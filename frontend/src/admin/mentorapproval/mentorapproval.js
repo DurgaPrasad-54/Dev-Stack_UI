@@ -16,12 +16,13 @@ import {
   Typography,
   message
 } from 'antd';
-import { Github, Linkedin, Eye, Check, X, Search, Filter } from 'lucide-react';
+import { Github, Linkedin, Eye, Check, X, Search } from 'lucide-react';
 import './mentorapproval.css';
 import config from '../../config';
 
 
 const { Title, Text } = Typography;
+// eslint-disable-next-line no-unused-vars
 const { TabPane } = Tabs;
 
 const MentorManagement = () => {
@@ -51,6 +52,7 @@ const MentorManagement = () => {
     if (allMentors.length > 0) {
       applyFilters();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, allMentors]);
   
   const fetchMentors = async () => {

@@ -3,7 +3,9 @@ import { Input, Button, Select, Form, message, List, Card, Modal } from 'antd';
 import config from '../config';
 
 const TeamFormation = () => {
+  // eslint-disable-next-line no-unused-vars
   const [students, setStudents] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [mentors, setMentors] = useState([]);
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [selectedMentor, setSelectedMentor] = useState(null);
@@ -179,6 +181,7 @@ const TeamFormation = () => {
 
     fetchAllData();
     fetchTeams();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

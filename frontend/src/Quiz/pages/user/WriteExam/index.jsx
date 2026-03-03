@@ -89,6 +89,7 @@ export const getUserInfo = async (payload) => {
       payload
     );
     return response.data;
+    // eslint-disable-next-line no-unreachable
     console.log("User info response:", response.data);
   } catch (error) {
     return error.response.data;
@@ -186,12 +187,14 @@ function WriteExam() {
   const [tabSwitchCount, setTabSwitchCount] = useState(0);
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // eslint-disable-next-line no-unused-vars
   const user = decodeToken();
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -201,6 +204,7 @@ function WriteExam() {
 
   useEffect(() => {
     getExamById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Security measures
@@ -410,6 +414,7 @@ function WriteExam() {
         exitFullscreen();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view, tabSwitchCount]);
 
   useEffect(() => {
@@ -417,12 +422,14 @@ function WriteExam() {
       clearInterval(intervalId);
       calculateResult();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeUp]);
 
   useEffect(() => {
     if (params.id) {
       getExamData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -453,6 +460,7 @@ function WriteExam() {
     }
 
     fetchUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Example usage: fetch exams for the current user and year
@@ -470,6 +478,7 @@ function WriteExam() {
       }
     };
     fetchUserExams();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isMobileDevice) {

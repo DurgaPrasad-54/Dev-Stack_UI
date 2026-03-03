@@ -3,6 +3,7 @@ import PageTitle from "../../../components/PageTitle";
 import { message, Table, Form, Input, Select, Button } from "antd";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../../redux/loaderSlice";
+// eslint-disable-next-line no-unused-vars
 import moment from "moment";
 import axios from "axios";
 import config from '../../../../config';
@@ -136,6 +137,7 @@ function AdminAddExam() {
   useEffect(() => {
     getAllExams();
     setYearOptions(currentYearOptions); // Set year options on component mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

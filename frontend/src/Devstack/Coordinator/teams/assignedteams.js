@@ -23,6 +23,7 @@ function MentorTeamTabs() {
 
   useEffect(() => {
     fetchHackathons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ function MentorTeamTabs() {
     }
     setSelectedBranch('');
     setSearchQuery('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon]);
 
   useEffect(() => {

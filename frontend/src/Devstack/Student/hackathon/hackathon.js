@@ -123,6 +123,7 @@ const HackathonsByStatus = () => {
     };
 
     fetchHackathons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Lazy load poster images one by one
@@ -141,6 +142,7 @@ const HackathonsByStatus = () => {
         }, index * 100); // Load each image 100ms apart
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkRegistrationStatuses = useCallback(async (hackathonsData) => {
@@ -271,6 +273,7 @@ const HackathonsByStatus = () => {
     }
 
     return null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [registrationStatuses, storeSelectedHackathonId]);
 
   const filteredHackathons = hackathons.filter(

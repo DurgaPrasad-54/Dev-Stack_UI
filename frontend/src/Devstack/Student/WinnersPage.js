@@ -7,6 +7,7 @@ import {
   SearchOutlined,
   TeamOutlined,
   UserOutlined,
+  // eslint-disable-next-line no-unused-vars
   CodeOutlined,
   CrownOutlined,
   CloseCircleOutlined,
@@ -51,6 +52,7 @@ const WinnersPage = () => {
 
   useEffect(() => {
     fetchAllHackathons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchAllHackathons = async () => {

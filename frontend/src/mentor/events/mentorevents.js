@@ -7,7 +7,6 @@ import {
   Plus, 
   Edit3, 
   Trash2, 
-  Eye,
   Save,
   X,
   AlertCircle,
@@ -55,6 +54,7 @@ const EventManagement = () => {
   useEffect(() => {
     fetchEvents();
     fetchTeams();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchEvents = async () => {

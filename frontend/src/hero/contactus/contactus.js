@@ -19,6 +19,7 @@ const Contact = () => {
     message: '',
     phone: '',
   });
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -30,6 +31,7 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(`${config.backendUrl}/contact`, formData);
       toast.success('Message sent successfully!', {
         position: 'top-right',

@@ -23,6 +23,7 @@ export default function HackathonSubmissionForm() {
     liveDemoLink: '',
     documents: []
   });
+  // eslint-disable-next-line no-unused-vars
   const [hasDocuments, setHasDocuments] = useState(false);
 
   const API_URL = `${config.backendUrl}/hacksubmission`;
@@ -33,6 +34,7 @@ export default function HackathonSubmissionForm() {
 
   useEffect(() => {
     fetchTeamAndInitialData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchTeamAndInitialData = async () => {

@@ -27,6 +27,7 @@ const ProjectManagement = () => {
   const [form] = Form.useForm();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [imageUrl, setImageUrl] = useState('');
   const [fileList, setFileList] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);

@@ -5,12 +5,10 @@ import {
   Clock, 
   CheckCircle, 
   XCircle, 
-  Calendar, 
   Search, 
   Filter,
   Eye,
   RefreshCw,
-  AlertCircle,
   TrendingUp,
   Activity,
   ChevronLeft,
@@ -162,6 +160,7 @@ const AdminDashboard = () => {
     fetchDashboardStats();
     fetchPendingStudents();
     fetchApprovalActivity();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Dashboard stats component

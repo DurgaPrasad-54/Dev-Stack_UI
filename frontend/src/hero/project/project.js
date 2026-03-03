@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { IoLogoGithub, IoClose } from "react-icons/io5";
 import { FaYoutube } from "react-icons/fa";
 import './project.css';
@@ -138,6 +138,7 @@ const Project = () => {
                                     )}
                                     {project.youtubeLink && (
                                         <li>
+                                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                             <a 
                                                 href="#"
                                                 onClick={(e) => handleYoutubeClick(project, e)}

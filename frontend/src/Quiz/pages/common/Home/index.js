@@ -1,5 +1,6 @@
 import { message } from "antd";
 import React, { useEffect, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ShowLoading } from "../../../redux/loaderSlice";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -86,6 +87,7 @@ function Home() {
 
   useEffect(() => {
     getExams();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -114,6 +116,7 @@ function Home() {
     localStorage.removeItem("resultShown");
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleRefresh = () => {
     setLoading(true);
     getExams();

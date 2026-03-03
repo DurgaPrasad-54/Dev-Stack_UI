@@ -10,7 +10,7 @@ import {
   Space,
   Input,
 } from "antd";
-import { PictureOutlined, FolderOutlined, SearchOutlined } from "@ant-design/icons";
+import { PictureOutlined, FolderOutlined } from "@ant-design/icons";
 import axios from "axios";
 import config from "../../config";
 import "../Admin/Gallery/Gallery.css";
@@ -111,7 +111,6 @@ const PublicGallery = () => {
           fontSize: '16px',
           display: 'block',
           marginTop: '8px',
-          color:'black'
         }}>
           Explore amazing moments from our hackathon events
         </Text>
@@ -398,7 +397,6 @@ const PublicGallery = () => {
                         </Title>
                         <Text type="secondary" style={{ 
                           fontSize: '13px',
-                          display: 'block',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           display: '-webkit-box',

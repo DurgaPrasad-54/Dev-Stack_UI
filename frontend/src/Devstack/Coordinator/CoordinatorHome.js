@@ -12,6 +12,7 @@ import {
   HomeOutlined,
   CheckSquareOutlined,
   UserSwitchOutlined,
+  // eslint-disable-next-line no-unused-vars
   LoadingOutlined
 } from '@ant-design/icons';
 

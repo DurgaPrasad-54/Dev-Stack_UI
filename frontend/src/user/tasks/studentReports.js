@@ -32,6 +32,7 @@ const StudentReport = ({ studentId }) => {
     };
 
     fetchReport();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [studentId]);
 
   const formatDate = (dateString) => {

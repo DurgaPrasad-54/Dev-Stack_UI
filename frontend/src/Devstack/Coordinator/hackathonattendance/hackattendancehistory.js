@@ -36,6 +36,7 @@ export default function AttendanceHistoryViewer() {
         setHackathons(filteredHackathons);
       })
       .catch(err => setError(String(err)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinatorCollege, coordinatorYear]);
 
   useEffect(() => {
@@ -63,6 +64,7 @@ export default function AttendanceHistoryViewer() {
         console.error('Error fetching branches:', err);
         setBranches([]);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon]);
 
   useEffect(() => {
@@ -89,6 +91,7 @@ export default function AttendanceHistoryViewer() {
         console.error('Error fetching sessions:', err);
         setSessions([]);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, selectedBranch]);
 
   useEffect(() => {
@@ -135,6 +138,7 @@ export default function AttendanceHistoryViewer() {
         setAttendanceData(null);
       })
       .finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, selectedBranch, selectedSession]);
 
   const selectedHackathonData = hackathons.find(h => (h._id || h.id) === selectedHackathon);

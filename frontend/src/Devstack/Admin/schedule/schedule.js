@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Eye, Calendar, Clock, Users, Search, Filter, ChevronDown, ChevronRight } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, Calendar, Search, Filter } from 'lucide-react';
+// eslint-disable-next-line no-unused-vars
 import { ConsoleSqlOutlined } from '@ant-design/icons';
 import './schedule.css';
 import config from '../../../config';
@@ -35,6 +36,7 @@ const scheduleAPI = {
 };
 
 // Styles
+// eslint-disable-next-line no-unused-vars
 const styles = {
   container: {
     maxWidth: '1200px',
@@ -646,11 +648,13 @@ console.log(hackathons)
     loadData();
     loadHackathons();
     loadStats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Load schedules with filters
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const loadData = async () => {

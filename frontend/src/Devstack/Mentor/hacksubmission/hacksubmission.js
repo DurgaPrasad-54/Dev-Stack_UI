@@ -16,6 +16,7 @@ const MentorSubmissionDashboard = () => {
   const [hackathons, setHackathons] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   const [stats, setStats] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [mentorId, setMentorId] = useState(localStorage.getItem("mentor"));
 
   const API_BASE = `${config.backendUrl}/hacksubmission`;
@@ -25,6 +26,7 @@ const MentorSubmissionDashboard = () => {
     fetchHackathons();
     fetchStats();
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const MentorSubmissionDashboard = () => {
       setSubmissions([]);
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.hackathon]);
 
   const fetchSubmissions = async () => {

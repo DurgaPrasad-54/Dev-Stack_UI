@@ -50,7 +50,9 @@ const AllTeamsProgressPage = () => {
   const [selectedBranch, setBranch] = useState(null);
   const [selectedCollege, setCollege] = useState(null);
   const [searchText, setSearchText] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [sortBy, setSortBy] = useState("progress");
+  // eslint-disable-next-line no-unused-vars
   const [sortOrder, setSortOrder] = useState("desc");
 
   const API_URL = config.backendUrl;
@@ -68,6 +70,7 @@ const AllTeamsProgressPage = () => {
 
   useEffect(() => {
     fetchHackathons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -80,6 +83,7 @@ const AllTeamsProgressPage = () => {
         fetchStatistics();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     selectedHackathon,
     selectedBranch,

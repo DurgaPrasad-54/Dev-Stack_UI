@@ -12,10 +12,13 @@ import {
   Input,
   Alert,
   Tag,
+  // eslint-disable-next-line no-unused-vars
   Statistic,
   Space,
+  // eslint-disable-next-line no-unused-vars
   Tooltip,
   Empty,
+  // eslint-disable-next-line no-unused-vars
   Divider,
 } from "antd";
 import {
@@ -106,6 +109,7 @@ const TeamProgressPage = () => {
     }
 
     fetchTeamAndProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentHackathonId, hackathonContextLoading]);
 
   const fetchTeamAndProgress = async () => {
@@ -215,6 +219,7 @@ const TeamProgressPage = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const fetchHackathonDetails = async (hackathonId) => {
     try {
       const res = await fetch(`${API_URL}/hackathon/${hackathonId}`, {

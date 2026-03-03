@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { message, Table, Button, Form, Input, Modal, InputNumber, Card, Divider, Spin, Tooltip, Space, Popconfirm, Select } from 'antd';
+import { message, Table, Button, Form, Input, Modal, InputNumber, Card, Divider, Tooltip, Space, Popconfirm, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { SafetyCertificateOutlined, FileSearchOutlined } from '@ant-design/icons';
 import config from '../../config';
@@ -93,6 +93,7 @@ const GradeCriteriaComponent = () => {
   useEffect(() => {
     fetchGradeCriteria();
     fetchGeneratedPrograms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const showCreateModal = () => {

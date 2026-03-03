@@ -14,6 +14,7 @@ import {
   CloudUploadOutlined,
   BarChartOutlined,
   FireOutlined,
+  // eslint-disable-next-line no-unused-vars
   LoadingOutlined
 } from '@ant-design/icons';
 
@@ -27,6 +28,7 @@ const StudentHome = () => {
 
   const [ongoingHackathon, setOngoingHackathon] = useState(null);
   const [upcomingHackathons, setUpcomingHackathons] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,6 +36,7 @@ const StudentHome = () => {
 
   useEffect(() => {
     fetchStudentData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchStudentData = async () => {

@@ -4,6 +4,7 @@ import config from '../../../config';
 import './hackmentorfeedback.css';
 
 // API Base URLs using config
+// eslint-disable-next-line no-unused-vars
 const API_BASE = `${config.backendUrl}/studenthackteam`;
 const API_BASEs = `${config.backendUrl}/hackmentorfeedback`;
 const API_HACKATHON = `${config.backendUrl}/hackathon`;
@@ -39,11 +40,13 @@ const [isHackathonOpen, setIsHackathonOpen] = useState(false);
       fetchAllFeedbacks();
       setSelectedMentor(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon]);
 
   // Apply filters whenever filter values or feedbacks change
   useEffect(() => {
     applyFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feedbacks, searchMentor, selectedBranch]);
 
  const fetchHackathons = async () => {

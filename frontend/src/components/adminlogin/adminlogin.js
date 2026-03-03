@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import { Form, Input, Button, Spin, Typography, Card } from "antd";
-import { LockOutlined, MailOutlined, KeyOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Typography, Card } from "antd";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 const { Title, Text } = Typography;
 
 const AdminLogin = () => {
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [otpStage, setOtpStage] = useState(false);
   const [email, setEmail] = useState("");

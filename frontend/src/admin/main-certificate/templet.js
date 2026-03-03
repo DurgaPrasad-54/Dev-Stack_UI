@@ -4,11 +4,13 @@ import './templet.css';
 import config from '../../config';
 
 const CertificateTemplate = ({ certificate }) => {
+  // eslint-disable-next-line no-unused-vars
   const [studentDetails, setStudentDetails] = useState({});
   const { student, totalMarks, grade, certificateType, programName, certificateId, issueDate } = certificate;
 
   useEffect(() => {
     fetchStudentDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchStudentDetails = async () => {

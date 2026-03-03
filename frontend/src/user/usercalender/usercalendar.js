@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { IoIosArrowBack, IoIosArrowForward, IoIosClose } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import './usercalendar.css'; // Ensure you import your CSS
 import config from '../../config';
 import LeaderboardComponent from '../../components/leaderboard/leaderboard';
@@ -175,6 +175,7 @@ const CalendarUser = () => {
     setViewMode('month'); // Switch back to month view after selecting a month
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleDelete = async () => {
     if (selectedDate) {
       const formattedDate = selectedDate.toLocaleDateString('en-GB');

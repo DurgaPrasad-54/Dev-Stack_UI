@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Upload, Video, FileText, Link, ArrowLeft, Eye, Download, Clock, Check, X, Edit, Trash2, Save } from 'lucide-react';
+import { Video, FileText, Link, ArrowLeft, Eye, Download, Clock, Check, X, Edit, Trash2, Save } from 'lucide-react';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './HackMentorResource.css';
@@ -84,6 +84,7 @@ const HackMentorResource = () => {
   };
 
   // Helper function to make authenticated API calls
+  // eslint-disable-next-line no-unused-vars
   const makeAuthenticatedRequest = async (url, options = {}) => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -156,6 +157,7 @@ const HackMentorResource = () => {
         .then(data => setItems(filterByMentor(data)))
         .catch(() => setItems([]));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSection, currentView]);
 
   // Fetch videos for history view
@@ -163,6 +165,7 @@ const HackMentorResource = () => {
     if (activeSection === 'video' && currentView === 'history') {
       fetchVideosByStatus();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSection, currentView]);
 
   // Fetch notes for history view
@@ -170,6 +173,7 @@ const HackMentorResource = () => {
     if (activeSection === 'notes' && currentView === 'history') {
       fetchNotesByStatus();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSection, currentView]);
 
   const getStatusIcon = (status) => {
@@ -673,6 +677,7 @@ const HackMentorResource = () => {
                 {item.videoLink ? (
                   item.videoLink.includes('youtube.com') || item.videoLink.includes('youtu.be') ? (
                     <iframe
+                      title="YouTube Video"
                       width="100%"
                       height="450"
                       src={item.videoLink.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/')}

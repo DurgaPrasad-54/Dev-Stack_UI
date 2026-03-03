@@ -7,6 +7,7 @@ import config from '../../config'; // Adjust the path as necessary
 
 const AdminApprovalDashboard = () => {
   const [requests, setRequests] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [allRequests, setAllRequests] = useState([]); // Store all requests for stats calculation
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState({ type: 'all', status: 'pending' });

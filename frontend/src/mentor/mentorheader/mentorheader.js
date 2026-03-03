@@ -18,6 +18,7 @@ const socket = io(`${config.backendUrl}`, {
 
 const UserNavbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [isResourcesDropdownOpen, setResourcesDropdownOpen] = useState(false);
@@ -109,7 +110,8 @@ const UserNavbar = () => {
         <ul className="nav-links">
           <li><a href="/mentor">Home</a></li>
           <li className="dropdown" onClick={toggleResourcesDropdown}>
-            <a>Resources <FaAngleDown className="down-arrow" /></a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a href="#">Resources <FaAngleDown className="down-arrow" /></a>
             {isResourcesDropdownOpen && (
               <ul className="user-dropdown-menu">
                 <a href="/mentor/videos"><li>Videos</li></a>
@@ -153,7 +155,8 @@ const UserNavbar = () => {
         <ul className="mobile-menu">
           <li><a href="/user" onClick={closeMobileMenu}>Home</a></li>
           <li onClick={toggleMobileResourcesDropdown}>
-            <a>Resources <FaAngleDown className="down-arrow" /></a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a href="#">Resources <FaAngleDown className="down-arrow" /></a>
             {isMobileResourcesOpen && (
               <ul className="mobile-dropdown-menu">
                 <li><a href="/mentor/videos" onClick={closeMobileMenu}>Videos</a></li>

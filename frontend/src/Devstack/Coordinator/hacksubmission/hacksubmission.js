@@ -15,13 +15,16 @@ const CoordinatorSubmissionDashboard = () => {
   });
   const [hackathons, setHackathons] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [stats, setStats] = useState(null);
   const [branchStats, setBranchStats] = useState(null);
   const [deleteModal, setDeleteModal] = useState({ show: false, submissionId: null });
   
   const [coordinatorYear] = useState(localStorage.getItem('coordinatoryear') || '');
   const [coordinatorCollege] = useState(localStorage.getItem('coordinatordetails') || '');
+  // eslint-disable-next-line no-unused-vars
   const [coordinatorId, setCoordinatorId] = useState(localStorage.getItem('coordinatorid') || null);
+  // eslint-disable-next-line no-unused-vars
   const [useCoordinatorRoutes, setUseCoordinatorRoutes] = useState(false);
   
   // API base URL using config
@@ -32,6 +35,7 @@ const CoordinatorSubmissionDashboard = () => {
     fetchHackathons();
     fetchStats();
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -43,6 +47,7 @@ const CoordinatorSubmissionDashboard = () => {
       setBranchStats(null);
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.hackathon]);
 
   const fetchSubmissions = async () => {

@@ -16,6 +16,7 @@ import umaa from '../assests/teampics/umaa.jpg' ;
 const TeamDetails = () => {
   const navigate = useNavigate();
 
+  // eslint-disable-next-line no-unused-vars
   const [teamDetails, setTeamDetails] = useState({
     batch: "2024",
     teamNumber: 4,

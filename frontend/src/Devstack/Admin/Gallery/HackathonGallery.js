@@ -631,7 +631,6 @@ const HackathonGallery = () => {
                         </Title>
                         <Text type="secondary" style={{ 
                           fontSize: 'clamp(11px, 2.5vw, 13px)',
-                          display: 'block',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           display: '-webkit-box',

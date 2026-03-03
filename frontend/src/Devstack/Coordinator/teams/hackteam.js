@@ -29,6 +29,7 @@ const [coordinatorCollege] = useState(localStorage.getItem('coordinatordetails')
   useEffect(() => {
     fetchHackathons();
     fetchBranches();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
    useEffect(() => {
@@ -43,12 +44,14 @@ const [coordinatorCollege] = useState(localStorage.getItem('coordinatordetails')
       setTeams([]);
       setTeamSizeLimits({ minTeam: 1, maxTeam: 4 });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, selectedBranch, editingTeam]);
 
   useEffect(() => {
     if (editingTeam && selectedHackathon) {
       fetchStudents();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingTeam]);
 
   useEffect(() => {

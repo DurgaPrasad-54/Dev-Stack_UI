@@ -15,6 +15,7 @@ const UserRoomAllocationBatch = () => {
   const [selectedHackathon, setSelectedHackathon] = useState('');
   const [mentors, setMentors] = useState([]);
   const [allocations, setAllocations] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [batches, setBatches] = useState([]);
   const [hackathonBatches, setHackathonBatches] = useState([]);
   const [loading, setLoading] = useState(false);

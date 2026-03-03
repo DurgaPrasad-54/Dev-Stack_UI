@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Star, X, Send, Loader2, CheckCircle, AlertCircle, User, Mail, Github, Linkedin, Users, Search, UserPlus, Clock, ArrowRight, Shield, Crown, UserCheck, MessageSquare, Plus, ChevronRight } from 'lucide-react';
+import { Star, X, Send, Loader2, CheckCircle, AlertCircle, User, Mail, Github, Linkedin, Users, Search, UserPlus, Clock, ArrowRight, Shield, Crown, UserCheck, Plus } from 'lucide-react';
 import config from '../../../config';
 
 const API_BASE = `${config.backendUrl}/studenthackteam`;
@@ -25,6 +25,7 @@ const MentorFeedbackModal = ({ isOpen, onClose, mentor, team, hackathonId }) => 
       fetchExistingFeedback();
       
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, mentor, hackathonId]);
 
   const fetchExistingFeedback = async () => {
@@ -478,6 +479,7 @@ export default function TeamManagementPage() {
     if (showSearchResults) {
       loadAllStudents();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viewMode]);
 
   // Filter students on client side

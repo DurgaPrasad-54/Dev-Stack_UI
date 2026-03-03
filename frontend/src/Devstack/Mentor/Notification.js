@@ -5,6 +5,7 @@ import config from '../../config';
 import './hackathonnotification.css';
 import { toast, ToastContainer } from "react-toastify";
 
+// eslint-disable-next-line no-unused-vars
 const { Title } = Typography;
 
 const HackathonNotifications = () => {
@@ -76,6 +77,7 @@ const HackathonNotifications = () => {
       console.log('Cleaning up socket connection...');
       socket.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const fetchNotifications = async () => {

@@ -350,8 +350,9 @@ const MentorResourcesDashboard = () => {
 
   useEffect(() => { 
     fetchRequests(); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+    
   useEffect(() => {
     if (formData.requestType === 'pdf') {
       fetchAvailableFolders();
@@ -359,6 +360,7 @@ const MentorResourcesDashboard = () => {
     if (formData.requestType === 'video') {
       fetchAvailableVideoFolders();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.requestType]);
 
   const filteredRequests = requests.filter(req => {

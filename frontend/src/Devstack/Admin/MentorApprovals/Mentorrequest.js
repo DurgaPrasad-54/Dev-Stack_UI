@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, Calendar, Clock, Check, X, ChevronDown, Eye, Mail, Github, Linkedin, MapPin, Phone, Building, Award, Users } from 'lucide-react';
+import { User, Calendar, Clock, Check, X, ChevronDown, Eye, Mail, Github, Linkedin, MapPin, Phone } from 'lucide-react';
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";

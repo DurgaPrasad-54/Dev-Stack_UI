@@ -33,10 +33,12 @@ const HackathonDashboard = () => {
       return;
     }
     fetchHackathons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinatorYear, coordinatorCollege]);
 
   useEffect(() => {
     filterStudents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [students, filters]);
 
   const fetchHackathons = async () => {

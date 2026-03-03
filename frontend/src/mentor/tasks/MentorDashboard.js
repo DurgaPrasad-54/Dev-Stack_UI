@@ -47,6 +47,7 @@ const MentorDashboard = () => {
     }
     // Increment refresh key to force re-render
     setRefreshKey(prevKey => prevKey + 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTeam]);
 
   useEffect(() => {
@@ -80,6 +81,7 @@ const MentorDashboard = () => {
       window.removeEventListener('resize', handleResize);
       clearTimeout(resizeTimer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshDashboard]);
 
   useEffect(() => {
@@ -87,6 +89,7 @@ const MentorDashboard = () => {
       fetchTeamSubmissionStats(selectedTeam);
       fetchTeamMembers(selectedTeam);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTeam]);
 
   useEffect(() => {

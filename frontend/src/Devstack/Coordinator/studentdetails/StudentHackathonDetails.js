@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   User, Search, ChevronDown, Calendar, Users, FileText, 
   Award, Star, GitBranch, Mail, Phone, ExternalLink,
-  CheckCircle, Clock, XCircle, AlertCircle, Download,
+  CheckCircle, Clock, XCircle, AlertCircle,
   Briefcase, Code, MessageSquare, Trophy
 } from 'lucide-react';
 import config from '../../../config';
@@ -37,6 +37,7 @@ export default function StudentHackathonDetails() {
   // Fetch branches on mount
   useEffect(() => {
     fetchBranches();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Fetch students when branch changes
@@ -50,6 +51,7 @@ export default function StudentHackathonDetails() {
     setSelectedStudent(null);
     setSelectedHackathon('');
     setDetails(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBranch]);
 
   // Filter students based on search
@@ -73,6 +75,7 @@ export default function StudentHackathonDetails() {
     } else {
       setDetails(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStudent, selectedHackathon]);
 
   const fetchBranches = async () => {

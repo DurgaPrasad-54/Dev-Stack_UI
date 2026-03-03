@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
+// eslint-disable-next-line no-unused-vars
 import { FaAngleDown } from 'react-icons/fa';
 import './StudentHeader.css';
 import userheader from '../../../assests/headerlogo.png';
 import notification from '../../../assests/notificationicon.png';
+// eslint-disable-next-line no-unused-vars
 import chart from '../../../assests/messageicon.png';
 import profile from '../../../assests/userprofileicon.png';
 import config from '../../../config';
@@ -184,10 +186,14 @@ const UserNavbar = () => {
 
   // Hamburger and dropdown toggles
   const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
+  // eslint-disable-next-line no-unused-vars
   const toggleResourcesDropdown = () => setResourcesDropdownOpen(!isResourcesDropdownOpen);
+  // eslint-disable-next-line no-unused-vars
   const toggleAssignmentsDropdown = () => setAssignmentsDropdownOpen(!isAssignmentsDropdownOpen);
   const closeMobileMenu = () => setMobileMenuOpen(false);
+  // eslint-disable-next-line no-unused-vars
   const toggleMobileResourcesDropdown = () => setMobileResourcesOpen(!isMobileResourcesOpen);
+  // eslint-disable-next-line no-unused-vars
   const toggleMobileAssignmentsDropdown = () => setMobileAssignmentsOpen(!isMobileAssignmentsOpen);
   const toggleProfileDropdown = () => setProfileDropdownOpen(!isProfileDropdownOpen);
 

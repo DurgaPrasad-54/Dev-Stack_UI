@@ -71,6 +71,7 @@ const ResourcePage = () => {
     if (activeSection === 'items') {
       fetchApprovedItems();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSection]);
 
   const fetchApprovedVideoFolders = async () => {
@@ -295,6 +296,7 @@ const ResourcePage = () => {
                   src={selectedVideo.videoLink.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/')}
                   frameBorder="0"
                   allowFullScreen
+                  title="Video Player"
                   className="resource-video-iframe"
                 ></iframe>
               ) : (
@@ -504,6 +506,7 @@ const ResourcePage = () => {
                       </div>
                       <h4 className="resource-note-title">{note.title}</h4>
                     </div>
+                    {/* eslint-disable jsx-a11y/anchor-is-valid */}
                     {token && (
                       <a
                         href="#"
@@ -534,6 +537,7 @@ const ResourcePage = () => {
                         Download
                       </a>
                     )}
+                    {/* eslint-enable jsx-a11y/anchor-is-valid */}
                   </div>
                 );
               })}

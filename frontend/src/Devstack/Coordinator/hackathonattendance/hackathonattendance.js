@@ -44,6 +44,7 @@ export default function HackathonAttendanceManagement() {
         setHackathons(filteredHackathons);
       })
       .catch(err => setError(String(err)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinatorCollege, coordinatorYear]);
 
   useEffect(() => {
@@ -88,6 +89,7 @@ export default function HackathonAttendanceManagement() {
       })
       .catch(err => setError(String(err)))
       .finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, coordinatorCollege, coordinatorYear]);
 
   useEffect(() => {
@@ -114,6 +116,7 @@ export default function HackathonAttendanceManagement() {
         setSessions([]);
       })
       .finally(() => setLoadingSessions(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, branchFilter]);
 
   const handleSessionChange = async (sessionName) => {

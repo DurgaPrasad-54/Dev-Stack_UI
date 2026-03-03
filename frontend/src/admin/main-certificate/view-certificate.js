@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Table, Button, message, Card, Tag, Modal, Select, Input, Space, Row, Col, Divider } from 'antd';
-import { FileTextOutlined, DownloadOutlined, SafetyCertificateOutlined, FilterOutlined, ClearOutlined } from '@ant-design/icons';
+import { Table, Button, message, Card, Tag, Modal, Select, Input, Space, Row, Col } from 'antd';
+import { FileTextOutlined, DownloadOutlined, SafetyCertificateOutlined, ClearOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import CertificateTemplate from './templet';
 import { generateCertificatePDF } from '../../user/main-certificate/pdf-generator';
@@ -99,11 +99,13 @@ const CertificatesListComponent = () => {
   useEffect(() => {
     fetchGradeCriteria();
     fetchCertificates();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Apply filters whenever any filter changes
   useEffect(() => {
     applyFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedProgram, filterType, searchText, certificates]);
 
   const applyFilters = () => {

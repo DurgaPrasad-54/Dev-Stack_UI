@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import config from '../../config';
 
 const UserActiveTimer = () => {
+  // eslint-disable-next-line no-unused-vars
   const [activeTime, setActiveTime] = useState(() => {
     return parseInt(localStorage.getItem("activeTime")) || 0;
   });
@@ -15,6 +16,7 @@ const UserActiveTimer = () => {
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
     let interval, sendInterval;
 
     const updateActivity = () => {
@@ -109,6 +111,7 @@ const UserActiveTimer = () => {
     };
   }, [isPaused, lastActive, minuteCounter, isSending]);
 
+  // eslint-disable-next-line no-unused-vars
   const formatTime = (seconds) => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);

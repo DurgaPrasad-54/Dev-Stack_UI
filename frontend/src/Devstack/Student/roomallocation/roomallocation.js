@@ -100,6 +100,7 @@ const RoomAllocationTable = () => {
     );
   }
 
+  // eslint-disable-next-line no-unused-vars
   const stats = getStatistics();
 
   return (

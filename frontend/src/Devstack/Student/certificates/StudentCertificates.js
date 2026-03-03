@@ -58,6 +58,7 @@ const StudentCertificates = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getAchievementLabel = (type) => {
     switch (type) {
       case 'champion': return 'Champion';
@@ -68,6 +69,7 @@ const StudentCertificates = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getAchievementColor = (type) => {
     switch (type) {
       case 'champion': return '#FFD700';

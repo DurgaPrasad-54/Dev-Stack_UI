@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, Send, X, Paperclip, Mic } from 'lucide-react';
+import { MessageCircle, Send, X } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import './ChatInterface.css';
 

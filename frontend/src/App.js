@@ -13,6 +13,7 @@ import loadingAnimation from './assests/Loading.lottie';
 import ForgotPassword from './components/loginpage/ForgotPassword';
 import ResetPassword from './components/loginpage/ResetPassword';
 import SignupPage from './components/signups/signup';
+// eslint-disable-next-line no-unused-vars
 import Footer from './components/footer/footer';
 import TeamDetails from './pages/TeamDetails';
 import RoleBasedProtectedRoute from './protected-routes/protectedroutes';

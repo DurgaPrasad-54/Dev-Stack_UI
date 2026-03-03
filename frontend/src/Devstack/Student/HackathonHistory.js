@@ -45,6 +45,7 @@ import config from '../../config';
 
 const { Title, Text, Paragraph } = Typography;
 const { Option } = Select;
+// eslint-disable-next-line no-unused-vars
 const { TabPane } = Tabs;
 
 const HackathonHistory = () => {
@@ -61,6 +62,7 @@ const HackathonHistory = () => {
       fetchHackathonHistory();
       fetchSummary();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [studentId]);
 
   // Auto-select first hackathon when list loads
@@ -68,6 +70,7 @@ const HackathonHistory = () => {
     if (hackathonList.length > 0 && !selectedHackathonId) {
       setSelectedHackathonId(hackathonList[0].hackathon._id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hackathonList]);
 
   // Fetch detailed data when hackathon is selected

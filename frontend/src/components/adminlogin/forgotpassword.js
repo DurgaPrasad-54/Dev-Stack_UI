@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Card, Typography, Divider } from "antd";
+import { Form, Input, Button, Card, Typography } from "antd";
 import { LockOutlined, MailOutlined, KeyOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -27,6 +27,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       // Call backend to send OTP to the email
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(`${config.backendUrl}/roles/admin/forgot-password`, { email });
 
       toast.success("OTP sent successfully to your email.");
@@ -48,6 +49,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       // Validate OTP with backend
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(`${config.backendUrl}/roles/admin/validate-otp`, { email, otp });
 
       toast.success("OTP validated successfully.");
@@ -69,6 +71,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       // Call backend to reset password
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(`${config.backendUrl}/roles/admin/reset-forgot-password`, {
         email,
         newPassword,

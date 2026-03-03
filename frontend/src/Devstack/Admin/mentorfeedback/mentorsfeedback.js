@@ -4,6 +4,7 @@ import './mentorsfeedback.css';
 import config from '../../../config';
 
 // API Base URLs
+// eslint-disable-next-line no-unused-vars
 const API_BASE = `${config.backendUrl}/studenthackteam`;
 const API_BASEs = `${config.backendUrl}/hackmentorfeedback`;
 const API_HACKATHON = `${config.backendUrl}/hackathon`;
@@ -39,11 +40,13 @@ export default function MentorFeedbackDashboard() {
       fetchAllFeedbacks();
       setSelectedMentor(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon]);
 
   // Apply filters whenever filter values or feedbacks change
   useEffect(() => {
     applyFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feedbacks, searchMentor, selectedBranch]);
 
   const fetchHackathons = async () => {
@@ -184,6 +187,7 @@ export default function MentorFeedbackDashboard() {
     setSelectedMentor(null);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getStatusColor = (status) => {
     switch(status) {
       case 'ongoing': return 'text-green-600 bg-green-100';

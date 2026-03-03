@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import Image from '../assests/Ellipse 11.png';
 import '../components/profile/profile.css';
@@ -35,6 +36,7 @@ const MentorProfilePage = () => {
       localStorage.removeItem('token');
       navigate('/login');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   const fetchProfileData = async (token, role) => {

@@ -5,6 +5,7 @@ import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import config from '../../config';
 
 const { Content } = Layout;
+// eslint-disable-next-line no-unused-vars
 const { Search } = Input;
 const { Paragraph } = Typography;
 
@@ -14,6 +15,7 @@ const AdminForm = () => {
     const [filteredItems, setFilteredItems] = useState([]); // State to manage filtered data
     const [editId, setEditId] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [searchText, setSearchText] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 10; // Number of items per page

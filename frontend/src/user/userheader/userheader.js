@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import { FaAngleDown } from 'react-icons/fa';
@@ -8,6 +8,7 @@ import notification from '../../assests/notificationicon.png';
 import chart from '../../assests/messageicon.png';
 import profile from '../../assests/userprofileicon.png';
 import config from '../../config';
+// eslint-disable-next-line no-unused-vars
 import { StarOutlined } from '@ant-design/icons';
 
 const socket = io(`${config.backendUrl}`, {
@@ -126,6 +127,7 @@ const UserNavbar = () => {
             <a href="/user">Home</a>
           </li>
           <li className="dropdown">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={toggleResourcesDropdown}>
               Resources <FaAngleDown className="down-arrow" />
             </a>
@@ -146,6 +148,7 @@ const UserNavbar = () => {
             </ul>
           </li>
           <li className="dropdown">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={toggleAssignmentsDropdown}>
               Assignments <FaAngleDown className="down-arrow" />
             </a>
@@ -222,6 +225,7 @@ const UserNavbar = () => {
             </a>
           </li>
           <li>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={toggleMobileResourcesDropdown}>
               Resources <FaAngleDown className="down-arrow" />
             </a>
@@ -246,6 +250,7 @@ const UserNavbar = () => {
             )}
           </li>
           <li>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={toggleMobileAssignmentsDropdown}>
               Assignments <FaAngleDown className="down-arrow" />
             </a>

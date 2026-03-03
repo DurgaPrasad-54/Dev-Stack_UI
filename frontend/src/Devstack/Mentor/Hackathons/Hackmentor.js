@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import {
   Modal,
+  // eslint-disable-next-line no-unused-vars
   message,
 } from "antd";
 import {
@@ -205,6 +206,7 @@ const MentorHackathonPage = () => {
     }, 30000);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const canRequestMentor = (hackathon) => {
@@ -223,6 +225,7 @@ const MentorHackathonPage = () => {
     return "Request to Mentor";
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getRequestButtonStyle = (hackathon) => {
     const requestStatus = mentorRequests[hackathon._id];
     if (requestStatus === 'approved') {

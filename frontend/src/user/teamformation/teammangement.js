@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useRef } from 'react';
-import { UserPlus, UserCircle2, Loader2 } from 'lucide-react';
+import { UserPlus, UserCircle2 } from 'lucide-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../teamformation/teammangement.css';
@@ -14,10 +14,12 @@ const TeamPage = () => {
     const [loading, setLoading] = useState(false);
     const [joinRequests, setJoinRequests] = useState([]);
     const [invitations, setInvitations] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState('');
     const [activeTab, setActiveTab] = useState('invitations');
     const [teamRequest,setteamRequest] = useState([])
     const searchSectionRef = useRef(null);
+    // eslint-disable-next-line no-unused-vars
     const [sentJoinRequests, setSentJoinRequests] = useState([]);
     const [allTeamRequests, setAllTeamRequests] = useState([]);
     const [hasNewRequests, setHasNewRequests] = useState({
@@ -137,6 +139,7 @@ const TeamPage = () => {
             setLoading(false);
         }
     };
+    // eslint-disable-next-line no-unused-vars
     const handleSendJoinRequest = async (student) => {
         if (!student?.teamInfo?.teamId) {
             showError('Invalid team information');
@@ -335,11 +338,13 @@ const TeamPage = () => {
         }
         fetchJoinRequests();
         fetchAllTeamRequests(); // Fetch all team requests
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
     useEffect(() => {
         fetchTeamDetails();
         fetchJoinRequests();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
 
@@ -347,6 +352,7 @@ const TeamPage = () => {
     useEffect(() => {
         fetchTeamDetails();
         fetchJoinRequests();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleToggleView = (view) => {setActiveTab(view);}
@@ -412,6 +418,7 @@ const deleteRequests = async () => {
         
         const data = await response.json();
         return data.message;
+        // eslint-disable-next-line no-unreachable
         console.log("deleted",data)
     } catch (error) {
         console.error('Error deleting requests:', error);
@@ -511,6 +518,7 @@ const fetchSentJoinRequests = async () => {
         fetchRequests();
       }, []);
 
+      // eslint-disable-next-line no-unused-vars
       const fetchsendTeamleadRequests = async () => {
         try {
           const response = await fetch(`${config.backendUrl}/teamformation/team-join-requests`, {
@@ -523,8 +531,8 @@ const fetchSentJoinRequests = async () => {
             throw new Error('Failed to fetch requests');
           }
     
+          // eslint-disable-next-line no-unused-vars
           const data = await response.json();
-        //   setRequests(data.requests || []);
         } catch (err) {
           setError(err.message);
         } finally {
@@ -544,9 +552,11 @@ const fetchSentJoinRequests = async () => {
 
     // Compute members and remainingSlots from teamDetails
     const members = teamDetails?.teamDetails?.members || [];
+    // eslint-disable-next-line no-unused-vars
     const remainingSlots = TEAM_SIZE_LIMIT - members.length;
    
   
+    // eslint-disable-next-line no-unused-vars
         const LoadingOverlay = () => (
         <div className="loading-overlay">
             <div className="loader"></div>

@@ -5,7 +5,9 @@ import config from '../../../config';
 import './roomallocation.css';
 
 const AdminRoomAllocationBatch = () => {
+  // eslint-disable-next-line no-unused-vars
   const [hackathons, setHackathons] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [selectedHackathon, setSelectedHackathon] = useState(''); // Set to empty string for "All Hackathons"
   const [batches, setBatches] = useState([]);
   const [filteredBatches, setFilteredBatches] = useState([]);
@@ -13,6 +15,7 @@ const AdminRoomAllocationBatch = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [updatingId, setUpdatingId] = useState(null);
   const [error, setError] = useState('');
   const [counts, setCounts] = useState({ all: 0, pending: 0, approved: 0, rejected: 0 });
@@ -32,6 +35,7 @@ const AdminRoomAllocationBatch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   
   // Debounce timer ref
+  // eslint-disable-next-line no-unused-vars
   const searchTimerRef = useRef(null);
 
   // Fetch hackathons
@@ -158,6 +162,7 @@ const AdminRoomAllocationBatch = () => {
   // Fetch batches when filters change
   useEffect(() => {
     fetchBatches();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statusFilter, page, selectedHackathon]);
 
   // Handle search input

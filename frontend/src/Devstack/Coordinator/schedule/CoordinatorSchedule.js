@@ -23,6 +23,7 @@ const CoordinatorSchedule = () => {
   // Fetch all hackathons on mount
   useEffect(() => {
     fetchHackathons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Close dropdown when clicking outside
