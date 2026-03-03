@@ -1,0 +1,173 @@
+@import '../../devstack-common.css';
+
+/* Room Allocation & Schedule Combined Component Styles */
+
+.room-schedule-main-wrapper {
+  min-height: 100vh;
+  background-color: var(--ds-bg-secondary);
+  padding-top: var(--ds-space-5);
+}
+
+.room-schedule-tabs-header {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  max-width: 680px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ds-bg-primary);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  box-shadow: var(--ds-shadow-md);
+  position: fixed;
+  top: 120px;
+  z-index: 1000;
+  gap: var(--ds-space-2);
+  border-radius: var(--ds-radius-lg);
+  transition: width var(--ds-transition-fast), transform var(--ds-transition-fast);
+}  
+
+.room-schedule-main-wrapper h1,
+.room-schedule-main-wrapper h2 {
+  text-align: center;
+  width: 100%;
+  margin: var(--ds-space-3-5) 0;
+}
+
+.room-schedule-tab-btn {
+  padding: var(--ds-space-1-5) var(--ds-space-3);
+  min-width: 120px;
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-font-semibold);
+  border: none;
+  background: var(--ds-gray-200);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  border-radius: var(--ds-radius);
+  transition: all var(--ds-transition-slow);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  box-sizing: border-box;
+} 
+
+.room-schedule-tab-btn:hover {
+  background: var(--ds-gray-300);
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-sm);
+}
+
+.room-schedule-tab-btn.active {
+  background: linear-gradient(135deg, var(--ds-primary) 0%, #4f46e5 100%);
+  color: var(--ds-text-inverse);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+}
+
+.room-schedule-tab-content {
+  /* Add padding to account for fixed header */
+  padding-top: 130px;
+  min-height: calc(100vh - 150px);
+}
+
+/* Responsive Design */
+
+/* Tablet view - 768px */
+@media (max-width: 768px) {
+  .room-schedule-main-wrapper {
+    padding-top: 15px;
+  }
+
+  .room-schedule-tabs-header {
+    display: inline-flex;
+    padding: 8px 12px;
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 8px;
+    width: fit-content;
+    max-width: 600px;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .room-schedule-tab-btn {
+    padding: 8px 16px;
+    font-size: 0.7rem;
+    min-width: 110px;
+  }
+
+  .room-schedule-tab-content {
+    padding-top: 110px;
+    min-height: calc(100vh - 140px);
+  }
+}
+
+/* Mobile view - 480px and below */
+@media (max-width: 480px) {
+  .room-schedule-main-wrapper {
+    padding-top: 10px;
+  }
+
+  .room-schedule-tabs-header {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    padding: 8px 10px;
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    width: calc(100% - 16px);
+    max-width: calc(100% - 16px);
+    overflow-x: auto;
+    z-index: 1000;
+  }
+
+  .room-schedule-tab-btn {
+    flex: 1;
+    min-width: 100px;
+    max-width: 150px;
+    padding: 8px 12px;
+    font-size: 0.65rem;
+    white-space: nowrap;
+  }
+
+  .room-schedule-tab-content {
+    padding-top: 100px;
+    min-height: calc(100vh - 130px);
+  }
+}
+
+/* Mobile view - 320px */
+@media (max-width: 320px) {
+  .room-schedule-main-wrapper {
+    padding-top: 8px;
+  }
+
+  .room-schedule-tabs-header {
+    padding: 6px 8px;
+    gap: 5px;
+    position: fixed;
+    top: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 12px);
+    max-width: calc(100% - 12px);
+    border-radius: 6px;
+    z-index: 1000;
+  }
+
+  .room-schedule-tab-btn {
+    padding: 6px 10px;
+    font-size: 0.6rem;
+    min-width: 90px;
+    max-width: 130px;
+    letter-spacing: 0.2px;
+  }
+
+  .room-schedule-tab-content {
+    padding-top: 95px;
+    min-height: calc(100vh - 120px);
+  }
+}

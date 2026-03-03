@@ -1,0 +1,957 @@
+/* hackathon.css - Updated to match Admin UI */
+
+.student-hackathon-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  background-color: #f9fafb;
+  min-height: calc(100vh - 80px);
+  padding: 24px;
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Styles */
+.student-hackathon-header {
+  margin-bottom: 24px;
+}
+
+.student-hackathon-header-content {
+  text-align: center;
+}
+
+.student-hackathon-page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a365d;
+  margin: 0;
+}
+
+/* Status Filter Buttons */
+.student-hackathon-status-filter {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.student-hackathon-filter-btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  background-color: #fff;
+  color: #64748b;
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+}
+
+.student-hackathon-filter-btn:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.student-hackathon-filter-btn:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.student-hackathon-filter-btn:hover:not(.active) {
+  background-color: #f0f5ff;
+  color: #1890ff;
+}
+
+.student-hackathon-filter-btn.active {
+  background: #1890ff;
+  color: white;
+  border-color: #1890ff;
+  cursor: default;
+}
+
+/* Loading and Messages */
+.student-hackathon-loading, .student-hackathon-error, .student-hackathon-no-hackathons {
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 14px;
+  color: #64748b;
+  background: white;
+  border-radius: 8px;
+  margin: 24px 0;
+  border: 1px solid #e5e7eb;
+}
+
+.student-hackathon-error {
+  color: #dc3545;
+  background: #fff5f5;
+  border-color: #ffccc7;
+}
+
+.student-hackathon-loading {
+  color: #1890ff;
+  background: #f0f5ff;
+  border-color: #bae0ff;
+}
+
+/* Hackathons Grid */
+.student-hackathon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Hackathon Card */
+.student-hackathon-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-hackathon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  border-color: #1890ff;
+}
+
+/* Hackathon Content */
+.student-hackathon-content {
+  padding: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-hackathon-details {
+  flex: 1;
+}
+
+.student-hackathon-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.student-hackathon-info {
+  margin: 4px 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.student-hackathon-info strong {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* Date Info */
+.student-hackathon-date-info {
+  background: #f0f5ff;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+}
+
+.student-hackathon-date-info p {
+  margin: 2px 0;
+  color: #1890ff;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Hackathon Status */
+.student-hackathon-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  margin: 8px 0;
+  text-transform: uppercase;
+}
+
+/* Virtual Link */
+.student-hackathon-virtual-link {
+  background: #f0f5ff;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 8px 0;
+}
+
+.student-hackathon-virtual-link strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #1890ff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.student-hackathon-virtual-link a {
+  color: #096dd9;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.student-hackathon-virtual-link a:hover {
+  color: #1890ff;
+  text-decoration: underline;
+}
+
+/* Rules Section */
+.student-hackathon-rules-section {
+  background: #fffbe6;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 8px 0;
+}
+
+.student-hackathon-rules-section strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #fa8c16;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.student-hackathon-rules-section ul {
+  margin: 4px 0 0 12px;
+  padding: 0;
+}
+
+.student-hackathon-rules-section li {
+  color: #8c6d1f;
+  margin: 2px 0;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* Hackathon Poster */
+.student-hackathon-poster {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f0f5ff 0%, #e6f7ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.student-hackathon-status-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.student-hackathon-status-badge.ongoing {
+  background: #52c41a;
+  color: white;
+}
+
+.student-hackathon-status-badge.upcoming {
+  background: #1890ff;
+  color: white;
+}
+
+.student-hackathon-status-badge.completed {
+  background: #8c8c8c;
+  color: white;
+}
+
+.student-hackathon-card:hover .student-hackathon-poster img {
+  transform: scale(1.05);
+}
+
+/* Hackathon Meta */
+.student-hackathon-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.student-hackathon-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Hackathon Description */
+.student-hackathon-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Prizes */
+.student-hackathon-prizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.student-hackathon-prizes .prize {
+  padding: 3px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.student-hackathon-prizes .prize.gold {
+  background: #fff7e6;
+  color: #d48806;
+  border: 1px solid #ffd591;
+}
+
+.student-hackathon-prizes .prize.silver {
+  background: #f5f5f5;
+  color: #8c8c8c;
+  border: 1px solid #d9d9d9;
+}
+
+.student-hackathon-prizes .prize.bronze {
+  background: #fff1e6;
+  color: #ad6800;
+  border: 1px solid #ffc591;
+}
+
+/* Registration End */
+.student-hackathon-regend {
+  margin: 8px 0;
+  color: #fa541c;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Actions */
+.student-hackathon-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* View More Button */
+.student-hackathon-view-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background: #f0f5ff;
+  color: #1890ff;
+  border: 1px solid #1890ff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.student-hackathon-view-btn:hover {
+  background: #1890ff;
+  color: white;
+}
+
+/* Action Buttons */
+.student-hackathon-status-btn,
+.student-hackathon-register-btn {
+  flex: 1;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.student-hackathon-register-btn {
+  background: #52c41a;
+  color: white;
+}
+
+.student-hackathon-register-btn:hover {
+  background: #389e0d;
+  transform: translateY(-1px);
+}
+
+.student-hackathon-status-btn {
+  background: #8c8c8c;
+  color: white;
+}
+
+.student-hackathon-approved-btn {
+  background: #1890ff;
+}
+
+.student-hackathon-approved-btn:hover {
+  background: #096dd9;
+  transform: translateY(-1px);
+}
+
+.student-hackathon-pending-btn {
+  background: #faad14;
+  color: #000;
+  cursor: default;
+}
+
+.student-hackathon-rejected-btn {
+  background: #ff4d4f;
+  cursor: default;
+}
+
+.student-hackathon-upcoming-btn {
+  background: #d9d9d9;
+  color: #8c8c8c;
+  cursor: default;
+}
+
+/* Modal Styles */
+.student-hackathon-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+}
+
+@keyframes student-hackathon-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.student-hackathon-modal-content {
+  background: white;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: none;
+  border: none;
+}
+
+@keyframes student-hackathon-slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.student-hackathon-modal-header {
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  color: white;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.student-hackathon-modal-header h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+}
+
+.student-hackathon-close-btn {
+  background: none;
+  border: none;
+  color: white !important;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.student-hackathon-close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Form Styles */
+.student-hackathon-modal-content form {
+  padding: 20px 24px;
+}
+
+.student-hackathon-form {
+  padding: 16px;
+}
+
+.student-hackathon-form-group {
+  margin-bottom: 12px;
+}
+
+.student-hackathon-form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: #1e293b;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.student-hackathon-form-group input[type="text"],
+.student-hackathon-form-group input[type="file"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.student-hackathon-form-group input[type="text"]:focus {
+  outline: none;
+  border-color: #1890ff;
+}
+
+.student-hackathon-image-preview {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.student-hackathon-registration-info {
+  background: #f9fafb;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 12px 0;
+}
+
+.student-hackathon-registration-info p {
+  margin: 4px 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.student-hackathon-upi-payment-section {
+  background: #f0f5ff;
+  padding: 16px 20px;
+  border-radius: 6px;
+  margin: 12px 0;
+  text-align: center;
+}
+
+.student-hackathon-upi-payment-section button {
+  padding: 8px 16px;
+  background: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.student-hackathon-upi-payment-section button:hover {
+  background: #096dd9;
+}
+
+.student-hackathon-upi-info {
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.student-hackathon-upi-info p {
+  margin: 4px 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.student-hackathon-modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: none;
+}
+
+.student-hackathon-modal-actions button {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.student-hackathon-modal-actions button[type="button"] {
+  background: #f5f5f5;
+  color: #595959;
+}
+
+.student-hackathon-modal-actions button[type="button"]:hover {
+  background: #e8e8e8;
+}
+
+.student-hackathon-modal-actions button[type="submit"] {
+  background: #1890ff;
+  color: white;
+}
+
+.student-hackathon-modal-actions button[type="submit"]:hover:not(:disabled) {
+  background: #096dd9;
+}
+
+.student-hackathon-modal-actions button[type="submit"]:disabled {
+  background: #d9d9d9;
+  cursor: not-allowed;
+  color: #8c8c8c;
+}
+
+/* Responsive Design */
+@media (min-width: 1600px) {
+  .student-hackathon-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .student-hackathon-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .student-hackathon-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .student-hackathon-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .student-hackathon-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .student-hackathon-container {
+    padding: 16px;
+  }
+
+  .student-hackathon-page-title {
+    font-size: 1.25rem;
+  }
+
+  .student-hackathon-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .student-hackathon-filter-btn {
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+
+  .student-hackathon-modal-content {
+    max-width: 92%;
+  }
+
+  .student-hackathon-form {
+    padding: 12px;
+  }
+
+  .student-hackathon-modal-actions {
+    flex-direction: column;
+  }
+
+  .student-hackathon-modal-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .student-hackathon-container {
+    padding: 12px;
+  }
+
+  .student-hackathon-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-hackathon-page-title {
+    font-size: 1.1rem;
+  }
+
+  .student-hackathon-title {
+    font-size: 13px;
+  }
+
+  .student-hackathon-poster {
+    height: 120px;
+  }
+
+  .student-hackathon-content {
+    padding: 10px;
+  }
+}
+
+/* View More Modal Styles */
+.student-hackathon-view-modal-content {
+  background: white;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: none;
+  border: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-hackathon-view-modal-content .student-hackathon-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white !important;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.student-hackathon-view-modal-content .student-hackathon-close-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.student-hackathon-modal-poster {
+  width: calc(100% - 40px);
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  margin: 48px 20px 16px 20px;
+  flex-shrink: 0;
+}
+
+.student-hackathon-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a365d;
+  margin: 0 0 16px 0;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+
+.student-hackathon-modal-details {
+  display: grid;
+  gap: 10px;
+  overflow-y: auto;
+  flex: 1;
+  padding: 0 20px 20px 20px;
+}
+
+.student-hackathon-modal-details p {
+  margin: 0;
+  color: #1e293b;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.student-hackathon-modal-details p .anticon {
+  color: #1890ff;
+}
+
+.student-hackathon-modal-details strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.student-hackathon-modal-description {
+  margin-top: 8px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 6px;
+}
+
+.student-hackathon-modal-description strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #1a365d;
+}
+
+.student-hackathon-modal-description p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.student-hackathon-modal-prizes {
+  margin-top: 8px;
+}
+
+.student-hackathon-modal-prizes strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #1a365d;
+}
+
+.student-hackathon-modal-prizes .prizes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.student-hackathon-modal-prizes .prize {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.student-hackathon-modal-prizes .prize.gold {
+  background: #fff7e6;
+  color: #d48806;
+  border: 1px solid #ffd591;
+}
+
+.student-hackathon-modal-prizes .prize.silver {
+  background: #f5f5f5;
+  color: #8c8c8c;
+  border: 1px solid #d9d9d9;
+}
+
+.student-hackathon-modal-prizes .prize.bronze {
+  background: #fff1e6;
+  color: #ad6800;
+  border: 1px solid #ffc591;
+}
+
+.student-hackathon-modal-link {
+  margin-top: 8px;
+}
+
+.student-hackathon-modal-link a {
+  color: #1890ff;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.student-hackathon-modal-link a:hover {
+  text-decoration: underline;
+}
+
+.student-hackathon-modal-rules {
+  margin-top: 8px;
+  padding: 12px;
+  background: #fffbe6;
+  border-radius: 6px;
+}
+
+.student-hackathon-modal-rules strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #fa8c16;
+}
+
+.student-hackathon-modal-rules ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.student-hackathon-modal-rules li {
+  color: #8c6d1f;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 2px 0;
+}
+
+@media (max-width: 575px) {
+  .student-hackathon-view-modal-content {
+    max-width: 92%;
+    padding: 16px;
+  }
+
+  .student-hackathon-modal-poster {
+    height: 150px;
+  }
+
+  .student-hackathon-modal-title {
+    font-size: 16px;
+  }
+
+  .student-hackathon-modal-prizes .prizes-list {
+    flex-direction: column;
+  }
+}
