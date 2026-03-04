@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 const { Title, Text } = Typography;
 
 const AdminLogin = () => {
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [otpStage, setOtpStage] = useState(false);
   const [email, setEmail] = useState("");
@@ -144,6 +143,7 @@ const AdminLogin = () => {
                 placeholder="Admin Email"
                 autoComplete="email"
                 className="adminlogin-auth-input"
+                disabled={loading}
               />
             </Form.Item>
 
@@ -158,6 +158,7 @@ const AdminLogin = () => {
                 prefix={<LockOutlined className="adminlogin-input-icon" />}
                 placeholder="Password"
                 className="adminlogin-auth-input"
+                disabled={loading}
               />
             </Form.Item>
 
@@ -167,8 +168,10 @@ const AdminLogin = () => {
                 htmlType="submit"
                 className="adminlogin-auth-button"
                 block
+                loading={loading}
+                disabled={loading}
               >
-                Secure Login
+                {loading ? 'Signing in...' : 'Secure Login'}
               </Button>
             </Form.Item>
           </Form>
@@ -200,8 +203,10 @@ const AdminLogin = () => {
                 onClick={onFinishOtp}
                 className="adminlogin-auth-button"
                 block
+                loading={loading}
+                disabled={loading}
               >
-                Verify & Continue
+                {loading ? 'Verifying...' : 'Verify & Continue'}
               </Button>
               
               <Button 
