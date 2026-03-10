@@ -515,6 +515,128 @@
   background: #f9fafb;
 }
 
+/* Mentor Problem Modal - Responsive */
+.mentor-problem-modal {
+  width: 100%;
+}
+
+.mentor-problem-modal .ant-modal {
+  max-width: 600px;
+}
+
+.mentor-problem-modal .ant-modal-content {
+  border-radius: 12px;
+  overflow: visible;
+  margin-top: 100px;
+}
+
+.mentor-problem-modal .ant-modal-header {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 1px solid #e5e7eb;
+  padding: 20px 24px;
+  border-radius: 12px 12px 0 0;
+}
+
+.mentor-problem-modal .ant-modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  max-width: 85%;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.mentor-problem-modal .ant-modal-close {
+  top: 16px;
+  right: 16px;
+  font-size: 1.5rem;
+}
+
+.mentor-problem-modal .ant-modal-body {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.mentor-problem-modal .ant-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+  display: flex;
+  gap: 12px;
+}
+
+.mentor-problem-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mentor-problem-form .ant-form-item {
+  margin-bottom: 0;
+}
+
+.mentor-problem-form .ant-form-item-label > label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.mentor-problem-form .ant-input,
+.mentor-problem-form .ant-input-textarea > textarea {
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  padding: 10px 12px;
+  transition: all 0.2s ease;
+}
+
+.mentor-problem-form .ant-input:hover,
+.mentor-problem-form .ant-input-textarea > textarea:hover {
+  border-color: #d1d5db;
+}
+
+.mentor-problem-form .ant-input:focus,
+.mentor-problem-form .ant-input-textarea > textarea:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
+}
+
+.tech-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tech-input-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.tech-input-wrapper .ant-input {
+  flex: 1;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+}
+
+.tech-input-wrapper .add-tech-btn {
+  flex-shrink: 0;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  justify-content: flex-start;
+}
+
+.form-submit-btn,
+.form-cancel-btn {
+  flex: 0 0 auto;
+  min-width: 120px;
+}
+
 /* Form Styles */
 .problem-form-section {
   background: white;
@@ -641,7 +763,7 @@
   margin-top: 24px;
 }
 
-.form-submit-btn {
+.mentor-problem-modal .form-submit-btn {
   height: 40px;
   border-radius: 8px;
   font-weight: 600;
@@ -652,16 +774,17 @@
   color: white;
   cursor: pointer;
   transition: all 0.2s ease;
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 120px;
 }
 
-.form-submit-btn:hover {
+.mentor-problem-modal .form-submit-btn:hover {
   background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
-.form-cancel-btn {
+.mentor-problem-modal .form-cancel-btn {
   height: 40px;
   border-radius: 8px;
   font-weight: 500;
@@ -672,17 +795,18 @@
   color: #374151;
   cursor: pointer;
   transition: all 0.2s ease;
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 120px;
 }
 
-.form-cancel-btn:hover {
+.mentor-problem-modal .form-cancel-btn:hover {
   background: #f9fafb;
   border-color: #d1d5db;
 }
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
-  .mentor-problems-container,
+  .mentor-problem-container,
   .mentor-problem-container {
     padding: 18px;
   }
@@ -693,6 +817,10 @@
 
   .hackathon-selector {
     max-width: 100%;
+  }
+  
+  .mentor-problem-modal .ant-modal-body {
+    max-height: 65vh;
   }
 }
 
@@ -802,6 +930,57 @@
 
   .problem-modal .ant-modal-footer {
     padding: 12px 16px;
+  }
+  
+  /* Mentor Problem Modal Responsive */
+  .mentor-problem-modal .ant-modal {
+    max-width: 90vw;
+    margin: 0 auto;
+  }
+  
+  .mentor-problem-modal .ant-modal-content {
+    max-height: 90vh;
+    overflow: hidden;
+  }
+  
+  .mentor-problem-modal .ant-modal-header {
+    padding: 16px 20px;
+  }
+  
+  .mentor-problem-modal .ant-modal-title {
+    font-size: 1rem;
+  }
+  
+  .mentor-problem-modal .ant-modal-body {
+    padding: 20px;
+    max-height: 60vh;
+  }
+  
+  .mentor-problem-form .ant-form-item-label > label {
+    font-size: 0.85rem;
+  }
+  
+  .mentor-problem-form .ant-input,
+  .mentor-problem-form .ant-input-textarea > textarea {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  
+  .tech-input-wrapper .ant-input {
+    font-size: 13px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .mentor-problem-modal .form-submit-btn,
+  .mentor-problem-modal .form-cancel-btn {
+    height: 36px;
+    font-size: 13px;
+    flex: 0 0 auto;
+    min-width: 110px;
   }
 }
 
@@ -974,6 +1153,108 @@
     height: 34px;
     font-size: 12px;
     width: 100%;
+  }
+  
+  /* Mentor Problem Modal Responsive - 640px */
+  .mentor-problem-modal .ant-modal {
+    max-width: 95vw;
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+  }
+  
+  .mentor-problem-modal .ant-modal-wrap {
+    position: fixed;
+  }
+  
+  .mentor-problem-modal .ant-modal-content {
+    max-height: 85vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mentor-problem-modal .ant-modal-header {
+    padding: 14px 16px;
+    flex-shrink: 0;
+  }
+  
+  .mentor-problem-modal .ant-modal-title {
+    font-size: 0.95rem;
+    max-width: 80%;
+  }
+  
+  .mentor-problem-modal .ant-modal-close {
+    top: 12px;
+    right: 12px;
+  }
+  
+  .mentor-problem-modal .ant-modal-body {
+    padding: 16px;
+    max-height: calc(85vh - 140px);
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  .mentor-problem-modal .ant-modal-footer {
+    padding: 14px 16px;
+    flex-shrink: 0;
+  }
+  
+  .mentor-problem-form .ant-form-item {
+    margin-bottom: 12px;
+  }
+  
+  .mentor-problem-form .ant-form-item-label > label {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+  
+  .mentor-problem-form .ant-input,
+  .mentor-problem-form .ant-input-textarea > textarea {
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: 6px;
+  }
+  
+  .mentor-problem-form .ant-input-textarea > textarea {
+    min-height: 80px;
+  }
+  
+  .tech-input-section {
+    gap: 10px;
+  }
+  
+  .tech-input-wrapper {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  
+  .tech-input-wrapper .ant-input {
+    flex: 1;
+    min-width: 120px;
+    font-size: 12px;
+  }
+  
+  .tech-input-wrapper .add-tech-btn {
+    white-space: nowrap;
+  }
+  
+  .tech-tags-list {
+    gap: 6px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .form-submit-btn,
+  .form-cancel-btn {
+    height: 34px;
+    font-size: 12px;
   }
 }
 
@@ -1276,5 +1557,207 @@
     height: 32px;
     font-size: 10px;
     padding: 0 10px;
+  }
+  
+  /* Mentor Problem Modal Responsive - 480px */
+  .mentor-problem-modal {
+    z-index: 1050;
+  }
+  
+  .mentor-problem-modal .ant-modal-mask {
+    z-index: 1049;
+  }
+  
+  .mentor-problem-modal .ant-modal {
+    max-width: 98vw;
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+  }
+  
+  .mentor-problem-modal .ant-modal-content {
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+  }
+  
+  .mentor-problem-modal .ant-modal-header {
+    padding: 12px 14px;
+    flex-shrink: 0;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .mentor-problem-modal .ant-modal-title {
+    font-size: 0.9rem;
+    max-width: 75%;
+    line-height: 1.3;
+  }
+  
+  .mentor-problem-modal .ant-modal-close {
+    top: 10px;
+    right: 10px;
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+  
+  .mentor-problem-modal .ant-modal-body {
+    padding: 14px;
+    max-height: calc(90vh - 130px);
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  .mentor-problem-modal .ant-modal-footer {
+    padding: 12px 14px;
+    flex-shrink: 0;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .mentor-problem-form {
+    gap: 12px;
+  }
+  
+  .mentor-problem-form .ant-form-item {
+    margin-bottom: 0;
+  }
+  
+  .mentor-problem-form .ant-form-item-label > label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  
+  .mentor-problem-form .ant-input,
+  .mentor-problem-form .ant-input-textarea > textarea {
+    font-size: 11px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .mentor-problem-form .ant-input-textarea > textarea {
+    min-height: 70px;
+    max-height: 120px;
+  }
+  
+  .tech-input-section {
+    gap: 8px;
+  }
+  
+  .tech-input-wrapper {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .tech-input-wrapper .ant-input {
+    width: 100%;
+    font-size: 11px;
+  }
+  
+  .tech-input-wrapper .add-tech-btn {
+    width: 100%;
+    height: 32px;
+    font-size: 11px;
+  }
+  
+  .tech-tags-list {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  
+  .tech-tags-list .ant-tag {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form-submit-btn,
+  .form-cancel-btn {
+    height: 32px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mentor-problem-modal .ant-modal {
+    max-width: 99vw;
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+  }
+  
+  .mentor-problem-modal .ant-modal-content {
+    max-height: 92vh;
+    border-radius: 8px;
+  }
+  
+  .mentor-problem-modal .ant-modal-header {
+    padding: 8px 10px;
+  }
+  
+  .mentor-problem-modal .ant-modal-title {
+    font-size: 0.8rem;
+    max-width: 65%;
+  }
+  
+  .mentor-problem-modal .ant-modal-close {
+    top: 8px;
+    right: 8px;
+    font-size: 1.1rem;
+  }
+  
+  .mentor-problem-modal .ant-modal-body {
+    padding: 10px;
+    max-height: calc(92vh - 120px);
+  }
+  
+  .mentor-problem-modal .ant-modal-footer {
+    padding: 10px;
+  }
+  
+  .mentor-problem-form .ant-form-item-label > label {
+    font-size: 0.7rem;
+  }
+  
+  .mentor-problem-form .ant-input,
+  .mentor-problem-form .ant-input-textarea > textarea {
+    font-size: 10px;
+    padding: 5px 7px;
+  }
+  
+  .mentor-problem-form .ant-input-textarea > textarea {
+    min-height: 60px;
+    max-height: 100px;
+  }
+  
+  .tech-input-wrapper .ant-input {
+    font-size: 10px;
+  }
+  
+  .tech-input-wrapper .add-tech-btn {
+    height: 30px;
+    font-size: 10px;
+  }
+  
+  .tech-tags-list .ant-tag {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+  
+  .form-submit-btn,
+  .form-cancel-btn {
+    height: 30px;
+    font-size: 10px;
   }
 }

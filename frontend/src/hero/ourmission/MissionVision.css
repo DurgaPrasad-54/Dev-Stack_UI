@@ -17,23 +17,23 @@
     flex-direction: column;
 }
 
-.section-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+.mission-header {
+   display:flex;
+  align-items:center;
+  gap:6px;
 }
 
 .vertical-line {
     width: 4px;
     height: 30px;
     background-color: #ff0000;
-    margin-right: 10px;
+    margin-right: 3px;
 }
 
 .missionvision {
     font-size: clamp(24px, 4vw, 32px);
     font-weight: bold;
-    margin: 0;
+    margin-left: 0;
     color: #003049;
 }
 
@@ -127,7 +127,7 @@
         gap: 30px;
     }
 
-    .section-header {
+    .mission-header {
         margin-bottom: 15px;
     }
 

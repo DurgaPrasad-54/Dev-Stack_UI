@@ -15,17 +15,13 @@ const CoordinatorSubmissionDashboard = () => {
   });
   const [hackathons, setHackathons] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [stats, setStats] = useState(null);
   const [branchStats, setBranchStats] = useState(null);
   const [deleteModal, setDeleteModal] = useState({ show: false, submissionId: null });
   
   const [coordinatorYear] = useState(localStorage.getItem('coordinatoryear') || '');
   const [coordinatorCollege] = useState(localStorage.getItem('coordinatordetails') || '');
-  // eslint-disable-next-line no-unused-vars
-  const [coordinatorId, setCoordinatorId] = useState(localStorage.getItem('coordinatorid') || null);
-  // eslint-disable-next-line no-unused-vars
-  const [useCoordinatorRoutes, setUseCoordinatorRoutes] = useState(false);
+  const [coordinatorId] = useState(localStorage.getItem('coordinatorid') || null);
   
   // API base URL using config
   const API_BASE = `${config.backendUrl}/hacksubmission`;
@@ -35,7 +31,6 @@ const CoordinatorSubmissionDashboard = () => {
     fetchHackathons();
     fetchStats();
     setLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -47,7 +42,6 @@ const CoordinatorSubmissionDashboard = () => {
       setBranchStats(null);
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.hackathon]);
 
   const fetchSubmissions = async () => {
@@ -367,51 +361,54 @@ const CoordinatorSubmissionDashboard = () => {
           </div>
         </div>
 
-        {/* Stats Card - Selected Hackathon Only */}
+        {/* Stats Card and Branch Stats - Side by Side */}
         {filters.hackathon && hackathons.length > 0 && (
-          <div className="coordinatorsub-stats-container">
-            <div className="coordinatorsub-stats-grid">
-              <div className="coordinatorsub-stat-card">
-                <div className="coordinatorsub-stat-header">
-                  <div className="coordinatorsub-stat-title-wrapper">
-                    <p className="coordinatorsub-stat-label">Selected Hackathon</p>
-                    <h3 className="coordinatorsub-stat-title">
-                      {hackathons.find(h => h._id === filters.hackathon)?.hackathonname || 'Unknown'}
-                    </h3>
+          <div className="coordinatorsub-stats-and-branches">
+            {/* Selected Hackathon Card */}
+            <div className="coordinatorsub-stats-container">
+              <div className="coordinatorsub-stats-grid">
+                <div className="coordinatorsub-stat-card">
+                  <div className="coordinatorsub-stat-header">
+                    <div className="coordinatorsub-stat-title-wrapper">
+                      <p className="coordinatorsub-stat-label">Selected Hackathon</p>
+                      <h3 className="coordinatorsub-stat-title">
+                        {hackathons.find(h => h._id === filters.hackathon)?.hackathonname || 'Unknown'}
+                      </h3>
+                    </div>
+                    <div className="coordinatorsub-stat-icon-wrapper">
+                      <FileText className="coordinatorsub-stat-icon" />
+                    </div>
                   </div>
-                  <div className="coordinatorsub-stat-icon-wrapper">
-                    <FileText className="coordinatorsub-stat-icon" />
-                  </div>
+                  <div className="coordinatorsub-stat-value">{filteredSubmissions.length}</div>
+                  <p className="coordinatorsub-stat-description">
+                    submissions for {coordinatorCollege} - {coordinatorYear}
+                  </p>
+                  {branchStats && branchStats.branchStats && (
+                    <div className="coordinatorsub-stat-meta">
+                      <span className="coordinatorsub-stat-meta-item">
+                        <Users className="coordinatorsub-card-meta-icon" />
+                        {branchStats.branchStats.length} branches
+                      </span>
+                    </div>
+                  )}
                 </div>
-                <div className="coordinatorsub-stat-value">{filteredSubmissions.length}</div>
-                <p className="coordinatorsub-stat-description">
-                  submissions for {coordinatorCollege} - {coordinatorYear}
-                </p>
-                {branchStats && branchStats.branchStats && (
-                  <div className="coordinatorsub-stat-meta">
-                    <span className="coordinatorsub-stat-meta-item">
-                      <Users className="coordinatorsub-card-meta-icon" />
-                      {branchStats.branchStats.length} branches
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
-          </div>
-        )}
 
-        {/* Branch Statistics for Selected Hackathon */}
-        {branchStats && branchStats.branchStats && branchStats.branchStats.length > 0 && (
-          <div className="coordinatorsub-branch-stats">
-            <h3 className="coordinatorsub-branch-stats-title">Submissions by Branch</h3>
-            <div className="coordinatorsub-branch-stats-grid">
-              {branchStats.branchStats.map((stat, idx) => (
-                <div key={idx} className="coordinatorsub-branch-stat-item">
-                  <div className="coordinatorsub-branch-name">{stat.branch}</div>
-                  <div className="coordinatorsub-branch-count">{stat.submissionCount}</div>
+            {/* Branch Statistics - Beside Selected Hackathon */}
+            {branchStats && branchStats.branchStats && branchStats.branchStats.length > 0 && (
+              <div className="coordinatorsub-branch-stats">
+                <h3 className="coordinatorsub-branch-stats-title">Submissions by Branch</h3>
+                <div className="coordinatorsub-branch-stats-grid">
+                  {branchStats.branchStats.map((stat, idx) => (
+                    <div key={idx} className="coordinatorsub-branch-stat-item">
+                      <div className="coordinatorsub-branch-name">{stat.branch}</div>
+                      <div className="coordinatorsub-branch-count">{stat.submissionCount}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
           </div>
         )}
 

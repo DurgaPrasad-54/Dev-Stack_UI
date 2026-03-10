@@ -8,8 +8,6 @@ import notification from '../../assests/notificationicon.png';
 import chart from '../../assests/messageicon.png';
 import profile from '../../assests/userprofileicon.png';
 import config from '../../config';
-// eslint-disable-next-line no-unused-vars
-import { StarOutlined } from '@ant-design/icons';
 
 const socket = io(`${config.backendUrl}`, {
   auth: {
@@ -93,17 +91,24 @@ const UserNavbar = () => {
   };
 
   const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
-  const toggleResourcesDropdown = () =>
-    setResourcesDropdownOpen(!isResourcesDropdownOpen);
-  const toggleAssignmentsDropdown = () =>
-    setAssignmentsDropdownOpen(!isAssignmentsDropdownOpen);
   const closeMobileMenu = () => setMobileMenuOpen(false);
-  const toggleMobileResourcesDropdown = () =>
-    setMobileResourcesOpen(!isMobileResourcesOpen);
-  const toggleMobileAssignmentsDropdown = () =>
-    setMobileAssignmentsOpen(!isMobileAssignmentsOpen);
   const toggleProfileDropdown = () =>
     setProfileDropdownOpen(!isProfileDropdownOpen);
+  const toggleResourcesDropdown = () => {
+    setResourcesDropdownOpen(!isResourcesDropdownOpen);
+  };
+
+  const toggleAssignmentsDropdown = () => {
+    setAssignmentsDropdownOpen(!isAssignmentsDropdownOpen);
+  };
+
+  const toggleMobileResourcesDropdown = () => {
+    setMobileResourcesOpen(!isMobileResourcesOpen);
+  };
+
+  const toggleMobileAssignmentsDropdown = () => {
+    setMobileAssignmentsOpen(!isMobileAssignmentsOpen);
+  };
 
   return (
     <nav className="user-navbar">
@@ -127,7 +132,6 @@ const UserNavbar = () => {
             <a href="/user">Home</a>
           </li>
           <li className="dropdown">
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={toggleResourcesDropdown}>
               Resources <FaAngleDown className="down-arrow" />
             </a>
@@ -148,7 +152,6 @@ const UserNavbar = () => {
             </ul>
           </li>
           <li className="dropdown">
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={toggleAssignmentsDropdown}>
               Assignments <FaAngleDown className="down-arrow" />
             </a>
@@ -225,7 +228,6 @@ const UserNavbar = () => {
             </a>
           </li>
           <li>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={toggleMobileResourcesDropdown}>
               Resources <FaAngleDown className="down-arrow" />
             </a>
@@ -250,7 +252,6 @@ const UserNavbar = () => {
             )}
           </li>
           <li>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={toggleMobileAssignmentsDropdown}>
               Assignments <FaAngleDown className="down-arrow" />
             </a>

@@ -1,22 +1,17 @@
 // src/components/AdminRoomAllocationBatch.js
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import config from '../../../config';
 import './roomallocation.css';
 
 const AdminRoomAllocationBatch = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [hackathons, setHackathons] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [selectedHackathon, setSelectedHackathon] = useState(''); // Set to empty string for "All Hackathons"
+  const [selectedHackathon] = useState(''); // Set to empty string for "All Hackathons"
   const [batches, setBatches] = useState([]);
   const [filteredBatches, setFilteredBatches] = useState([]);
   const [statusFilter, setStatusFilter] = useState('all');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [updatingId, setUpdatingId] = useState(null);
   const [error, setError] = useState('');
   const [counts, setCounts] = useState({ all: 0, pending: 0, approved: 0, rejected: 0 });
   
@@ -33,17 +28,12 @@ const AdminRoomAllocationBatch = () => {
   
   // Search state for filtering table
   const [searchTerm, setSearchTerm] = useState('');
-  
-  // Debounce timer ref
-  // eslint-disable-next-line no-unused-vars
-  const searchTimerRef = useRef(null);
 
   // Fetch hackathons
   const fetchHackathons = async () => {
     try {
-      const res = await axios.get(`${config.backendUrl}/roomallocation/hackathons`);
-      const fetchedHackathons = res.data.data || [];
-      setHackathons(fetchedHackathons);
+      await axios.get(`${config.backendUrl}/roomallocation/hackathons`);
+      // Hackathons list is fetched but not used in current UI
     } catch (err) {
       console.error('Error fetching hackathons:', err);
       setError('Failed to fetch hackathons');
@@ -51,7 +41,7 @@ const AdminRoomAllocationBatch = () => {
   };
 
   // Fetch batches based on filters
-  const fetchBatches = async () => {
+  const fetchBatches = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -95,7 +85,7 @@ const AdminRoomAllocationBatch = () => {
       setError('Failed to fetch batches');
       setLoading(false);
     }
-  };
+  }, [statusFilter, page, selectedHackathon]);
 
   // Filter batches based on search term
   useEffect(() => {
@@ -162,8 +152,7 @@ const AdminRoomAllocationBatch = () => {
   // Fetch batches when filters change
   useEffect(() => {
     fetchBatches();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusFilter, page, selectedHackathon]);
+  }, [fetchBatches]);
 
   // Handle search input
   const handleSearchChange = (e) => {

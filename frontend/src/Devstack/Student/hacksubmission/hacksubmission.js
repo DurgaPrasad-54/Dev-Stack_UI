@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Upload, FileText, Github, Link2, Loader2, CheckCircle, AlertCircle, Users, Info, ArrowLeft } from 'lucide-react';
+import config from '../../../config';
 import './hacksubmission.css';
 import { useHackathon } from '../context/HackathonContext';
-import config from '../../../config';
 
 export default function HackathonSubmissionForm() {
   const [loading, setLoading] = useState(true);
@@ -23,7 +23,6 @@ export default function HackathonSubmissionForm() {
     liveDemoLink: '',
     documents: []
   });
-  // eslint-disable-next-line no-unused-vars
   const [hasDocuments, setHasDocuments] = useState(false);
 
   const API_URL = `${config.backendUrl}/hacksubmission`;
@@ -34,10 +33,9 @@ export default function HackathonSubmissionForm() {
 
   useEffect(() => {
     fetchTeamAndInitialData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchTeamAndInitialData]);
 
-  const fetchTeamAndInitialData = async () => {
+  const fetchTeamAndInitialData = useCallback(async () => {
     setLoading(true);
     setError('');
     
@@ -126,7 +124,7 @@ export default function HackathonSubmissionForm() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentHackathonId, studentId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

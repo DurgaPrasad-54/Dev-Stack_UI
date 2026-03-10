@@ -15,9 +15,8 @@ import {
   Clock,
   XCircle
 } from 'lucide-react';
-
-import '../mentorresouces/mentorresources.css';
 import config from '../../config';
+import '../mentorresouces/mentorresources.css';
 
 const MentorResourcesDashboard = () => {
   const [requests, setRequests] = useState([]);
@@ -340,7 +339,7 @@ const MentorResourcesDashboard = () => {
     }
   };
 
-  const getBackendUrl = () => config.backendUrl;
+  const getBackendUrl = () => 'http://localhost:5000';
 
   const getPDFDownloadUrl = (requestId, view = false) =>
     `${getBackendUrl()}/mentorresources/download/pdf/${requestId}${view ? '?view=1' : ''}`;
@@ -350,9 +349,8 @@ const MentorResourcesDashboard = () => {
 
   useEffect(() => { 
     fetchRequests(); 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-    
+  
   useEffect(() => {
     if (formData.requestType === 'pdf') {
       fetchAvailableFolders();
@@ -360,7 +358,6 @@ const MentorResourcesDashboard = () => {
     if (formData.requestType === 'video') {
       fetchAvailableVideoFolders();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.requestType]);
 
   const filteredRequests = requests.filter(req => {

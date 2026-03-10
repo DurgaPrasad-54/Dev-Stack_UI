@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import "../header/header.css"; // Make sure your CSS is linked
-import Logo from '../../assests/heroheadericon.png';
+import Logo from '../../assests/Devstack_logo.png';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

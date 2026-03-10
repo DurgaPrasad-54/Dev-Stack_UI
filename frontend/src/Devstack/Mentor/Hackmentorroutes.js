@@ -5,8 +5,6 @@ import HackathonNotifications from './Notification'
 import HackMentorResource from './Hackmentorresource';
 import ResourcePage from '../HackResource';
 import Schedule from '../Student/schedule/studentschedule';
-// eslint-disable-next-line no-unused-vars
-import RoomAllocationTable from './roomallocation/roomallocation';
 import MentorHackathonPage from './Hackathons/Hackmentor';
 import MentorProblemStatementsPage from './Problem Statements/Problemstatements';
 import MentorSubmissionDashboard from './hacksubmission/hacksubmission';

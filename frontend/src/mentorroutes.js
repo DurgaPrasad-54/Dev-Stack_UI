@@ -5,8 +5,6 @@ import MentorTeams from './user/teamformation/mentor';
 import Githubapp from './mentor/githubapp';
 import Task from './mentor/tasks/TaskGrading';
 import MentorHeader from './mentor/mentorheader/mentorheader';
-// eslint-disable-next-line no-unused-vars
-import Chat from './components/AIchatbot/ChatInterface';
 import ItemsList from './user/sources/ItemsList';
 import Notes from './user/notes/notes';
 import Videos from './user/videos/videos';
@@ -18,8 +16,6 @@ import ProfilePage from './mentor/mentorprofile/mentorprofile';
 import Tracker from './components/leaderboard/timerleaderboard';
 import Verify from './admin/main-certificate/verification-certificate';
 import MentorEvents from './mentor/events/mentorevents';
-// eslint-disable-next-line no-unused-vars
-import StudentFeedback from './user/feedback/StudentFeedback';
 import MentorDashboard from './mentor/mentorresouces/mentorresources';
 function Mentor() {
   return (

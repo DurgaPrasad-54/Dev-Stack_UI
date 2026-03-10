@@ -157,7 +157,7 @@ const ViewHackathonsPage = () => {
                   <Tooltip title="Edit Hackathon">
                     <Button
                       icon={<EditOutlined />}
-                      type="primary"
+                      type="default"
                       onClick={() => handleEdit(hack._id)}
                     />
                   </Tooltip>
@@ -169,9 +169,8 @@ const ViewHackathonsPage = () => {
                       cancelText="No"
                     >
                       <Button
-                        type="primary"
+                        type="default"
                         icon={<DeleteOutlined />}
-                        danger
                         loading={deletingId === hack._id}
                       />
                     </Popconfirm>
@@ -244,13 +243,9 @@ const ViewHackathonsPage = () => {
         centered
         destroyOnClose
         maskClosable={true}
-        footer={[
-          <Button key="close" onClick={handleCloseModal}>
-            Close
-          </Button>,
-          selectedHackathon?.status !== "completed" && (
+        footer={
+          selectedHackathon?.status !== "completed" ? (
             <Button
-              key="edit"
               type="primary"
               icon={<EditOutlined />}
               onClick={() => {
@@ -260,8 +255,8 @@ const ViewHackathonsPage = () => {
             >
               Edit Hackathon
             </Button>
-          ),
-        ]}
+          ) : null
+        }
         width={500}
         className="hackathon-modal"
         zIndex={1050}

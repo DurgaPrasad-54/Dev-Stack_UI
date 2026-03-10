@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import config from '../../../config';
 
-const API_BASE = config.backendUrl;
-const BACKEND_URL = config.backendUrl;
+const API_BASE = config.backendUrl; // Replace with your actual config
+const BACKEND_URL = config.backendUrl; // Replace with your actual config
 
 const MentorSchedule = () => {
   const [schedules, setSchedules] = useState([]);
@@ -85,7 +85,6 @@ const MentorSchedule = () => {
 
   useEffect(() => {
     fetchSchedules();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchSchedules = async () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Calendar, 
   Clock, 
@@ -6,7 +6,7 @@ import {
   Users, 
   Plus, 
   Edit3, 
-  Trash2, 
+  Trash2,
   Save,
   X,
   AlertCircle,
@@ -54,10 +54,9 @@ const EventManagement = () => {
   useEffect(() => {
     fetchEvents();
     fetchTeams();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchEvents, fetchTeams]);
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
@@ -80,9 +79,9 @@ const EventManagement = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchTeams = async () => {
+  const fetchTeams = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`${config.backendUrl}/mentorevents/teams`, {
@@ -99,7 +98,7 @@ const EventManagement = () => {
     } catch (error) {
       console.error('Error fetching teams:', error);
     }
-  };
+  }, []);
 
   const showMessage = (type, text) => {
     setMessage({ type, text });

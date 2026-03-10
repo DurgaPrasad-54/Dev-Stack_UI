@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Card,
   Spin,
@@ -15,8 +16,7 @@ import {
   Statistic,
   Select,
   Tabs,
-  // eslint-disable-next-line no-unused-vars
-  Badge,
+
   Descriptions,
   List,
   Collapse,
@@ -31,8 +31,7 @@ import {
   CalendarOutlined,
   CodeOutlined,
   GithubOutlined,
-  // eslint-disable-next-line no-unused-vars
-  FileTextOutlined,
+
   CheckCircleOutlined,
   UserOutlined,
   BulbOutlined,
@@ -41,16 +40,12 @@ import {
   ProjectOutlined,
   DownOutlined,
   ClockCircleOutlined,
-  // eslint-disable-next-line no-unused-vars
-  MailOutlined,
-  // eslint-disable-next-line no-unused-vars
-  IdcardOutlined,
+
   BookOutlined,
   StarOutlined,
   ScheduleOutlined,
   SolutionOutlined,
-  // eslint-disable-next-line no-unused-vars
-  FundProjectionScreenOutlined,
+
   BarChartOutlined,
   FileSearchOutlined,
   CommentOutlined,
@@ -58,6 +53,8 @@ import {
 } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../config';
+import '../Student/hackathon/hackathon.css';
+import './MentorHackathonHistory.css';
 
 const { Title, Text, Paragraph } = Typography;
 const { Option } = Select;
@@ -77,7 +74,6 @@ const MentorHackathonHistory = () => {
       fetchHackathonHistory();
       fetchSummary();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mentorId]);
 
   // Auto-select first hackathon when list loads
@@ -85,7 +81,6 @@ const MentorHackathonHistory = () => {
     if (hackathonList.length > 0 && !selectedHackathonId) {
       setSelectedHackathonId(hackathonList[0].hackathon._id);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hackathonList]);
 
   // Fetch detailed data when hackathon is selected
@@ -157,90 +152,40 @@ const MentorHackathonHistory = () => {
 
   // Summary Cards Component
   const SummaryCards = () => (
-    <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
-      <Col xs={12} sm={8} md={4}>
-        <Card
-          style={{
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            border: 'none',
-          }}
-          bodyStyle={{ padding: '16px', textAlign: 'center' }}
-        >
-          <TrophyOutlined style={{ fontSize: '24px', color: 'white', marginBottom: '8px' }} />
-          <Statistic
-            value={summary?.totalParticipated || 0}
-            valueStyle={{ color: 'white', fontSize: '22px', fontWeight: 700 }}
-          />
-          <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: '11px' }}>Participated</Text>
+    <Row gutter={[4, 4]} className="mentor-history-summary-row" style={{ marginBottom: '16px' }}>
+      <Col xs={12} sm={12} md={8} lg={4}>
+        <Card style={{ borderRadius: '10px', background: '#f0f5ff', border: '1px solid #d6e4ff' }} bodyStyle={{ padding: '12px', textAlign: 'center' }}>
+          <TrophyOutlined style={{ fontSize: '22px', color: '#667eea', marginBottom: '8px' }} />
+          <div style={{ fontSize: '24px', fontWeight: 700, color: '#1a365d' }}>{summary?.totalParticipated || 0}</div>
+          <Text type="secondary" style={{ fontSize: '12px' }}>Participated</Text>
         </Card>
       </Col>
-      <Col xs={12} sm={8} md={4}>
-        <Card
-          style={{
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
-            border: 'none',
-          }}
-          bodyStyle={{ padding: '16px', textAlign: 'center' }}
-        >
-          <CheckCircleOutlined style={{ fontSize: '24px', color: 'white', marginBottom: '8px' }} />
-          <Statistic
-            value={summary?.completedHackathons || 0}
-            valueStyle={{ color: 'white', fontSize: '22px', fontWeight: 700 }}
-          />
-          <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: '11px' }}>Completed</Text>
+      <Col xs={12} sm={12} md={8} lg={4}>
+        <Card style={{ borderRadius: '10px', background: '#f6ffed', border: '1px solid #b7eb8f' }} bodyStyle={{ padding: '12px', textAlign: 'center' }}>
+          <CheckCircleOutlined style={{ fontSize: '22px', color: '#52c41a', marginBottom: '8px' }} />
+          <div style={{ fontSize: '24px', fontWeight: 700, color: '#1a365d' }}>{summary?.completedHackathons || 0}</div>
+          <Text type="secondary" style={{ fontSize: '12px' }}>Completed</Text>
         </Card>
       </Col>
-      <Col xs={12} sm={8} md={4}>
-        <Card
-          style={{
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-            border: 'none',
-          }}
-          bodyStyle={{ padding: '16px', textAlign: 'center' }}
-        >
-          <TeamOutlined style={{ fontSize: '24px', color: 'white', marginBottom: '8px' }} />
-          <Statistic
-            value={summary?.totalTeamsMentored || 0}
-            valueStyle={{ color: 'white', fontSize: '22px', fontWeight: 700 }}
-          />
-          <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: '11px' }}>Teams Mentored</Text>
+      <Col xs={12} sm={12} md={8} lg={4}>
+        <Card style={{ borderRadius: '10px', background: '#fff0f6', border: '1px solid #ffadd2' }} bodyStyle={{ padding: '12px', textAlign: 'center' }}>
+          <TeamOutlined style={{ fontSize: '22px', color: '#eb2f96', marginBottom: '8px' }} />
+          <div style={{ fontSize: '24px', fontWeight: 700, color: '#1a365d' }}>{summary?.totalTeamsMentored || 0}</div>
+          <Text type="secondary" style={{ fontSize: '12px' }}>Teams Mentored</Text>
         </Card>
       </Col>
-      <Col xs={12} sm={8} md={4}>
-        <Card
-          style={{
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-            border: 'none',
-          }}
-          bodyStyle={{ padding: '16px', textAlign: 'center' }}
-        >
-          <ProjectOutlined style={{ fontSize: '24px', color: 'white', marginBottom: '8px' }} />
-          <Statistic
-            value={summary?.totalSubmissions || 0}
-            valueStyle={{ color: 'white', fontSize: '22px', fontWeight: 700 }}
-          />
-          <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: '11px' }}>Submissions</Text>
+      <Col xs={12} sm={12} md={8} lg={4}>
+        <Card style={{ borderRadius: '10px', background: '#e6f7ff', border: '1px solid #91d5ff' }} bodyStyle={{ padding: '12px', textAlign: 'center' }}>
+          <ProjectOutlined style={{ fontSize: '22px', color: '#1890ff', marginBottom: '8px' }} />
+          <div style={{ fontSize: '24px', fontWeight: 700, color: '#1a365d' }}>{summary?.totalSubmissions || 0}</div>
+          <Text type="secondary" style={{ fontSize: '12px' }}>Submissions</Text>
         </Card>
       </Col>
-      <Col xs={12} sm={8} md={4}>
-        <Card
-          style={{
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-            border: 'none',
-          }}
-          bodyStyle={{ padding: '16px', textAlign: 'center' }}
-        >
-          <RocketOutlined style={{ fontSize: '24px', color: 'white', marginBottom: '8px' }} />
-          <Statistic
-            value={summary?.ongoingHackathons || 0}
-            valueStyle={{ color: 'white', fontSize: '22px', fontWeight: 700 }}
-          />
-          <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: '11px' }}>Ongoing</Text>
+      <Col xs={12} sm={12} md={8} lg={4}>
+        <Card style={{ borderRadius: '10px', background: '#fff7e6', border: '1px solid #ffd591' }} bodyStyle={{ padding: '12px', textAlign: 'center' }}>
+          <RocketOutlined style={{ fontSize: '22px', color: '#fa8c16', marginBottom: '8px' }} />
+          <div style={{ fontSize: '24px', fontWeight: 700, color: '#1a365d' }}>{summary?.ongoingHackathons || 0}</div>
+          <Text type="secondary" style={{ fontSize: '12px' }}>Ongoing</Text>
         </Card>
       </Col>
     </Row>
@@ -249,6 +194,7 @@ const MentorHackathonHistory = () => {
   // Hackathon Selector Dropdown
   const HackathonSelector = () => (
     <Card
+      className="mentor-history-selector"
       style={{
         borderRadius: '16px',
         marginBottom: '24px',
@@ -269,7 +215,7 @@ const MentorHackathonHistory = () => {
             </Text>
           </Space>
         </Col>
-        <Col xs={24} sm={12}>
+        <Col xs={24} sm={24} md={12}>
           <Select
             value={selectedHackathonId}
             onChange={handleHackathonChange}
@@ -283,7 +229,7 @@ const MentorHackathonHistory = () => {
               <Option key={item.hackathon._id} value={item.hackathon._id}>
                 <Space>
                   <TrophyOutlined style={{ color: '#667eea' }} />
-                  <span>{item.hackathon.name}</span>
+                  <span style={{ wordBreak: 'break-word' }}>{item.hackathon.name}</span>
                   <Tag color="blue">{item.teamsCount} teams</Tag>
                 </Space>
               </Option>
@@ -307,17 +253,13 @@ const MentorHackathonHistory = () => {
     >
       {/* Team Header */}
       <div style={{
-        background: `linear-gradient(135deg, ${
-          index % 4 === 0 ? '#667eea, #764ba2' :
-          index % 4 === 1 ? '#11998e, #38ef7d' :
-          index % 4 === 2 ? '#f093fb, #f5576c' :
-          '#4facfe, #00f2fe'
-        })`,
-        padding: '20px 24px',
-        margin: '-24px -24px 20px -24px',
-      }}>
-        <Row align="middle" justify="space-between" wrap gutter={[16, 16]}>
-          <Col>
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        padding: '16px 20px',
+        margin: '-24px -24px 16px -24px',
+        borderRadius: '10px 10px 0 0',
+      }} className="mentor-history-team-header">
+        <Row align="middle" justify="space-between" wrap gutter={[8, 8]}>
+          <Col xs={24} sm={12}>
             <Space>
               <Avatar
                 size={48}
@@ -325,7 +267,7 @@ const MentorHackathonHistory = () => {
                 style={{ background: 'rgba(255,255,255,0.2)' }}
               />
               <div>
-                <Title level={4} style={{ color: 'white', margin: 0 }}>
+                <Title level={4} style={{ color: 'white', margin: 0, wordBreak: 'break-word' }}>
                   {team.name || 'Unnamed Team'}
                 </Title>
                 <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: '13px' }}>
@@ -334,8 +276,8 @@ const MentorHackathonHistory = () => {
               </div>
             </Space>
           </Col>
-          <Col>
-            <Space>
+          <Col xs={24} sm={12} style={{ textAlign: 'right' }}>
+            <Space wrap>
               {team.progress && (
                 <Tag color="white" style={{ color: '#333', fontWeight: 600 }}>
                   {team.progress.percentage || 0}% Progress
@@ -360,9 +302,9 @@ const MentorHackathonHistory = () => {
           } 
           key="members"
         >
-          <Row gutter={[12, 12]}>
+          <Row gutter={[12, 12]} className="mentor-history-members-grid">
             {team.members?.map((member, idx) => (
-              <Col xs={24} sm={12} key={member._id || idx}>
+              <Col xs={24} sm={24} md={12} key={member._id || idx}>
                 <Card
                   size="small"
                   style={{
@@ -381,13 +323,13 @@ const MentorHackathonHistory = () => {
                           : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                       }}
                     />
-                    <div>
-                      <Space size={4}>
-                        <Text strong style={{ fontSize: '14px' }}>{member.name}</Text>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <Space size={4} wrap>
+                        <Text strong style={{ fontSize: '14px', wordBreak: 'break-word' }}>{member.name}</Text>
                         {member.isTeamLead && <Tag color="gold" style={{ fontSize: '10px' }}>Lead</Tag>}
                       </Space>
                       <div>
-                        <Text type="secondary" style={{ fontSize: '12px' }}>
+                        <Text type="secondary" style={{ fontSize: '12px', wordBreak: 'break-word' }}>
                           {member.rollNo} • {member.branch}
                         </Text>
                       </div>
@@ -553,21 +495,17 @@ const MentorHackathonHistory = () => {
           <Card
             key={dayIndex}
             style={{
-              borderRadius: '16px',
-              marginBottom: '20px',
+              borderRadius: '10px',
+              marginBottom: '16px',
               overflow: 'hidden',
-              border: 'none',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+              border: '1px solid #e5e7eb',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
             }}
           >
-            <div style={{
-              background: `linear-gradient(135deg, ${
-                dayIndex % 3 === 0 ? '#667eea, #764ba2' :
-                dayIndex % 3 === 1 ? '#11998e, #38ef7d' :
-                '#f093fb, #f5576c'
-              })`,
-              padding: '16px 24px',
-              margin: '-24px -24px 20px -24px',
+            <div className="mentor-history-gradient-header" style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              padding: '14px 20px',
+              margin: '-24px -24px 16px -24px',
             }}>
               <Title level={4} style={{ color: 'white', margin: 0 }}>
                 <CalendarOutlined style={{ marginRight: '10px' }} />
@@ -632,22 +570,17 @@ const MentorHackathonHistory = () => {
           <Card
             key={domain}
             style={{
-              borderRadius: '16px',
+              borderRadius: '10px',
               marginBottom: '16px',
               overflow: 'hidden',
-              border: 'none',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+              border: '1px solid #e5e7eb',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
             }}
           >
-            <div style={{
-              background: `linear-gradient(135deg, ${
-                idx % 4 === 0 ? '#667eea, #764ba2' :
-                idx % 4 === 1 ? '#11998e, #38ef7d' :
-                idx % 4 === 2 ? '#f093fb, #f5576c' :
-                '#4facfe, #00f2fe'
-              })`,
-              padding: '16px 24px',
-              margin: '-24px -24px 20px -24px',
+            <div className="mentor-history-gradient-header" style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              padding: '14px 20px',
+              margin: '-24px -24px 16px -24px',
             }}>
               <Title level={4} style={{ color: 'white', margin: 0 }}>
                 <BulbOutlined style={{ marginRight: '10px' }} />
@@ -694,16 +627,17 @@ const MentorHackathonHistory = () => {
 
     const columns = [
       {
-        title: 'Rank',
+        title: '#',
         key: 'rank',
-        width: 60,
+        width: 45,
         render: (_, __, index) => (
           <Avatar
-            size={28}
+            size={24}
             style={{
               background: index === 0 ? '#ffd700' : index === 1 ? '#c0c0c0' : index === 2 ? '#cd7f32' : '#e8e8e8',
               color: index < 3 ? '#333' : '#666',
               fontWeight: 600,
+              fontSize: '12px',
             }}
           >
             {index + 1}
@@ -716,14 +650,14 @@ const MentorHackathonHistory = () => {
         key: 'name',
         render: (name, record) => (
           <Space direction="vertical" size={0}>
-            <Space>
-              <Text strong>{name}</Text>
+            <Space size={4} wrap>
+              <Text strong style={{ fontSize: '13px' }}>{name}</Text>
               {record.isMentoredByMe && (
-                <Tag color="blue" style={{ fontSize: '10px' }}>My Team</Tag>
+                <Tag color="blue" style={{ fontSize: '10px', margin: 0 }}>My Team</Tag>
               )}
             </Space>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
-              Lead: {record.teamLead || 'N/A'} • {record.memberCount} members
+            <Text type="secondary" style={{ fontSize: '11px' }}>
+              {record.teamLead || 'N/A'} • {record.memberCount} members
             </Text>
           </Space>
         ),
@@ -732,12 +666,13 @@ const MentorHackathonHistory = () => {
         title: 'Mentor',
         dataIndex: 'mentorName',
         key: 'mentorName',
-        render: (mentor) => <Text>{mentor}</Text>,
+        responsive: ['md'],
+        render: (mentor) => <Text style={{ fontSize: '13px' }}>{mentor}</Text>,
       },
       {
         title: 'Progress',
         key: 'progress',
-        width: 200,
+        width: 140,
         render: (_, record) => (
           <div>
             <Progress
@@ -753,7 +688,7 @@ const MentorHackathonHistory = () => {
                 record.progress?.status === 'Completed' ? 'success' :
                 record.progress?.status === 'In Progress' ? 'processing' : 'default'
               }
-              style={{ marginTop: '4px', fontSize: '11px' }}
+              style={{ marginTop: '4px', fontSize: '10px' }}
             >
               {record.progress?.status || 'Not Started'}
             </Tag>
@@ -765,7 +700,6 @@ const MentorHackathonHistory = () => {
     // Calculate summary stats
     const completedCount = sortedTeams.filter(t => t.progress?.status === 'Completed').length;
     const inProgressCount = sortedTeams.filter(t => t.progress?.status === 'In Progress').length;
-    // eslint-disable-next-line no-unused-vars
     const notStartedCount = sortedTeams.filter(t => t.progress?.status === 'Not Started' || !t.progress?.status).length;
     const avgProgress = sortedTeams.length > 0 
       ? Math.round(sortedTeams.reduce((sum, t) => sum + (t.progress?.percentage || 0), 0) / sortedTeams.length)
@@ -774,9 +708,9 @@ const MentorHackathonHistory = () => {
     return (
       <div>
         {/* Summary Stats */}
-        <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
-          <Col xs={12} sm={6}>
-            <Card style={{ borderRadius: '12px', textAlign: 'center', background: '#f0f5ff' }}>
+        <Row gutter={[8,8]} className="mentor-history-summary-row" style={{ marginBottom: '24px' }}>
+          <Col xs={12} sm={12} md={6}>
+            <Card className="summary-card" style={{ borderRadius: '12px', textAlign: 'center', background: '#f0f5ff' }}>
               <Statistic 
                 title={<Text type="secondary" style={{ fontSize: '12px' }}>Total Teams</Text>}
                 value={sortedTeams.length} 
@@ -784,8 +718,8 @@ const MentorHackathonHistory = () => {
               />
             </Card>
           </Col>
-          <Col xs={12} sm={6}>
-            <Card style={{ borderRadius: '12px', textAlign: 'center', background: '#f6ffed' }}>
+          <Col xs={12} sm={12} md={6}>
+            <Card className="summary-card" style={{ borderRadius: '12px', textAlign: 'center', background: '#f6ffed' }}>
               <Statistic 
                 title={<Text type="secondary" style={{ fontSize: '12px' }}>Completed</Text>}
                 value={completedCount} 
@@ -793,8 +727,8 @@ const MentorHackathonHistory = () => {
               />
             </Card>
           </Col>
-          <Col xs={12} sm={6}>
-            <Card style={{ borderRadius: '12px', textAlign: 'center', background: '#e6f7ff' }}>
+          <Col xs={12} sm={12} md={6}>
+            <Card className="summary-card" style={{ borderRadius: '12px', textAlign: 'center', background: '#e6f7ff' }}>
               <Statistic 
                 title={<Text type="secondary" style={{ fontSize: '12px' }}>In Progress</Text>}
                 value={inProgressCount} 
@@ -802,8 +736,8 @@ const MentorHackathonHistory = () => {
               />
             </Card>
           </Col>
-          <Col xs={12} sm={6}>
-            <Card style={{ borderRadius: '12px', textAlign: 'center', background: '#fff7e6' }}>
+          <Col xs={12} sm={12} md={6}>
+            <Card className="summary-card" style={{ borderRadius: '12px', textAlign: 'center', background: '#fff7e6' }}>
               <Statistic 
                 title={<Text type="secondary" style={{ fontSize: '12px' }}>Avg Progress</Text>}
                 value={avgProgress} 
@@ -815,14 +749,16 @@ const MentorHackathonHistory = () => {
         </Row>
 
         {/* Teams Table */}
-        <Card style={{ borderRadius: '12px' }}>
-          <Table
-            dataSource={sortedTeams}
-            columns={columns}
-            rowKey="_id"
-            pagination={{ pageSize: 10 }}
-            rowClassName={(record) => record.isMentoredByMe ? 'my-team-row' : ''}
-          />
+        <Card style={{ borderRadius: '12px', marginTop: '16px' }} bodyStyle={{ padding: '12px' }}>
+          <div className="mentor-history-table-wrapper">
+            <Table
+              dataSource={sortedTeams}
+              columns={columns}
+              rowKey="_id"
+              pagination={{ pageSize: 20 }}
+              rowClassName={(record) => record.isMentoredByMe ? 'my-team-row' : ''}
+            />
+          </div>
         </Card>
 
         <style>{`
@@ -853,16 +789,17 @@ const MentorHackathonHistory = () => {
 
     const columns = [
       {
-        title: 'Rank',
+        title: '#',
         key: 'rank',
-        width: 60,
+        width: 45,
         render: (_, __, index) => (
           <Avatar
-            size={28}
+            size={24}
             style={{
               background: index === 0 ? '#ffd700' : index === 1 ? '#c0c0c0' : index === 2 ? '#cd7f32' : '#e8e8e8',
               color: index < 3 ? '#333' : '#666',
               fontWeight: 600,
+              fontSize: '12px',
             }}
           >
             {index + 1}
@@ -874,14 +811,14 @@ const MentorHackathonHistory = () => {
         key: 'team',
         render: (_, record) => (
           <Space direction="vertical" size={0}>
-            <Space>
-              <Text strong>{record.teamName}</Text>
+            <Space size={4} wrap>
+              <Text strong style={{ fontSize: '13px' }}>{record.teamName}</Text>
               {record.isMentoredByMe && (
-                <Tag color="blue" style={{ fontSize: '10px' }}>My Team</Tag>
+                <Tag color="blue" style={{ fontSize: '10px', margin: 0 }}>My Team</Tag>
               )}
             </Space>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
-              Lead: {record.teamLead || 'N/A'}
+            <Text type="secondary" style={{ fontSize: '11px' }}>
+              {record.teamLead || 'N/A'}
             </Text>
           </Space>
         ),
@@ -890,10 +827,11 @@ const MentorHackathonHistory = () => {
         title: 'Problem',
         dataIndex: 'problemTitle',
         key: 'problemTitle',
+        responsive: ['md'],
         ellipsis: true,
         render: (title) => (
           <Tooltip title={title}>
-            <Text>{title}</Text>
+            <Text style={{ fontSize: '13px' }}>{title}</Text>
           </Tooltip>
         ),
       },
@@ -901,11 +839,11 @@ const MentorHackathonHistory = () => {
         title: 'Score',
         dataIndex: 'score',
         key: 'score',
-        width: 100,
+        width: 80,
         render: (score) => (
           <Tag 
             color={score >= 80 ? 'green' : score >= 60 ? 'blue' : score >= 40 ? 'orange' : 'default'}
-            style={{ fontSize: '14px', padding: '4px 12px' }}
+            style={{ fontSize: '12px', padding: '2px 8px' }}
           >
             {score || 0}/100
           </Tag>
@@ -914,9 +852,10 @@ const MentorHackathonHistory = () => {
       {
         title: 'Links',
         key: 'links',
-        width: 120,
+        width: 80,
+        responsive: ['sm'],
         render: (_, record) => (
-          <Space>
+          <Space size={4}>
             {record.githubRepo && (
               <Tooltip title="GitHub Repo">
                 <Button 
@@ -946,7 +885,8 @@ const MentorHackathonHistory = () => {
         title: 'Submitted',
         dataIndex: 'submittedAt',
         key: 'submittedAt',
-        render: (date) => formatDate(date),
+        responsive: ['lg'],
+        render: (date) => <Text style={{ fontSize: '12px' }}>{formatDate(date)}</Text>,
       },
     ];
 
@@ -960,9 +900,9 @@ const MentorHackathonHistory = () => {
     return (
       <div>
         {/* Summary Stats */}
-        <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
-          <Col xs={12} sm={6}>
-            <Card style={{ borderRadius: '12px', textAlign: 'center', background: '#f0f5ff' }}>
+        <Row gutter={[4, 4]} className="mentor-history-summary-row" style={{ marginBottom: '16px' }}>
+          <Col xs={12} sm={12} md={6}>
+            <Card className="summary-card" style={{ borderRadius: '12px', textAlign: 'center', background: '#f0f5ff' }}>
               <Statistic 
                 title={<Text type="secondary" style={{ fontSize: '12px' }}>Total Submissions</Text>}
                 value={sortedSubmissions.length} 
@@ -970,8 +910,8 @@ const MentorHackathonHistory = () => {
               />
             </Card>
           </Col>
-          <Col xs={12} sm={6}>
-            <Card style={{ borderRadius: '12px', textAlign: 'center', background: '#f6ffed' }}>
+          <Col xs={12} sm={12} md={6}>
+            <Card className="summary-card" style={{ borderRadius: '12px', textAlign: 'center', background: '#f6ffed' }}>
               <Statistic 
                 title={<Text type="secondary" style={{ fontSize: '12px' }}>Top Score</Text>}
                 value={topScore} 
@@ -980,8 +920,8 @@ const MentorHackathonHistory = () => {
               />
             </Card>
           </Col>
-          <Col xs={12} sm={6}>
-            <Card style={{ borderRadius: '12px', textAlign: 'center', background: '#fff7e6' }}>
+          <Col xs={12} sm={12} md={6}>
+            <Card className="summary-card" style={{ borderRadius: '12px', textAlign: 'center', background: '#fff7e6' }}>
               <Statistic 
                 title={<Text type="secondary" style={{ fontSize: '12px' }}>Average Score</Text>}
                 value={avgScore} 
@@ -990,8 +930,8 @@ const MentorHackathonHistory = () => {
               />
             </Card>
           </Col>
-          <Col xs={12} sm={6}>
-            <Card style={{ borderRadius: '12px', textAlign: 'center', background: '#f9f0ff' }}>
+          <Col xs={12} sm={12} md={6}>
+            <Card className="summary-card" style={{ borderRadius: '12px', textAlign: 'center', background: '#f9f0ff' }}>
               <Statistic 
                 title={<Text type="secondary" style={{ fontSize: '12px' }}>My Teams</Text>}
                 value={myTeamSubmissions.length} 
@@ -1002,22 +942,25 @@ const MentorHackathonHistory = () => {
         </Row>
 
         {/* Submissions Table */}
-        <Card style={{ borderRadius: '12px' }}>
-          <Table
-            dataSource={sortedSubmissions}
-            columns={columns}
-            rowKey="_id"
-            pagination={{ pageSize: 10 }}
-            rowClassName={(record) => record.isMentoredByMe ? 'my-team-row' : ''}
-            expandable={{
-              expandedRowRender: (record) => (
-                <div style={{ padding: '16px', background: '#fafafa', borderRadius: '8px' }}>
-                  <Title level={5} style={{ marginBottom: '8px' }}>Project Description</Title>
-                  <Paragraph style={{ marginBottom: 0 }}>{record.projectDescription}</Paragraph>
-                </div>
-              ),
-            }}
-          />
+        <Card style={{ borderRadius: '12px' }} bodyStyle={{ padding: '12px' }}>
+          <div className="mentor-history-table-wrapper">
+            <Table
+              dataSource={sortedSubmissions}
+              columns={columns}
+              rowKey="_id"
+              pagination={{ pageSize: 10 }}
+              size="small"
+              rowClassName={(record) => record.isMentoredByMe ? 'my-team-row' : ''}
+              expandable={{
+                expandedRowRender: (record) => (
+                  <div style={{ padding: '12px', background: '#fafafa', borderRadius: '8px' }}>
+                    <Title level={5} style={{ marginBottom: '8px', fontSize: '14px' }}>Project Description</Title>
+                    <Paragraph style={{ marginBottom: 0, fontSize: '13px' }}>{record.projectDescription}</Paragraph>
+                  </div>
+                ),
+              }}
+            />
+          </div>
         </Card>
       </div>
     );
@@ -1046,7 +989,7 @@ const MentorHackathonHistory = () => {
             boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
           }}
         >
-          <div style={{
+          <div className="mentor-history-rating-header" style={{
             background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
             padding: '32px',
             margin: '-24px -24px 24px -24px',
@@ -1066,8 +1009,8 @@ const MentorHackathonHistory = () => {
             </Text>
           </div>
 
-          <Row gutter={[16, 16]}>
-            <Col xs={12}>
+          <Row gutter={[16, 16]} className="mentor-history-summary-row">
+            <Col xs={24} sm={12}>
               <Card style={{ borderRadius: '10px', background: '#f6ffed', textAlign: 'center' }}>
                 <Statistic
                   title="Total Feedbacks"
@@ -1077,7 +1020,7 @@ const MentorHackathonHistory = () => {
                 />
               </Card>
             </Col>
-            <Col xs={12}>
+            <Col xs={24} sm={12}>
               <Card style={{ borderRadius: '10px', background: '#fff7e6', textAlign: 'center' }}>
                 <Statistic
                   title="Average Rating"
@@ -1109,23 +1052,23 @@ const MentorHackathonHistory = () => {
                 border: '1px solid #f0f0f0',
               }}
             >
-              <Row align="middle" gutter={16}>
-                <Col>
+              <Row align="middle" gutter={[8, 8]} wrap className="mentor-history-feedback-row">
+                <Col xs={24} sm={4} md={3} style={{ textAlign: 'center' }}>
                   <Avatar
                     size={48}
                     icon={<UserOutlined />}
                     style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
                   />
                 </Col>
-                <Col flex="auto">
+                <Col xs={24} sm={12} md={14}>
                   <Space direction="vertical" size={0}>
-                    <Text strong>{item.studentName}</Text>
+                    <Text strong style={{ wordBreak: 'break-word' }}>{item.studentName}</Text>
                     {item.studentRollNo && (
                       <Text type="secondary" style={{ fontSize: '12px' }}>{item.studentRollNo}</Text>
                     )}
                   </Space>
                 </Col>
-                <Col>
+                <Col xs={24} sm={8} md={7} style={{ textAlign: 'right' }}>
                   <Rate disabled value={item.rating} style={{ fontSize: '16px' }} />
                 </Col>
               </Row>
@@ -1167,48 +1110,37 @@ const MentorHackathonHistory = () => {
           boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
         }}
       >
-        <div style={{
-          background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
-          padding: '32px',
+        <div className="mentor-history-overview-header" style={{
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '24px 28px',
           margin: '-24px -24px 24px -24px',
-          position: 'relative',
-          overflow: 'hidden',
+          borderRadius: '10px 10px 0 0',
         }}>
-          <div style={{
-            position: 'absolute',
-            top: '-50px',
-            right: '-50px',
-            width: '150px',
-            height: '150px',
-            borderRadius: '50%',
-            background: 'rgba(102, 126, 234, 0.2)',
-          }} />
-
-          <Row align="middle" gutter={[24, 16]} wrap>
-            <Col>
+          <Row align="middle" gutter={[16, 12]} wrap>
+            <Col xs={24} sm={4} md={3} style={{ textAlign: 'center' }}>
               <Avatar
-                size={80}
+                size={64}
                 icon={<TrophyOutlined />}
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  border: '4px solid rgba(255,255,255,0.2)',
+                  background: 'rgba(255,255,255,0.2)',
+                  border: '2px solid rgba(255,255,255,0.4)',
                 }}
               />
             </Col>
-            <Col flex="auto">
-              <Title level={2} style={{ color: 'white', margin: 0 }}>
+            <Col xs={24} sm={20} md={21}>
+              <Title level={3} style={{ color: 'white', margin: 0, fontSize: '20px', wordBreak: 'break-word' }}>
                 {hackathon.name}
               </Title>
-              <Space style={{ marginTop: '12px' }} wrap>
-                <Tag color={getStatusColor(hackathon.status)} style={{ fontSize: '13px', padding: '4px 12px' }}>
+              <Space style={{ marginTop: '8px' }} wrap>
+                <Tag color={getStatusColor(hackathon.status)} style={{ fontSize: '12px' }}>
                   {hackathon.status?.toUpperCase()}
                 </Tag>
                 {hackathon.year && (
-                  <Tag style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: 'white' }}>
+                  <Tag style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', fontSize: '12px' }}>
                     {hackathon.year}
                   </Tag>
                 )}
-                <Tag color="blue" icon={<TeamOutlined />}>
+                <Tag color="blue" icon={<TeamOutlined />} style={{ fontSize: '12px' }}>
                   {teamsCount} Teams Mentored
                 </Tag>
               </Space>
@@ -1243,39 +1175,18 @@ const MentorHackathonHistory = () => {
 
   // Main Render
   return (
-    <div style={{
-      padding: '24px',
-      maxWidth: '1400px',
-      margin: '0 auto',
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%)',
-    }}>
+    <div className="student-hackathon-container">
       {/* Page Header */}
-      <div style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        borderRadius: '20px',
-        padding: '32px',
-        marginBottom: '24px',
-        boxShadow: '0 10px 40px rgba(102, 126, 234, 0.3)',
-        textAlign: 'center',
-      }}>
-        <Title level={2} style={{
-          color: 'white',
-          margin: 0,
-          fontSize: '28px',
-          fontWeight: 700,
-        }}>
-          <SolutionOutlined style={{ marginRight: '12px' }} />
-          My Mentoring Journey
-        </Title>
-        <Text style={{
-          color: 'rgba(255, 255, 255, 0.9)',
-          fontSize: '15px',
-          display: 'block',
-          marginTop: '8px',
-        }}>
-          View your hackathon mentoring history, teams, and achievements
-        </Text>
+      <div className="student-hackathon-header">
+        <div className="student-hackathon-header-content">
+          <h2 className="student-hackathon-page-title">
+            <SolutionOutlined style={{ marginRight: '10px', color: '#1a365d' }} />
+            My Mentoring Journey
+          </h2>
+          <p style={{ color: '#64748b', fontSize: '14px', margin: '4px 0 0 0' }}>
+            View your hackathon mentoring history, teams, and achievements
+          </p>
+        </div>
       </div>
 
       {/* Summary Statistics */}
@@ -1304,7 +1215,7 @@ const MentorHackathonHistory = () => {
         ) : (
           <>
             {/* Hackathon Selector */}
-            <HackathonSelector />
+            {/* <HackathonSelector /> */}
 
             {/* Selected Hackathon Content */}
             {selectedHackathonData && (
@@ -1327,23 +1238,24 @@ const MentorHackathonHistory = () => {
                   <Tabs
                     defaultActiveKey="teams"
                     tabBarStyle={{
-                      padding: '16px 24px 0 24px',
+                      padding: '12px 16px 0 16px',
                       marginBottom: 0,
                       background: '#fafafa',
                       borderRadius: '16px 16px 0 0',
                     }}
-                    size="large"
+                    size="small"
+                    moreIcon={null}
                     items={[
                       {
                         key: 'teams',
                         label: (
-                          <span>
-                            <TeamOutlined />
-                            My Teams
+                          <span className="tab-label">
+                            <TeamOutlined className="tab-icon" />
+                            <span className="tab-text">My Teams</span>
                           </span>
                         ),
                         children: (
-                          <div style={{ padding: '24px' }}>
+                          <div className="mentor-history-tab-content">
                             <TeamsTab teams={selectedHackathonData.teams} />
                           </div>
                         ),
@@ -1351,13 +1263,13 @@ const MentorHackathonHistory = () => {
                       {
                         key: 'allProgress',
                         label: (
-                          <span>
-                            <BarChartOutlined />
-                            All Teams Progress
+                          <span className="tab-label">
+                            <BarChartOutlined className="tab-icon" />
+                            <span className="tab-text">Progress</span>
                           </span>
                         ),
                         children: (
-                          <div style={{ padding: '24px' }}>
+                          <div className="mentor-history-tab-content">
                             <AllTeamsProgressTab allTeamsProgress={selectedHackathonData.allTeamsProgress} />
                           </div>
                         ),
@@ -1365,13 +1277,13 @@ const MentorHackathonHistory = () => {
                       {
                         key: 'allSubmissions',
                         label: (
-                          <span>
-                            <FileSearchOutlined />
-                            All Submissions
+                          <span className="tab-label">
+                            <FileSearchOutlined className="tab-icon" />
+                            <span className="tab-text">Submissions</span>
                           </span>
                         ),
                         children: (
-                          <div style={{ padding: '24px' }}>
+                          <div className="mentor-history-tab-content">
                             <AllSubmissionsTab allSubmissions={selectedHackathonData.allSubmissions} />
                           </div>
                         ),
@@ -1379,13 +1291,13 @@ const MentorHackathonHistory = () => {
                       {
                         key: 'schedule',
                         label: (
-                          <span>
-                            <ScheduleOutlined />
-                            Schedule
+                          <span className="tab-label">
+                            <ScheduleOutlined className="tab-icon" />
+                            <span className="tab-text">Schedule</span>
                           </span>
                         ),
                         children: (
-                          <div style={{ padding: '24px' }}>
+                          <div className="mentor-history-tab-content">
                             <ScheduleTab schedule={selectedHackathonData.schedule} />
                           </div>
                         ),
@@ -1393,13 +1305,13 @@ const MentorHackathonHistory = () => {
                       {
                         key: 'problems',
                         label: (
-                          <span>
-                            <BulbOutlined />
-                            Problems
+                          <span className="tab-label">
+                            <BulbOutlined className="tab-icon" />
+                            <span className="tab-text">Problems</span>
                           </span>
                         ),
                         children: (
-                          <div style={{ padding: '24px' }}>
+                          <div className="mentor-history-tab-content">
                             <ProblemStatementsTab problemStatements={selectedHackathonData.problemStatements} />
                           </div>
                         ),
@@ -1407,13 +1319,13 @@ const MentorHackathonHistory = () => {
                       {
                         key: 'evaluation',
                         label: (
-                          <span>
-                            <CommentOutlined />
-                            Evaluation
+                          <span className="tab-label">
+                            <CommentOutlined className="tab-icon" />
+                            <span className="tab-text">Feedback</span>
                           </span>
                         ),
                         children: (
-                          <div style={{ padding: '24px' }}>
+                          <div className="mentor-history-tab-content">
                             <EvaluationTab evaluation={selectedHackathonData.evaluation} />
                           </div>
                         ),

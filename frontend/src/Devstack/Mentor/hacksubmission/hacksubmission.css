@@ -297,7 +297,7 @@
 
 @media (min-width: 1024px) {
   .mentordash-main {
-    grid-template-columns: 1fr 400px;
+    grid-template-columns: 40% 58%;
   }
 }
 

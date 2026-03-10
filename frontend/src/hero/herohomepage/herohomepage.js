@@ -12,19 +12,19 @@ const images = [home1, home3,home4,home2];
 const textArray = [
   {
     subtitle: "Spark Your Innovation, Your Ideas Deserve a Platform.",
-    description: "Join Dev-Orbit and turn your vision into reality."
+    description: "Join Dev-Stack and turn your vision into reality."
   },
   {
     subtitle: "Fuel your dreams with endless possibilities.",
-    description: "Unleash your potential through Dev-Orbit."
+    description: "Unleash your potential through Dev-Stack."
   },
   {
     subtitle: "Where ideas take flight.",
-    description: "Step into Dev-Orbit and soar towards success."
+    description: "Step into Dev-Stack and soar towards success."
   },
   {
     subtitle: "Innovation at its finest.",
-    description: "Dev-Orbit is your platform for greatness."
+    description: "Dev-Stack is your platform for greatness."
   }
 ];
 
@@ -85,8 +85,8 @@ const Projectnest = () => {
       </div>
       <div className="overlay">
         <div className="content">
-          <h1>{wrapLetters("DEV ORBIT")}</h1>
-          <p className="subtitle">{wrapLetters(textArray[currentIndex].subtitle)}</p>
+          <h1>{wrapLetters("DEV-STACK")}</h1>
+          <p className="subtitles">{wrapLetters(textArray[currentIndex].subtitle)}</p>
           <p className="description-hero">{wrapLetters(textArray[currentIndex].description)}</p>
         </div>
       </div>

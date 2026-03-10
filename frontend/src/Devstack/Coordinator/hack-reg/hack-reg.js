@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Eye, Check, X, Clock, Users, Download, AlertCircle } from 'lucide-react';
 import config from '../../../config';
 import './hack-reg.css';
@@ -33,15 +33,13 @@ const HackathonDashboard = () => {
       return;
     }
     fetchHackathons();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [coordinatorYear, coordinatorCollege]);
+  }, [fetchHackathons]);
 
   useEffect(() => {
     filterStudents();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [students, filters]);
+  }, [filterStudents]);
 
-  const fetchHackathons = async () => {
+  const fetchHackathons = useCallback(async () => {
     try {
       // Pass coordinator year and college to get only matching hackathons
       const queryParams = new URLSearchParams();
@@ -60,7 +58,7 @@ const HackathonDashboard = () => {
     } catch (error) { 
       console.error('Error fetching hackathons:', error); 
     }
-  };
+  }, [coordinatorYear, coordinatorCollege]);
 
   const fetchStudents = async (hackathonId) => {
     if (!hackathonId) return;
@@ -107,7 +105,7 @@ const HackathonDashboard = () => {
     }
   };
 
-  const filterStudents = () => {
+  const filterStudents = useCallback(() => {
     let filtered = [...students];
     
     if (filters.status !== 'all') {
@@ -134,7 +132,7 @@ const HackathonDashboard = () => {
     }
     
     setFilteredStudents(filtered);
-  };
+  }, [students, filters]);
 
   const updateStudentStatus = async (registrationId, studentRegId, status, remarks = '') => {
     try {

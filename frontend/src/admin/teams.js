@@ -3,10 +3,6 @@ import { Input, Button, Select, Form, message, List, Card, Modal } from 'antd';
 import config from '../config';
 
 const TeamFormation = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [students, setStudents] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [mentors, setMentors] = useState([]);
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [selectedMentor, setSelectedMentor] = useState(null);
   const [teamName, setTeamName] = useState('');
@@ -16,6 +12,8 @@ const TeamFormation = () => {
   const [editingTeam, setEditingTeam] = useState(null);
   const [allStudents, setAllStudents] = useState([]);
   const [allMentors, setAllMentors] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [mentors, setMentors] = useState([]);
   const [teamSearchQuery, setTeamSearchQuery] = useState('');
 
   // Function to filter teams based on search query
@@ -181,7 +179,6 @@ const TeamFormation = () => {
 
     fetchAllData();
     fetchTeams();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

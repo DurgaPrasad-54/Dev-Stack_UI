@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Filter, AlertCircle, CheckCircle } from 'lucide-react';
 import config from '../../../config';
+import './teams.css';
 
 function MentorTeamTabs() {
   const [hackathons, setHackathons] = useState([]);
@@ -23,7 +23,6 @@ function MentorTeamTabs() {
 
   useEffect(() => {
     fetchHackathons();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -37,7 +36,6 @@ function MentorTeamTabs() {
     }
     setSelectedBranch('');
     setSearchQuery('');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon]);
 
   useEffect(() => {
@@ -71,9 +69,6 @@ function MentorTeamTabs() {
           maxWidth: '500px',
           textAlign: 'center'
         }}>
-          <div style={{ marginBottom: '20px' }}>
-            <AlertCircle size={48} style={{ color: '#dc3545', margin: '0 auto' }} />
-          </div>
           <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px', color: '#1a1a1a' }}>
             Missing Coordinator Information
           </h2>
@@ -289,6 +284,7 @@ function MentorTeamTabs() {
 
   const renderTeamCard = (team) => (
     <div
+      className="team-card"
       key={team._id}
       style={{
         border: '1px solid #e0e0e0',
@@ -299,7 +295,7 @@ function MentorTeamTabs() {
         marginBottom: '16px'
       }}
     >
-      <div style={{
+      <div className="team-card-header" style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'start',
@@ -308,7 +304,7 @@ function MentorTeamTabs() {
         borderBottom: '2px solid #f0f0f0'
       }}>
         <h4 style={{ margin: 0, fontSize: '18px', color: '#1a1a1a' }}>
-          👥 {team.name}
+          {team.name}
         </h4>
         {team.mentor ? (
           <span style={{
@@ -319,7 +315,7 @@ function MentorTeamTabs() {
             fontSize: '12px',
             fontWeight: '600'
           }}>
-            ✓ Mentor Assigned
+            Mentor Assigned
           </span>
         ) : (
           <span style={{
@@ -330,7 +326,7 @@ function MentorTeamTabs() {
             fontSize: '12px',
             fontWeight: '600'
           }}>
-            ⚠ No Mentor
+            No Mentor
           </span>
         )}
       </div>
@@ -344,7 +340,7 @@ function MentorTeamTabs() {
           borderLeft: '4px solid #ff9800'
         }}>
           <strong style={{ color: '#e65100', fontSize: '14px', display: 'block', marginBottom: '12px' }}>
-            👨‍🏫 Assign Mentor:
+            Assign Mentor:
           </strong>
           {approvedMentors.length === 0 ? (
             <div style={{
@@ -355,7 +351,7 @@ function MentorTeamTabs() {
               fontSize: '14px',
               border: '1px solid #ffcdd2'
             }}>
-              ⚠️ No approved mentors available for this hackathon. Please approve mentor requests first.
+              No approved mentors available for this hackathon. Please approve mentor requests first.
             </div>
           ) : (
             <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -398,41 +394,33 @@ function MentorTeamTabs() {
                   whiteSpace: 'nowrap'
                 }}
               >
-                {loading ? '⏳' : '✓ Assign'}
+                {loading ? 'Loading...' : 'Assign'}
               </button>
             </div>
           )}
         </div>
       ) : (
         team.mentor && (
-          <div style={{
-            marginBottom: '16px',
-            padding: '12px',
-            backgroundColor: '#e3f2fd',
-            borderRadius: '6px',
-            borderLeft: '4px solid #1976d2'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-              <div style={{ flex: 1 }}>
-                <strong style={{ color: '#1976d2', fontSize: '14px' }}>👨‍🏫 Mentor:</strong>
-                <div style={{ marginTop: '8px' }}>
-                  <div style={{ fontSize: '15px', fontWeight: '600', color: '#1a1a1a' }}>
-                    {team.mentor.name}
-                  </div>
-                  <div style={{ fontSize: '13px', color: '#666', marginTop: '4px' }}>
-                    📧 {team.mentor.email || 'N/A'}
-                  </div>
-                  {team.mentor.github && (
-                    <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>
-                      🔗 GitHub: {team.mentor.github}
-                    </div>
-                  )}
-                  {team.mentor.linkedin && (
-                    <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>
-                      💼 LinkedIn: {team.mentor.linkedin}
-                    </div>
-                  )}
+          <div className="assigned-mentor-section">
+            <div className="assigned-mentor-label">Mentor:</div>
+            <div className="assigned-mentor-content">
+              <div className="assigned-mentor-info">
+                <div className="assigned-mentor-name">
+                  {team.mentor.name}
                 </div>
+                <div className="assigned-mentor-email">
+                  {team.mentor.email || 'N/A'}
+                </div>
+                {team.mentor.github && (
+                  <div className="assigned-mentor-github">
+                    GitHub: {team.mentor.github}
+                  </div>
+                )}
+                {team.mentor.linkedin && (
+                  <div className="assigned-mentor-linkedin">
+                    LinkedIn: {team.mentor.linkedin}
+                  </div>
+                )}
               </div>
               <button
                 onClick={() => removeMentorFromTeam(team._id)}
@@ -446,10 +434,11 @@ function MentorTeamTabs() {
                   borderRadius: '6px',
                   cursor: loading ? 'not-allowed' : 'pointer',
                   fontWeight: '600',
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0
                 }}
               >
-                🗑️ Remove
+                Remove
               </button>
             </div>
           </div>
@@ -457,37 +446,29 @@ function MentorTeamTabs() {
       )}
 
       {team.teamLead && (
-        <div style={{
-          marginBottom: '16px',
-          padding: '12px',
-          backgroundColor: '#fff3cd',
-          borderRadius: '6px',
-          borderLeft: '4px solid #856404'
-        }}>
-          <strong style={{ color: '#856404', fontSize: '14px' }}>⭐ Team Lead:</strong>
-          <div style={{ marginTop: '8px' }}>
-            <div style={{ fontSize: '15px', fontWeight: '600', color: '#1a1a1a' }}>
-              {team.teamLead.name}
-            </div>
-            <div style={{ fontSize: '13px', color: '#666', marginTop: '4px' }}>
-              {team.teamLead.rollNo && `📝 ${team.teamLead.rollNo} • `}
-              {team.teamLead.currentYear && `📅 ${team.teamLead.currentYear} • `}
-              📧 {team.teamLead.email}
-            </div>
-            {team.teamLead.college && (
-              <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>
-                🏛️ {team.teamLead.college}
-              </div>
-            )}
+        <div className="assigned-team-lead-section">
+          <div className="assigned-team-lead-label">Team Lead:</div>
+          <div className="assigned-team-lead-name">
+            {team.teamLead.name}
           </div>
+          <div className="assigned-team-lead-details" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {team.teamLead.rollNo && <div>{team.teamLead.rollNo}</div>}
+            {team.teamLead.currentYear && <div>{team.teamLead.currentYear}</div>}
+            <div>{team.teamLead.email}</div>
+          </div>
+          {team.teamLead.college && (
+            <div className="assigned-team-lead-college">
+              {team.teamLead.college}
+            </div>
+          )}
         </div>
       )}
 
-      <div>
-        <strong style={{ fontSize: '15px', color: '#1a1a1a' }}>
+      <div className="assigned-team-members-section">
+        <div className="assigned-team-members-title">
           Team Members ({(team.students || []).length}/4):
-        </strong>
-        <div style={{ marginTop: '12px' }}>
+        </div>
+        <div>
           {(team.students || []).length === 0 ? (
             <p style={{ color: '#999', fontStyle: 'italic' }}>No members yet</p>
           ) : (
@@ -496,36 +477,23 @@ function MentorTeamTabs() {
               return (
                 <div
                   key={student._id || index}
-                  style={{
-                    padding: '12px',
-                    marginBottom: '10px',
-                    backgroundColor: '#f8f9fa',
-                    borderRadius: '6px',
-                    borderLeft: '3px solid #007bff'
-                  }}
+                  className="assigned-member-item"
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-                    <strong style={{ fontSize: '15px', color: '#1a1a1a' }}>
+                  <div className="assigned-member-header">
+                    <span className="assigned-member-name">
                       {index + 1}. {student.name}
-                    </strong>
+                    </span>
                     {isLead && (
-                      <span style={{
-                        padding: '3px 10px',
-                        backgroundColor: '#ffc107',
-                        borderRadius: '4px',
-                        fontSize: '11px',
-                        fontWeight: '700',
-                        color: '#000'
-                      }}>
+                      <span className="assigned-member-badge">
                         ⭐ LEAD
                       </span>
                     )}
                   </div>
-                  <div style={{ fontSize: '13px', color: '#666', marginTop: '4px' }}>
-                    {student.rollNo && `📝 ${student.rollNo} • `}
-                    {student.branch && `🎓 ${student.branch} • `}
-                    {student.currentYear && `📅 ${student.currentYear} • `}
-                    📧 {student.email || 'N/A'}
+                  <div className="assigned-member-info" style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', color: '#666' }}>
+                    {student.rollNo && <div>{student.rollNo}</div>}
+                    {student.branch && <div>{student.branch}</div>}
+                    {student.currentYear && <div>{student.currentYear}</div>}
+                    <div>{student.email || 'N/A'}</div>
                   </div>
                 </div>
               );
@@ -537,20 +505,17 @@ function MentorTeamTabs() {
   );
 
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif',paddingTop: '90px' }}>
+    <div className="teams-container" style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       {/* Coordinator Info Banner */}
       <div style={{
         marginBottom: '20px',
         padding: '16px 20px',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white' }}>
-          <CheckCircle size={24} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div>
-            <div style={{ fontSize: '13px', opacity: 0.9 }}>Viewing teams for:</div>
-            <div style={{ fontSize: '18px', fontWeight: '600' }}>
+            <div style={{ fontSize: '13px', opacity: 0.9, color:'black' }}>Viewing teams for:</div>
+            <div style={{ fontSize: '18px', fontWeight: '600', color:'black' }}>
               {coordinatorCollege} • {coordinatorYear}
             </div>
           </div>
@@ -614,25 +579,10 @@ function MentorTeamTabs() {
       {selectedHackathon && (
         <>
           {/* Filter and Search Section */}
-          <div style={{
-            marginBottom: '30px',
-            padding: '20px',
-            backgroundColor: '#f8f9fa',
-            borderRadius: '8px',
-            border: '1px solid #e0e0e0'
-          }}>
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'end' }}>
-              <div style={{ flex: '1', minWidth: '200px' }}>
-                <label style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '8px', 
-                  fontSize: '14px', 
-                  fontWeight: '600', 
-                  color: '#333',
-                  marginBottom: '8px'
-                }}>
-                  <Filter size={16} />
+          <div className="assigned-filter-section">
+            <div className="assigned-filter-row">
+              <div className="assigned-filter-group">
+                <label className="assigned-filter-label">
                   Filter by Branch
                 </label>
                 <select
@@ -655,45 +605,24 @@ function MentorTeamTabs() {
                 </select>
               </div>
 
-              <div style={{ flex: '2', minWidth: '300px' }}>
-                <label style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '8px', 
-                  fontSize: '14px', 
-                  fontWeight: '600', 
-                  color: '#333',
-                  marginBottom: '8px'
-                }}>
-                  <Search size={16} />
+              <div className="assigned-filter-group" style={{ flex: 2, minWidth: 'max(150px, 200px)' }}>
+                <label className="assigned-filter-label">
                   Search Teams & Students
                 </label>
-                <div style={{ position: 'relative' }}>
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                    placeholder="Search by name, roll no, email, team name..."
-                    style={{
-                      width: '100%',
-                      padding: '10px 40px 10px 12px',
-                      fontSize: '14px',
-                      borderRadius: '6px',
-                      border: '1px solid #ddd',
-                      backgroundColor: 'white'
-                    }}
-                  />
-                  <Search 
-                    size={18} 
-                    style={{
-                      position: 'absolute',
-                      right: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      color: '#999'
-                    }}
-                  />
-                </div>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Search by name, roll no, email, team name..."
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    fontSize: '14px',
+                    borderRadius: '6px',
+                    border: '1px solid #ddd',
+                    backgroundColor: 'white'
+                  }}
+                />
               </div>
 
               {(selectedBranch || searchQuery) && (
@@ -715,7 +644,7 @@ function MentorTeamTabs() {
                     height: '42px'
                   }}
                 >
-                  ✕ Clear Filters
+                  Clear Filters
                 </button>
               )}
             </div>
@@ -751,51 +680,32 @@ function MentorTeamTabs() {
             )}
           </div>
 
-          <div style={{
-            display: 'flex',
-            gap: '0',
-            marginBottom: '30px',
-            borderBottom: '2px solid #e0e0e0'
-          }}>
+          <div className="assigned-tabs-container">
             <button
               onClick={() => setActiveTab('assigned')}
+              className="assigned-tab-button"
               style={{
-                padding: '14px 28px',
-                fontSize: '15px',
-                fontWeight: '600',
                 backgroundColor: activeTab === 'assigned' ? '#1976d2' : 'transparent',
                 color: activeTab === 'assigned' ? 'white' : '#666',
-                border: 'none',
-                borderBottom: activeTab === 'assigned' ? '3px solid #1976d2' : '3px solid transparent',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                borderRadius: '6px 6px 0 0',
-                marginBottom: '-2px'
+                borderBottom: activeTab === 'assigned' ? '3px solid #1976d2' : '3px solid transparent'
               }}
             >
-              ✓ Teams with Mentors ({assignedTeams.length})
+              Teams with Mentors ({assignedTeams.length})
             </button>
             <button
               onClick={() => setActiveTab('unassigned')}
+              className="assigned-tab-button"
               style={{
-                padding: '14px 28px',
-                fontSize: '15px',
-                fontWeight: '600',
                 backgroundColor: activeTab === 'unassigned' ? '#ff9800' : 'transparent',
                 color: activeTab === 'unassigned' ? 'white' : '#666',
-                border: 'none',
-                borderBottom: activeTab === 'unassigned' ? '3px solid #ff9800' : '3px solid transparent',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                borderRadius: '6px 6px 0 0',
-                marginBottom: '-2px'
+                borderBottom: activeTab === 'unassigned' ? '3px solid #ff9800' : '3px solid transparent'
               }}
             >
-              ⚠ Teams without Mentors ({unassignedTeams.length})
+              Teams without Mentors ({unassignedTeams.length})
             </button>
           </div>
 
-          <div style={{
+          <div className="teams-stats-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: '16px',
@@ -899,7 +809,7 @@ function MentorTeamTabs() {
                 backgroundColor: '#f5f5f5',
                 borderRadius: '8px'
               }}>
-                <p style={{ fontSize: '16px', color: '#666' }}>⏳ Loading teams...</p>
+                <p style={{ fontSize: '16px', color: '#666' }}>Loading teams...</p>
               </div>
             ) : currentTeams.length === 0 ? (
               <div style={{
@@ -911,15 +821,15 @@ function MentorTeamTabs() {
               }}>
                 <p style={{ fontSize: '16px', margin: 0 }}>
                   {(selectedBranch || searchQuery) 
-                    ? '🔍 No teams found matching your filters'
+                    ? 'No teams found matching your filters'
                     : activeTab === 'assigned' 
                       ? 'No teams with assigned mentors yet'
-                      : 'All teams have mentors assigned! 🎉'
+                      : 'All teams have mentors assigned!'
                   }
                 </p>
               </div>
             ) : (
-              <div>
+              <div className="teams-list-wrapper">
                 {currentTeams.map(team => renderTeamCard(team))}
               </div>
             )}

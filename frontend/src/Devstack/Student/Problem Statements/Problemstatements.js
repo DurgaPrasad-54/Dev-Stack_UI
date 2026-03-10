@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Card,
   Button,
@@ -26,9 +26,7 @@ import {
 } from "@ant-design/icons";
 import { useHackathon } from "../context/HackathonContext";
 import "./Problemstatements.css";
-import config from '../../../config';
 
-// eslint-disable-next-line no-unused-vars
 const { Title, Text, Paragraph } = Typography;
 
 const TeamProblemStatementsPage = () => {
@@ -44,7 +42,7 @@ const TeamProblemStatementsPage = () => {
   const [hackathonUpcoming, setHackathonUpcoming] = useState(false);
   const [notRegistered, setNotRegistered] = useState(false);
 
-  const API_URL = config.backendUrl;
+  const API_URL = "http://localhost:5000";
   const token = localStorage.getItem("token");
 
   // Get userId from localStorage
@@ -74,7 +72,6 @@ const TeamProblemStatementsPage = () => {
     }
 
     fetchTeamData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentHackathonId, hackathonContextLoading]);
 
   const fetchTeamData = async () => {
@@ -497,7 +494,6 @@ const TeamProblemStatementsPage = () => {
     // 1. User is team lead
     // 2. Team hasn't selected any problem yet
     // 3. This problem isn't selected by another team
-    // eslint-disable-next-line no-unused-vars
     const canSelect = isTeamLead && !hasSelectedProblem && !isSelectedByOther;
 
     const cardClassName = `problem-card ${isSelectedByTeam ? 'selected-by-team' : ''} ${isSelectedByOther ? 'unavailable' : ''}`;

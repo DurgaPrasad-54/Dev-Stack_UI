@@ -15,7 +15,6 @@ const UserRoomAllocationBatch = () => {
   const [selectedHackathon, setSelectedHackathon] = useState('');
   const [mentors, setMentors] = useState([]);
   const [allocations, setAllocations] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [batches, setBatches] = useState([]);
   const [hackathonBatches, setHackathonBatches] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -391,7 +390,7 @@ const UserRoomAllocationBatch = () => {
                         </option>
                         {mentors.map(m => (
                           <option key={m._id} value={m._id}>
-                            {m.name} ({m.email}){m.github && ` - ${m.github}`}
+                            {m.name} ({m.email})
                           </option>
                         ))}
                       </select>

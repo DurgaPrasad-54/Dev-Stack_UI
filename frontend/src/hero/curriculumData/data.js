@@ -10,19 +10,19 @@ import { TbCertificate } from "react-icons/tb";
 export const experiencesData = [
   {
     title: "Introduction and Orientation",
-    description: "Welcome to the DevOrbit Program! Introduction to mentors, team members, and program expectations. Overview of the tools and resources available to participants.",
+    description: "Welcome to the DevStack Program! Introduction to mentors, team members, and program expectations. Overview of the tools and resources available to participants.",
     icon: React.createElement(RiCalendarCheckLine),
     date: "Week - 1",
   },
   {
     title: "Foundational Technologies",
-    description: "Deep dive into core technologies relevant to DevOrbit. Learn essential libraries and frameworks for efficient development.",
+    description: "Deep dive into core technologies relevant to DevStack. Learn essential libraries and frameworks for efficient development.",
     icon: React.createElement(FaRegHandshake),
     date: "Week - 2",
   },
   {
     title: " Core Concepts and Principles",
-    description: "Explore key concepts and principles of DevRel and DevOrbit. Understand the importance of building strong developer communities.",
+    description: "Explore key concepts and principles of Hackathon and DevStack. Understand the importance of building strong developer communities.",
     icon: React.createElement(HiOutlineRocketLaunch),
     date: "Week - 3",
   },
@@ -40,13 +40,13 @@ export const experiencesData = [
   },
   {
     title: " Advanced Topics and Best Practices",
-    description: "Delve into advanced DevRel techniques and strategies. Learn best practices for content creation, community management, and developer advocacy.",
+    description: "Delve into advanced Hackathon techniques and strategies. Learn best practices for content creation, community management, and developer advocacy.",
     icon: React.createElement(TbCertificate),
     date: "Week - 6",
   },
   {
-    title: " Mini-Project 2: DevRel Campaign",
-    description: "Plan and execute a mini-DevRel campaign. Create a targeted campaign to engage developers and drive adoption.",
+    title: " Mini-Project 2: Hackathon Campaign",
+    description: "Plan and execute a mini-hackathon campaign. Create a targeted campaign to engage developers and drive adoption.",
     icon: React.createElement(FaBullhorn),
     date: "Week - 7",
   }

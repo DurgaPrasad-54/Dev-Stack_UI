@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import axios from "axios";
-import config from "../../config";
 
 // Components
 import UserNavbar from "./StudentHeader/StudentHeader";
@@ -26,56 +24,54 @@ import HackathonHistory from "./HackathonHistory";
 
 function HackStudent() {
   const [hackathonId, setHackathonId] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // useEffect(() => {
+  //   const fetchOngoingHackathon = async () => {
+  //     try {
+  //       const studentId = localStorage.getItem("student");
+  //       if (!studentId) {
+  //         console.warn("⚠️ No studentId found in localStorage.");
+  //         setIsLoading(false);
+  //         return;
+  //       }
 
-  useEffect(() => {
-    const fetchOngoingHackathon = async () => {
-      try {
-        const studentId = localStorage.getItem("student");
-        if (!studentId) {
-          console.warn("⚠️ No studentId found in localStorage.");
-          setIsLoading(false);
-          return;
-        }
+  //       console.log("🔍 Fetching ongoing approved hackathon for student:", studentId);
 
-        console.log("🔍 Fetching ongoing approved hackathon for student:", studentId);
+  //       const { data } = await axios.get(
+  //         `${config.backendUrl}/hackreg/student/${studentId}/ongoing-approved`
+  //       );
 
-        const { data } = await axios.get(
-          `${config.backendUrl}/hackreg/student/${studentId}/ongoing-approved`
-        );
+  //       if (data?.hackathon) {
+  //         const hackId = data.hackathon._id;
+  //         setHackathonId(hackId);
+  //         localStorage.setItem("selectedHackathonId", hackId);
+  //         console.log("✅ Ongoing approved hackathon stored:", data.hackathon.hackathonname);
+  //       } else {
+  //         setHackathonId(null);
+  //         localStorage.removeItem("selectedHackathonId");
+  //         console.log("ℹ️ No ongoing approved hackathon found.");
+  //       }
+  //     } catch (error) {
+  //       console.error("❌ Error fetching ongoing hackathon:", error);
+  //       setHackathonId(null);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
 
-        if (data?.hackathon) {
-          const hackId = data.hackathon._id;
-          setHackathonId(hackId);
-          localStorage.setItem("selectedHackathonId", hackId);
-          console.log("✅ Ongoing approved hackathon stored:", data.hackathon.hackathonname);
-        } else {
-          setHackathonId(null);
-          localStorage.removeItem("selectedHackathonId");
-          console.log("ℹ️ No ongoing approved hackathon found.");
-        }
-      } catch (error) {
-        console.error("❌ Error fetching ongoing hackathon:", error);
-        setHackathonId(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchOngoingHackathon();
-  }, []);
+  //   fetchOngoingHackathon();
+  // }, []);
 
   // Show loading state while fetching hackathon
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading your hackathon data...</p>
-        </div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+  //       <div className="text-center">
+  //         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+  //         <p className="text-gray-600 text-lg">Loading your hackathon data...</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>

@@ -22,8 +22,6 @@ import config from '../../config';
 
 
 const { Title, Text } = Typography;
-// eslint-disable-next-line no-unused-vars
-const { TabPane } = Tabs;
 
 const MentorManagement = () => {
   const [mentors, setMentors] = useState([]);
@@ -52,7 +50,6 @@ const MentorManagement = () => {
     if (allMentors.length > 0) {
       applyFilters();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, allMentors]);
   
   const fetchMentors = async () => {

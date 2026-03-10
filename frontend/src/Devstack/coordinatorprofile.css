@@ -303,7 +303,7 @@
 /* Tablet - 768px and below */
 @media (max-width: 768px) {
   .hack-coordinator-container {
-    padding: 5rem 1rem 1rem 1rem;
+    padding: 0rem 1rem 1rem 1rem;
   }
 
   .hack-coordinator-header {
@@ -356,7 +356,7 @@
 /* Mobile - 480px and below */
 @media (max-width: 480px) {
   .hack-coordinator-container {
-    padding: 5rem 0.75rem 1rem 0.75rem;
+    padding: 0rem 0.75rem 1rem 0.75rem;
   }
 
   .hack-coordinator-header {
@@ -420,7 +420,7 @@
 /* Small Mobile - 320px and below */
 @media (max-width: 320px) {
   .hack-coordinator-container {
-    padding: 5rem 0.5rem 0.75rem 0.5rem;
+    padding: 0rem 0.5rem 0.75rem 0.5rem;
   }
 
   .hack-coordinator-header {

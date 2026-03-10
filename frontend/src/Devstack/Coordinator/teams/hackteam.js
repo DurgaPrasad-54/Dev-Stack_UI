@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import config from '../../../config';
+import './teams.css';
 
 function TeamManagement() {
   const [hackathons, setHackathons] = useState([]);
@@ -29,7 +30,6 @@ const [coordinatorCollege] = useState(localStorage.getItem('coordinatordetails')
   useEffect(() => {
     fetchHackathons();
     fetchBranches();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
    useEffect(() => {
@@ -44,14 +44,12 @@ const [coordinatorCollege] = useState(localStorage.getItem('coordinatordetails')
       setTeams([]);
       setTeamSizeLimits({ minTeam: 1, maxTeam: 4 });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, selectedBranch, editingTeam]);
 
   useEffect(() => {
     if (editingTeam && selectedHackathon) {
       fetchStudents();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingTeam]);
 
   useEffect(() => {
@@ -644,7 +642,7 @@ if (!coordinatorYear || !coordinatorCollege) {
 
   // ========== RENDER ==========
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif', paddingTop: '90px' }}>
+    <div className="teams-container" style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       <h1 style={{ marginBottom: '30px', color: '#1a1a1a' }}>Team Management</h1>
 
       {error && (
@@ -730,7 +728,7 @@ if (!coordinatorYear || !coordinatorCollege) {
             }}
           >
             <h3 style={{ marginTop: 0, marginBottom: '20px', color: '#1a1a1a' }}>
-              {editingTeam ? '✏️ Edit Team' : '➕ Create New Team'}
+              {editingTeam ? 'Edit Team' : 'Create New Team'}
             </h3>
 
             {editingTeam && (
@@ -743,7 +741,7 @@ if (!coordinatorYear || !coordinatorCollege) {
                 fontSize: '14px',
                 border: '1px solid #ffeaa7'
               }}>
-                <strong>📝 Editing Mode:</strong> Green badges show original team members. Blue badges show currently selected students. Red badges indicate students in other teams.
+                <strong>Editing Mode:</strong> Green badges show original team members. Blue badges show currently selected students. Red badges indicate students in other teams.
               </div>
             )}
 
@@ -769,7 +767,7 @@ if (!coordinatorYear || !coordinatorCollege) {
               />
               {teamName && isTeamNameDuplicate(teamName) && (
                 <div style={{ color: '#d32f2f', fontSize: '13px', marginTop: '6px' }}>
-                  ⚠️ This team name already exists
+                   This team name already exists
                 </div>
               )}
             </div>
@@ -878,6 +876,7 @@ if (!coordinatorYear || !coordinatorCollege) {
 
                     return (
                       <div
+                        className="student-select-card"
                         key={studentId}
                         onClick={() => toggleStudentSelection(studentId)}
                         style={{
@@ -903,12 +902,13 @@ if (!coordinatorYear || !coordinatorCollege) {
                           e.currentTarget.style.boxShadow = isSelected ? '0 2px 8px rgba(25, 118, 210, 0.15)' : 'none';
                         }}
                       >
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                          <div style={{ flex: 1 }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
-                              <strong style={{ fontSize: '16px', color: '#1a1a1a' }}>{st.name}</strong>
+                        <div className="student-card-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px', minHeight: '60px' }}>
+                          {/* Left side: Student Info */}
+                          <div className="student-card-info" style={{ flex: 1, minWidth: 0 }}>
+                            <div className="student-name-row" style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                              <strong className="student-name" style={{ fontSize: '16px', color: '#1a1a1a' }}>{st.name}</strong>
                               {st.rollNo && (
-                                <span style={{ 
+                                <span className="student-details" style={{ 
                                   fontSize: '13px', 
                                   color: '#666',
                                   padding: '3px 10px',
@@ -919,33 +919,51 @@ if (!coordinatorYear || !coordinatorCollege) {
                                 </span>
                               )}
                             </div>
-                            
+                          </div>
+
+                          {/* Right side: Badges */}
+                          <div className="student-badges-container" style={{ display: 'flex', gap: '10px', alignItems: 'center', flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                             {editingTeam && isOriginal && (
-                              <div style={{ marginBottom: '8px' }}>
-                                <span style={{
-                                  padding: '6px 14px',
-                                  backgroundColor: '#4caf50',
-                                  color: 'white',
-                                  borderRadius: '16px',
-                                  fontSize: '12px',
-                                  fontWeight: '700',
-                                  display: 'inline-flex',
-                                  alignItems: 'center',
-                                  gap: '6px',
-                                  boxShadow: '0 2px 4px rgba(76, 175, 80, 0.3)'
-                                }}>
-                                  <span style={{ fontSize: '14px' }}>✓</span>
-                                  <span>CURRENT MEMBER</span>
-                                </span>
-                              </div>
+                              <span style={{
+                                padding: '6px 14px',
+                                backgroundColor: '#4caf50',
+                                color: 'white',
+                                borderRadius: '16px',
+                                fontSize: '12px',
+                                fontWeight: '700',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                boxShadow: '0 2px 4px rgba(76, 175, 80, 0.3)',
+                                whiteSpace: 'nowrap'
+                              }}>
+                                CURRENT MEMBER
+                              </span>
+                            )}
+                            
+                            {isSelected && (
+                              <span style={{
+                                padding: '8px 18px',
+                                backgroundColor: '#1976d2',
+                                color: 'white',
+                                borderRadius: '24px',
+                                fontSize: '13px',
+                                fontWeight: '700',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                whiteSpace: 'nowrap',
+                                boxShadow: '0 3px 6px rgba(25, 118, 210, 0.4)'
+                              }}>
+                                SELECTED
+                              </span>
                             )}
                             
                             {isInOtherTeam && !isSelected && (
-                              <div style={{
-                                marginTop: '10px',
+                              <span style={{
                                 padding: '8px 14px',
-                                display: 'flex',
-                                justifyContent: 'end',
+                                display: 'inline-flex',
+                                justifyContent: 'center',
                                 alignItems: 'center',
                                 gap: '8px',
                                 color: '#d32f2f',
@@ -955,34 +973,12 @@ if (!coordinatorYear || !coordinatorCollege) {
                                 borderRadius: '16px',
                                 border: '2px solid #ffcdd2',
                                 boxShadow: '0 2px 4px rgba(211, 47, 47, 0.2)',
-                                width: 'fit-content',
-                                marginLeft: 'auto'
+                                whiteSpace: 'nowrap'
                               }}>
-                                <span style={{ fontSize: '16px' }}>🔒</span>
-                                <span>Already in another team</span>
-                              </div>
+                                Already in another team
+                              </span>
                             )}
                           </div>
-                          
-                          {isSelected && (
-                            <div style={{
-                              marginLeft: '15px',
-                              padding: '8px 18px',
-                              backgroundColor: '#1976d2',
-                              color: 'white',
-                              borderRadius: '24px',
-                              fontSize: '13px',
-                              fontWeight: '700',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '8px',
-                              whiteSpace: 'nowrap',
-                              boxShadow: '0 3px 6px rgba(25, 118, 210, 0.4)'
-                            }}>
-                              <span style={{ fontSize: '16px' }}>✓</span>
-                              <span>SELECTED</span>
-                            </div>
-                          )}
                         </div>
                       </div>
                     );
@@ -1042,7 +1038,7 @@ if (!coordinatorYear || !coordinatorCollege) {
                       transition: 'background-color 0.2s'
                     }}
                   >
-                    {loading ? '⏳ Updating...' : '✅ Update Team'}
+                    {loading ? 'Updating...' : 'Update Team'}
                   </button>
                   <button
                     onClick={resetForm}
@@ -1059,7 +1055,7 @@ if (!coordinatorYear || !coordinatorCollege) {
                       transition: 'background-color 0.2s'
                     }}
                   >
-                    ❌ Cancel
+                    Cancel
                   </button>
                 </>
               ) : (
@@ -1078,7 +1074,7 @@ if (!coordinatorYear || !coordinatorCollege) {
                     transition: 'background-color 0.2s'
                   }}
                 >
-                  {loading ? '⏳ Creating...' : '➕ Create Team'}
+                  {loading ? 'Creating...' : 'Create Team'}
                 </button>
               )}
             </div>
@@ -1099,12 +1095,12 @@ if (!coordinatorYear || !coordinatorCollege) {
               </h3>
               
               {/* Team search bar */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+              <div className="teams-filter-row" style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                 <input
                   type="text"
                   value={teamSearchText}
                   onChange={e => setTeamSearchText(e.target.value)}
-                  placeholder="🔍 Search teams (name, roll no, email)"
+                  placeholder="Search teams (name, roll no, email)"
                   style={{
                     padding: '10px 15px',
                     fontSize: '15px',
@@ -1160,7 +1156,7 @@ if (!coordinatorYear || !coordinatorCollege) {
               </div>
             </div>
 
-            {loading && <p style={{ textAlign: 'center', color: '#666' }}>⏳ Loading teams...</p>}
+            {loading && <p style={{ textAlign: 'center', color: '#666' }}>Loading teams...</p>}
             
             {filteredTeams.length === 0 && !loading ? (
               <div style={{
@@ -1178,9 +1174,11 @@ if (!coordinatorYear || !coordinatorCollege) {
                 </p>
               </div>
             ) : (
-              <div style={{ display: 'grid', gap: '20px' }}>
+              <div className="teams-list-wrapper">
+              <div className="teams-grid" style={{ display: 'grid', gap: '20px' }}>
                 {filteredTeams.map(team => (
                   <div
+                    className="team-card"
                     key={team._id || team.id}
                     style={{
                       border: '1px solid #e0e0e0',
@@ -1190,7 +1188,7 @@ if (!coordinatorYear || !coordinatorCollege) {
                       boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
                     }}
                   >
-                    <div style={{
+                    <div className="team-card-header" style={{
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'start',
@@ -1199,7 +1197,7 @@ if (!coordinatorYear || !coordinatorCollege) {
                       borderBottom: '2px solid #f0f0f0'
                     }}>
                       <h4 style={{ margin: 0, fontSize: '18px', color: '#1a1a1a' }}>
-                        👥 {team.name}
+                        {team.name}
                       </h4>
                       <div style={{ display: 'flex', gap: '10px' }}>
                         <button
@@ -1216,7 +1214,7 @@ if (!coordinatorYear || !coordinatorCollege) {
                             transition: 'background-color 0.2s'
                           }}
                         >
-                          ✏️ Edit
+                          Edit
                         </button>
                         <button
                           onClick={() => deleteTeam(team._id || team.id)}
@@ -1232,40 +1230,47 @@ if (!coordinatorYear || !coordinatorCollege) {
                             transition: 'background-color 0.2s'
                           }}
                         >
-                          🗑️ Delete
+                          Delete
                         </button>
                       </div>
                     </div>
 
                     {team.mentor && (
-                      <div style={{
+                      <div className="team-info-section" style={{
                         marginBottom: '16px',
                         padding: '12px',
                         backgroundColor: '#e7f3ff',
                         borderRadius: '6px',
                         borderLeft: '4px solid #0056b3'
                       }}>
-                        <strong style={{ color: '#0056b3', fontSize: '14px' }}>👨‍🏫 Mentor:</strong>
-                        <div style={{ marginTop: '6px' }}>
-                          <div style={{ fontSize: '15px', fontWeight: '600', color: '#1a1a1a' }}>
-                            {team.mentor.name} ({team.mentor.email || 'N/A'})
+                        <strong className="team-info-label" style={{ color: '#0056b3', fontSize: '14px' }}>Mentor:</strong>
+                        <div className="team-info-content" style={{ marginTop: '6px' }}>
+                          <div className="team-info-name" style={{ fontSize: '15px', fontWeight: '600', color: '#1a1a1a', wordBreak: 'break-word' }}>
+                            {team.mentor.name}
+                          </div>
+                          <div className="team-info-details" style={{ fontSize: '13px', color: '#666', marginTop: '4px', wordBreak: 'break-all' }}>
+                            {team.mentor.email || 'N/A'}
                           </div>
                         </div>
                       </div>
                     )}
 
                     {team.teamLead && (
-                      <div style={{
+                      <div className="team-info-section" style={{
                         marginBottom: '16px',
                         padding: '12px',
                         backgroundColor: '#fff3cd',
                         borderRadius: '6px',
                         borderLeft: '4px solid #856404'
                       }}>
-                        <strong style={{ color: '#856404', fontSize: '14px' }}>⭐ Team Lead:</strong>
-                        <div style={{ marginTop: '6px' }}>
-                          <div style={{ fontSize: '15px', fontWeight: '600', color: '#1a1a1a' }}>
-                            {team.teamLead.name} {team.teamLead.rollNo && `(${team.teamLead.rollNo})`} ({team.teamLead.email})
+                        <strong className="team-info-label" style={{ color: '#856404', fontSize: '14px' }}>Team Lead:</strong>
+                        <div className="team-info-content" style={{ marginTop: '6px' }}>
+                          <div className="team-info-name" style={{ fontSize: '15px', fontWeight: '600', color: '#1a1a1a', wordBreak: 'break-word' }}>
+                            {team.teamLead.name}
+                          </div>
+                          <div className="team-info-details" style={{ fontSize: '13px', color: '#666', marginTop: '4px', wordBreak: 'break-all' }}>
+                            {team.teamLead.rollNo && `${team.teamLead.rollNo} • `}
+                            {team.teamLead.email}
                           </div>
                         </div>
                       </div>
@@ -1288,6 +1293,7 @@ if (!coordinatorYear || !coordinatorCollege) {
 
                             return (
                               <div
+                                className="team-member-item"
                                 key={sid}
                                 style={{
                                   padding: '12px',
@@ -1297,8 +1303,8 @@ if (!coordinatorYear || !coordinatorCollege) {
                                   borderLeft: '3px solid #007bff'
                                 }}
                               >
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-                                  <strong style={{ fontSize: '15px', color: '#1a1a1a' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px', flexWrap: 'wrap' }}>
+                                  <strong className="member-name" style={{ fontSize: '15px', color: '#1a1a1a', wordBreak: 'break-word' }}>
                                     {index + 1}. {name}
                                   </strong>
                                   {isLead && (
@@ -1308,14 +1314,15 @@ if (!coordinatorYear || !coordinatorCollege) {
                                       borderRadius: '4px',
                                       fontSize: '11px',
                                       fontWeight: '700',
-                                      color: '#000'
+                                      color: '#000',
+                                      whiteSpace: 'nowrap'
                                     }}>
-                                      ⭐ LEAD
+                                      LEAD
                                     </span>
                                   )}
                                 </div>
                                 {typeof student !== 'string' && (
-                                  <div style={{ fontSize: '13px', color: '#666', marginTop: '4px' }}>
+                                  <div className="member-info" style={{ fontSize: '13px', color: '#666', marginTop: '4px', wordBreak: 'break-all' }}>
                                     {student.rollNo && `${student.rollNo}`} ({student.email || 'N/A'})
                                   </div>
                                 )}
@@ -1327,6 +1334,7 @@ if (!coordinatorYear || !coordinatorCollege) {
                     </div>
                   </div>
                 ))}
+              </div>
               </div>
             )}
           </div>

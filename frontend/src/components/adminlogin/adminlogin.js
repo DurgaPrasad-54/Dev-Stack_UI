@@ -143,7 +143,6 @@ const AdminLogin = () => {
                 placeholder="Admin Email"
                 autoComplete="email"
                 className="adminlogin-auth-input"
-                disabled={loading}
               />
             </Form.Item>
 
@@ -158,7 +157,6 @@ const AdminLogin = () => {
                 prefix={<LockOutlined className="adminlogin-input-icon" />}
                 placeholder="Password"
                 className="adminlogin-auth-input"
-                disabled={loading}
               />
             </Form.Item>
 
@@ -168,10 +166,8 @@ const AdminLogin = () => {
                 htmlType="submit"
                 className="adminlogin-auth-button"
                 block
-                loading={loading}
-                disabled={loading}
               >
-                {loading ? 'Signing in...' : 'Secure Login'}
+                Secure Login
               </Button>
             </Form.Item>
           </Form>
@@ -203,10 +199,8 @@ const AdminLogin = () => {
                 onClick={onFinishOtp}
                 className="adminlogin-auth-button"
                 block
-                loading={loading}
-                disabled={loading}
               >
-                {loading ? 'Verifying...' : 'Verify & Continue'}
+                Verify & Continue
               </Button>
               
               <Button 

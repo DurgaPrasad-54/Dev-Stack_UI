@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, User, Building, Clock, Download, Search, Filter } from 'lucide-react';
+import { Calendar, MapPin, User, Building, Clock, Download, Search } from 'lucide-react';
 import config from '../../../config';
 import { useHackathon } from '../../Student/context/HackathonContext';
 
@@ -16,7 +16,6 @@ const ApprovedScheduleViewer = () => {
 
   useEffect(() => {
     fetchApprovedSchedule();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentHackathonId]);
 
   const fetchApprovedSchedule = async () => {

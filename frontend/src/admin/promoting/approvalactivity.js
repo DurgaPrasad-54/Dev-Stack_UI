@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { CheckCircle, XCircle, AlertCircle, RefreshCw } from 'lucide-react';
 import config from '../../config'; // Adjust path as needed
 
@@ -12,7 +12,7 @@ const ApprovalActivity = () => {
 
   const API_BASE = `${config.backendUrl}/promoting-students/admin/approval-activity`;
 
-  const fetchActivity = async (page = 1, statusFilter = status, daysFilter = days) => {
+  const fetchActivity = useCallback(async (page = 1, statusFilter = status, daysFilter = days) => {
     setLoading(true);
     setError('');
     try {
@@ -32,12 +32,11 @@ const ApprovalActivity = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.limit]);
 
   useEffect(() => {
     fetchActivity(1, status, days);
-    // eslint-disable-next-line
-  }, [status, days]);
+  }, [fetchActivity, status, days]);
 
   const handlePageChange = (newPage) => {
     fetchActivity(newPage);

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './roomallocation.css';
 import config from '../../../config';
+import './roomallocation.css';
 
-const API_BASE = `${config.backendUrl}/roomallocation`;
-const BACKEND_URL = config.backendUrl;
+const API_BASE = `${config.backendUrl}/roomallocation`; // Replace with your actual config
+const BACKEND_URL = config.backendUrl; // Replace with your actual config
 
 const RoomAllocationTable = () => {
   const [scheduleData, setScheduleData] = useState(null);
@@ -220,7 +220,6 @@ const RoomAllocationTable = () => {
 
   useEffect(() => {
     fetchApprovedSchedule();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchApprovedSchedule = async () => {
@@ -341,7 +340,6 @@ const RoomAllocationTable = () => {
     return icons[step] || '📌';
   };
 
-  // eslint-disable-next-line no-unused-vars
   const getStepColor = (step) => {
     if (step.includes('success') || step.includes('found_approved')) return '#10b981';
     if (step.includes('error') || step.includes('no_match')) return '#ef4444';
@@ -373,7 +371,6 @@ const RoomAllocationTable = () => {
     );
   }
 
-  // eslint-disable-next-line no-unused-vars
   const stats = getStatistics();
 
   return (

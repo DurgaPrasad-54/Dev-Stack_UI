@@ -27,8 +27,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       // Call backend to send OTP to the email
-      // eslint-disable-next-line no-unused-vars
-      const response = await axios.post(`${config.backendUrl}/roles/admin/forgot-password`, { email });
+      await axios.post(`${config.backendUrl}/roles/admin/forgot-password`, { email });
 
       toast.success("OTP sent successfully to your email.");
       setStep(2); // Proceed to OTP validation step
@@ -49,8 +48,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       // Validate OTP with backend
-      // eslint-disable-next-line no-unused-vars
-      const response = await axios.post(`${config.backendUrl}/roles/admin/validate-otp`, { email, otp });
+      await axios.post(`${config.backendUrl}/roles/admin/validate-otp`, { email, otp });
 
       toast.success("OTP validated successfully.");
       setStep(3); // Proceed to password reset step
@@ -71,7 +69,6 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       // Call backend to reset password
-      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(`${config.backendUrl}/roles/admin/reset-forgot-password`, {
         email,
         newPassword,

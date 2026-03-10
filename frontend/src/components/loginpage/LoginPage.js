@@ -17,8 +17,6 @@ const LoginPage = ({ onNavigate = () => {} }) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  // eslint-disable-next-line no-unused-vars
-  const from = location.state?.from?.pathname || '/';
 
   // Fetch ongoing hackathon for student
   const fetchOngoingHackathon = async (studentId) => {

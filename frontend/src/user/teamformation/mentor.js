@@ -8,7 +8,6 @@ const MentorTeams = () => {
     const [availableTeams, setAvailableTeams] = useState([]);
     const [mentoredTeams, setMentoredTeams] = useState([]);
     const [loading, setLoading] = useState(false);
-    // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState('');
     const [activeView, setActiveView] = useState('myTeams');
     const [searchTerm, setSearchTerm] = useState('');

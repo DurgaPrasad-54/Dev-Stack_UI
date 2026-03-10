@@ -8,17 +8,14 @@ const MissionVision = () => {
     <div className="mission-vision-container">
       <div className="content-wrapper">
         <div className="mission">
-          <div className="section-header">
+          <div className="mission-header">
             <div className="vertical-line"></div>
             <h2 className='missionvision'>Our Mission</h2>
           </div>
           <div className="mission-content">
             <p className='para'>
-              Dev-Orbit enhances collaborative learning by having students research and develop innovative
-              projects on specific concepts. Teams receive mentorship and are evaluated on innovation,
-              practicality, and presentation. Top projects are recognized in a prize ceremony. Our mission is to
-              foster teamwork, critical thinking, and real-world problem-solving skills while celebrating student
-              achievements.
+              DevStack’s mission is to make hackathon participation more structured, inclusive, and impactful.
+The platform aims to simplify collaboration, provide mentorship support, and help participants transform innovative ideas into practical solutions. By offering organized workflows and development guidance, DevStack ensures every participant has the opportunity to learn, build, and deliver meaningful projects.
             </p>
             <img src={MissionImg} alt="Satellite in space" className="mission-image" />
           </div>
@@ -28,14 +25,14 @@ const MissionVision = () => {
           <div className="vision-content">
             <img src={VisionImg} alt="Satellite in space" className="vision-image" />
             <div className="vision-text">
-              <div className="section-header">
+              <div className="mission-header">
                 <div className="vertical-line"></div>
                 <h2 className='missionvision'>Our Vision</h2>
               </div>
               <p className='para'>
-                Our vision is to transform education by creating a dynamic platform where students collaboratively
-                tackle real-world problems, drive innovation, and develop essential skills for the future. We aim to
-                inspire a generation of problem-solvers who thrive in both academic and practical settings.
+              DevStack’s vision is to become a reliable innovation hub where students consistently build, test, and present scalable solutions.
+The platform aims to foster a culture of creativity, collaboration, and problem-solving, enabling future developers and innovators to contribute meaningful ideas that address real-world challenges.
+It also strives to create an ecosystem where continuous learning, experimentation, and innovation become a natural part of every participant’s development journey.
               </p>
             </div>
           </div>

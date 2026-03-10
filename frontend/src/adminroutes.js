@@ -9,8 +9,6 @@ import CSV from './admin/csv';
 import Notification from './admin/notification';
 import Project from './admin/projects';
 import Resources from './admin/resources';
-// eslint-disable-next-line no-unused-vars
-import Home from './Quiz/pages/common/Home';
 import Exams from './Quiz/pages/admin/Exams';
 // import Adminexam from"./Quiz/pages/user/WriteExam/adminexams";
 import AddEditExam from './Quiz/pages/admin/Exams/AddEditExam';

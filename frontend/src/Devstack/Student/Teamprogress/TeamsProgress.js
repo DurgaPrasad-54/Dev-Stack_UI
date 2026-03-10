@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import config from '../../../config';
 import {
   Card,
   Table,
@@ -32,7 +33,6 @@ import {
   FireOutlined,
 } from "@ant-design/icons";
 import './TeamsProgress.css';
-import config from '../../../config';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -50,9 +50,7 @@ const AllTeamsProgressPage = () => {
   const [selectedBranch, setBranch] = useState(null);
   const [selectedCollege, setCollege] = useState(null);
   const [searchText, setSearchText] = useState("");
-  // eslint-disable-next-line no-unused-vars
   const [sortBy, setSortBy] = useState("progress");
-  // eslint-disable-next-line no-unused-vars
   const [sortOrder, setSortOrder] = useState("desc");
 
   const API_URL = config.backendUrl;
@@ -70,8 +68,7 @@ const AllTeamsProgressPage = () => {
 
   useEffect(() => {
     fetchHackathons();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchHackathons]);
 
   useEffect(() => {
     if (selectedHackathon) {
@@ -83,7 +80,6 @@ const AllTeamsProgressPage = () => {
         fetchStatistics();
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     selectedHackathon,
     selectedBranch,
@@ -93,7 +89,7 @@ const AllTeamsProgressPage = () => {
     activeTab
   ]);
 
-  const fetchHackathons = async () => {
+  const fetchHackathons = useCallback(async () => {
     try {
       console.log('[FRONTEND] Fetching hackathons from:', `${API_URL}/hackteams/hackathons/all`);
       const res = await fetch(`${API_URL}/hackteams/hackathons/all`, {
@@ -125,7 +121,7 @@ const AllTeamsProgressPage = () => {
       console.error("[FRONTEND] Error fetching hackathons:", error);
       setHackathons([]);
     }
-  };
+  }, [token]);
 
   const fetchAllTeams = async () => {
     if (!selectedHackathon) return;

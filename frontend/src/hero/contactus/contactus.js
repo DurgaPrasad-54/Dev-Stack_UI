@@ -19,8 +19,6 @@ const Contact = () => {
     message: '',
     phone: '',
   });
-  // eslint-disable-next-line no-unused-vars
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +27,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     try {
-      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(`${config.backendUrl}/contact`, formData);
       toast.success('Message sent successfully!', {
         position: 'top-right',
@@ -57,8 +53,6 @@ const Contact = () => {
         pauseOnHover: true,
         draggable: true,
       });
-    } finally {
-      setLoading(false);
     }
   };
   
@@ -76,7 +70,7 @@ const Contact = () => {
           <div className="our-info">
             <div className="mailicon-section">
               <img className="mailicon" src={mail} alt="email icon" />
-              <p>Dev-Orbit@gmail.com</p>
+              <p>dev-stack@gmail.com</p>
             </div>
             <div className="phoneicon-section">
               <img className="phoneicon" src={phone} alt="phone icon" />

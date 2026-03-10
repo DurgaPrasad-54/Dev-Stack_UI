@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './WinnersPage.css';
 import config from "../../config";
@@ -7,8 +7,6 @@ import {
   SearchOutlined,
   TeamOutlined,
   UserOutlined,
-  // eslint-disable-next-line no-unused-vars
-  CodeOutlined,
   CrownOutlined,
   CloseCircleOutlined,
   LoadingOutlined,
@@ -52,10 +50,9 @@ const WinnersPage = () => {
 
   useEffect(() => {
     fetchAllHackathons();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchAllHackathons]);
 
-  const fetchAllHackathons = async () => {
+  const fetchAllHackathons = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -74,7 +71,7 @@ const WinnersPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_BASE_URL]);
 
   const handleSearchChange = async (value) => {
     setSearchQuery(value);

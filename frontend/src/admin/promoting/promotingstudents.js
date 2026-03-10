@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Users, ArrowUp, ArrowDown, AlertCircle, CheckCircle, RefreshCw, Search } from 'lucide-react';
 import './promotingstudents.css'; // Adjust the path as necessary
 import config from '../../config'; // Adjust the path to your config file
@@ -18,7 +18,7 @@ const BulkYearManagement = () => {
   const API_BASE_URL = `${config.backendUrl}`; // Change this to your actual API base URL
 
   // Fetch year range for validation
-  const fetchYearRange = async () => {
+  const fetchYearRange = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/promoting-students/students/filters/options`);
       const data = await response.json();
@@ -33,10 +33,10 @@ const BulkYearManagement = () => {
     } catch (err) {
       console.error('Error fetching year range:', err);
     }
-  };
+  }, []);
 
   // Fetch year statistics with optional year and search filter
-  const fetchYearStats = async (admissionYear = '', searchValue = '') => {
+  const fetchYearStats = useCallback(async (admissionYear = '', searchValue = '') => {
     setLoading(true);
     setError(null);
     try {
@@ -72,7 +72,7 @@ const BulkYearManagement = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Promote all students of a specific year with optional admission year filter
   const promoteYear = async (currentYear) => {
@@ -195,8 +195,7 @@ const BulkYearManagement = () => {
     fetchYearRange().then(() => {
       fetchYearStats(yearSearch, search);
     });
-    // eslint-disable-next-line
-  }, []);
+  }, [fetchYearRange, fetchYearStats, yearSearch, search]);
 
   const getYearCSSClass = (year) => {
     const classes = {

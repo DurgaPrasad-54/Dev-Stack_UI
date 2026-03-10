@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Plus, Edit, Trash2, Eye, Calendar, Search, Filter } from 'lucide-react';
-// eslint-disable-next-line no-unused-vars
-import { ConsoleSqlOutlined } from '@ant-design/icons';
-import './schedule.css';
 import config from '../../../config';
+import './schedule.css';
 
 // API Service
-const API_BASE = `${config.backendUrl}/schedule`;
+const API_BASE = `${config.backendUrl}/schedule`; // Adjust based on your backend URL
 
 const scheduleAPI = {
   getAll: (params = {}) => {
@@ -33,280 +31,6 @@ const scheduleAPI = {
   getMentors: () => fetch(`${API_BASE}/mentors`).then(res => res.json()),
   getHackathons: () => fetch(`${API_BASE}/hackathons`).then(res => res.json()),
   getStats: () => fetch(`${API_BASE}/stats/overview`).then(res => res.json())
-};
-
-// Styles
-// eslint-disable-next-line no-unused-vars
-const styles = {
-  container: {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '20px',
-    fontFamily: 'system-ui, -apple-system, sans-serif',
-    paddingTop: '90px'
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '30px',
-    paddingBottom: '20px',
-    borderBottom: '2px solid #e5e7eb'
-  },
-  title: {
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    color: '#1f2937',
-    margin: 0
-  },
-  button: {
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-    fontSize: '14px',
-    fontWeight: '500',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    transition: 'all 0.2s ease'
-  },
-  primaryButton: {
-    background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
-    color: 'white',
-    boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)'
-  },
-  secondaryButton: {
-    background: '#f3f4f6',
-    color: '#374151',
-    border: '1px solid #d1d5db'
-  },
-  dangerButton: {
-    background: '#ef4444',
-    color: 'white'
-  },
-  successButton: {
-    background: '#10b981',
-    color: 'white'
-  },
-  filters: {
-    display: 'flex',
-    gap: '15px',
-    marginBottom: '25px',
-    padding: '20px',
-    background: '#f9fafb',
-    borderRadius: '12px',
-    border: '1px solid #e5e7eb',
-    flexWrap: 'wrap'
-  },
-  input: {
-    padding: '10px 12px',
-    border: '1px solid #d1d5db',
-    borderRadius: '8px',
-    fontSize: '14px',
-    background: 'white',
-    minWidth: '200px'
-  },
-  select: {
-    padding: '10px 12px',
-    border: '1px solid #d1d5db',
-    borderRadius: '8px',
-    fontSize: '14px',
-    background: 'white',
-    minWidth: '150px'
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    background: 'white',
-    borderRadius: '12px',
-    overflow: 'hidden',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-  },
-  th: {
-    background: 'linear-gradient(135deg, #374151, #1f2937)',
-    color: 'white',
-    padding: '15px',
-    textAlign: 'left',
-    fontWeight: '600',
-    fontSize: '14px'
-  },
-  td: {
-    padding: '15px',
-    borderBottom: '1px solid #e5e7eb',
-    fontSize: '14px'
-  },
-  tr: {
-    transition: 'background-color 0.2s ease'
-  },
-  badge: {
-    padding: '4px 12px',
-    borderRadius: '20px',
-    fontSize: '12px',
-    fontWeight: '500',
-    textTransform: 'uppercase'
-  },
-  pendingBadge: {
-    background: '#fef3c7',
-    color: '#92400e'
-  },
-  approvedBadge: {
-    background: '#d1fae5',
-    color: '#065f46'
-  },
-  rejectedBadge: {
-    background: '#fee2e2',
-    color: '#991b1b'
-  },
-  modal: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'rgba(0, 0, 0, 0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1000
-  },
-  modalContent: {
-    background: 'white',
-    borderRadius: '12px',
-    padding: '30px',
-    maxWidth: '600px',
-    width: '90%',
-    maxHeight: '80vh',
-    overflow: 'auto',
-    position: 'relative'
-  },
-  modalHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '20px',
-    paddingBottom: '15px',
-    borderBottom: '1px solid #e5e7eb'
-  },
-  modalTitle: {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    color: '#1f2937',
-    margin: 0
-  },
-  closeButton: {
-    background: 'none',
-    border: 'none',
-    fontSize: '24px',
-    cursor: 'pointer',
-    color: '#6b7280',
-    padding: '0',
-    width: '32px',
-    height: '32px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '8px'
-  },
-  formGroup: {
-    marginBottom: '20px'
-  },
-  label: {
-    display: 'block',
-    marginBottom: '8px',
-    fontSize: '14px',
-    fontWeight: '500',
-    color: '#374151'
-  },
-  textarea: {
-    padding: '10px 12px',
-    border: '1px solid #d1d5db',
-    borderRadius: '8px',
-    fontSize: '14px',
-    background: 'white',
-    width: '100%',
-    minHeight: '80px',
-    resize: 'vertical'
-  },
-  dayCard: {
-    border: '1px solid #e5e7eb',
-    borderRadius: '8px',
-    padding: '15px',
-    marginBottom: '15px',
-    background: '#f9fafb'
-  },
-  dayHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '10px'
-  },
-  dayTitle: {
-    fontSize: '16px',
-    fontWeight: '600',
-    color: '#1f2937'
-  },
-  sessionsList: {
-    marginTop: '10px'
-  },
-  session: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '8px 12px',
-    background: 'white',
-    border: '1px solid #e5e7eb',
-    borderRadius: '6px',
-    marginBottom: '8px'
-  },
-  sessionTime: {
-    fontWeight: '500',
-    color: '#3b82f6',
-    minWidth: '80px'
-  },
-  sessionContent: {
-    flex: 1,
-    marginLeft: '12px'
-  },
-  buttonGroup: {
-    display: 'flex',
-    gap: '8px'
-  },
-  iconButton: {
-    padding: '6px',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '32px',
-    height: '32px'
-  },
-  stats: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '20px',
-    marginBottom: '30px'
-  },
-  statCard: {
-    background: 'white',
-    padding: '20px',
-    borderRadius: '12px',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-    border: '1px solid #e5e7eb'
-  },
-  statValue: {
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    color: '#1f2937',
-    margin: '0 0 5px 0'
-  },
-  statLabel: {
-    color: '#6b7280',
-    fontSize: '14px',
-    margin: 0
-  }
 };
 
 // Stats Component
@@ -648,16 +372,14 @@ console.log(hackathons)
     loadData();
     loadHackathons();
     loadStats();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Load schedules with filters
   useEffect(() => {
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  }, [loadData]);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       setLoading(true);
       const params = {};
@@ -683,7 +405,7 @@ console.log(hackathons)
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
 
   const loadHackathons = async () => {
     try {

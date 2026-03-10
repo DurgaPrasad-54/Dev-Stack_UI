@@ -99,13 +99,11 @@ const CertificatesListComponent = () => {
   useEffect(() => {
     fetchGradeCriteria();
     fetchCertificates();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Apply filters whenever any filter changes
   useEffect(() => {
     applyFilters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedProgram, filterType, searchText, certificates]);
 
   const applyFilters = () => {

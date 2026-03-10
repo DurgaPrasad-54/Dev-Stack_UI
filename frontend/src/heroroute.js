@@ -3,8 +3,6 @@ import React from 'react';
 import Navbar from './components/header/header';
 import Projectnest from './hero/herohomepage/herohomepage';
 import Ourmission from './hero/ourmission/ourmission';
-// eslint-disable-next-line no-unused-vars
-import Certificate from './hero/certificates/certificates'; 
 import About from './hero/aboutUs/about';
 import Faqs from './hero/faqs/Faqs';
 import Contact from './hero/contactus/contactus'

@@ -78,7 +78,7 @@ const PublicGallery = () => {
 
   return (
     <div style={{ 
-      padding: '24px',
+      padding: '16px 20px',
       maxWidth: '1400px',
       margin: '0 auto',
       minHeight: '100vh',
@@ -86,15 +86,11 @@ const PublicGallery = () => {
     }}>
       {/* Header */}
       <div style={{
-        // background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        borderRadius: '16px',
-        padding: '32px',
-        marginBottom: '32px',
-        boxShadow: '0 10px 30px rgba(102, 126, 234, 0.3)',
+        marginBottom: '24px',
         textAlign: 'center',
       }}>
         <Title level={2} style={{ 
-          color: 'black', 
+          color: '#1a1a1a', 
           margin: 0,
           fontSize: '32px',
           fontWeight: 700,
@@ -107,10 +103,10 @@ const PublicGallery = () => {
           Hackathon Gallery
         </Title>
         <Text style={{ 
-          color: 'rgba(255, 255, 255, 0.9)', 
           fontSize: '16px',
           display: 'block',
           marginTop: '8px',
+          color: '#6b7280'
         }}>
           Explore amazing moments from our hackathon events
         </Text>
@@ -349,33 +345,13 @@ const PublicGallery = () => {
                             alt={image.title || image.fileName}
                             src={`${config.backendUrl}${image.imageUrl}`}
                             preview={{
-                              mask: (
-                                <div style={{
-                                  background: 'rgba(102, 126, 234, 0.8)',
-                                  height: '100%',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  fontSize: '16px',
-                                  fontWeight: 600,
-                                  color: 'white'
-                                }}>
-                                  👁️ View Image
-                                </div>
-                              ),
+                              mask: false,
                             }}
                             style={{ 
                               width: '100%', 
                               height: '100%', 
                               objectFit: "cover",
                               objectPosition: 'top',
-                              transition: 'transform 0.3s ease'
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.transform = 'scale(1.05)';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.transform = 'scale(1)';
                             }}
                           />
                         </div>

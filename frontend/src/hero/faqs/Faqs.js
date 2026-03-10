@@ -19,24 +19,28 @@ const FAQ = () => {
 
   const faqData = [
     {
-      question: "What is the Dev-Orbit?",
-      answer: "Dev Orbit is a platform designed for developers to enhance their coding skills, collaborate with others, and stay up-to-date with the latest trends in technology. It offers a range of resources such as coding challenges, tutorials, community-driven discussions, and opportunities to connect with other developers. Whether you’re a beginner or an experienced professional, Dev Orbit provides a space to grow, learn, and contribute to the tech community. It aims to create an ecosystem where developers can share knowledge, solve problems, and improve their coding proficiency."
+      question: "What is DevStack?",
+      answer: "DevStack is a platform built to manage and support complete hackathon workflows. It provides tools for organizing hackathons, managing participants, and facilitating project development. DevStack aims to create an engaging and collaborative environment for developers to showcase their skills and connect with like-minded individuals."
     },
     {
-      question: "Can I collaborate with other developers on Dev Orbit?",
-      answer: "Yes, Dev Orbit encourages collaboration through features like community forums, pair programming sessions, and group challenges. You can join teams for specific tasks or work on open-source projects to gain practical experience and share knowledge with peers."
+      question: "Who can use DevStack?",
+      answer: "Students, mentors, coordinators, and organizers can use DevStack based on role-based access."
     },
     {
-      question: "Is there a community forum for developers to ask questions and share ideas?",
-      answer: "Absolutely! Dev Orbit has an active community forum where developers can ask questions, share coding tips, discuss challenges, and collaborate on projects. The forum is a great place to seek advice, get feedback on your code, or explore new technologies with others."
+      question: "Can I create or join a team in DevStack?",
+      answer: "Yes, DevStack supports both team creation and team joining during active hackathons."
     },
     {
-      question: "Are there any certifications available after completing challenges?",
-      answer: "Yes, Dev Orbit offers certifications for successfully completing certain coding challenges or courses. These certificates can be shared on your LinkedIn profile or added to your portfolio to showcase your skills to potential employers."
+      question: "What can I submit through DevStack?",
+      answer: "You can submit project details, repository links, documentation, demos, and final presentations."
     },
     {
-      question: "What programming languages are supported on Dev Orbit?",
-      answer: "Dev Orbit supports a wide range of programming languages, including Python, Java, C++, C. You can choose your preferred language for coding challenges and even filter challenges based on the language you wish to practice."
+      question: "Does DevStack support mentor and judge workflows?",
+      answer: "Yes, DevStack enables mentor guidance and judge evaluation with organized tracking."
+    },
+    {
+      question: "Is DevStack only for coding events?",
+      answer: "DevStack is designed mainly for hackathons and innovation events, including technical and solution-based tracks."
     }
   ];
 

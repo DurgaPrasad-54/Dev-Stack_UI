@@ -75,7 +75,6 @@ const AdminYearChangeDashboard = () => {
   // Load data on component mount and when filters change
   useEffect(() => {
     fetchYearChangeRequests(1, filterStatus);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterStatus]);
 
   // Handle individual approval

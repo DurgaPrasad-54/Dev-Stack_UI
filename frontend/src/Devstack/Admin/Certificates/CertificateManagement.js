@@ -16,10 +16,6 @@ import {
   TrophyOutlined,
   TeamOutlined,
   UserOutlined,
-  // eslint-disable-next-line no-unused-vars
-  CloseCircleOutlined,
-  // eslint-disable-next-line no-unused-vars
-  CheckCircleOutlined,
   LoadingOutlined
 } from '@ant-design/icons';
 
@@ -84,23 +80,6 @@ const CertificateManagement = () => {
       await fetchCompletedHackathons();
     } finally {
       setGenerating(null);
-    }
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  const handleViewCertificates = async (hackathon) => {
-    try {
-      setSelectedHackathon(hackathon);
-      setLoading(true);
-      const response = await axios.get(`${config.backendUrl}/hackcertificates/hackathon/${hackathon._id}`);
-      if (response.data.success) {
-        setCertificates(response.data.certificates);
-        setViewMode('certificates');
-      }
-    } catch (err) {
-      message.error('Failed to fetch certificates');
-    } finally {
-      setLoading(false);
     }
   };
 

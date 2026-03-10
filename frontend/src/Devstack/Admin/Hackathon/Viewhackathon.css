@@ -16,6 +16,7 @@
   align-items: center;
   margin-bottom: var(--ds-space-6);
   flex-wrap: wrap;
+  gap: 16px;
   padding: 0;
   background: transparent;
   border-radius: 0;
@@ -25,7 +26,8 @@
 .view-page-header .ant-typography {
   color: var(--ds-text-primary) !important;
   margin: 0 !important;
-  font-weight: var(--ds-font-semibold);
+  font-weight: 700 !important;
+  font-size: 28px !important;
 }
 
 .filter-container {
@@ -37,16 +39,18 @@
 
 .filter-container .ant-segmented {
   background: var(--ds-bg-primary);
-  border-radius: var(--ds-radius-lg);
-  padding: var(--ds-space-1);
-  box-shadow: var(--ds-shadow-sm);
-  border: 1px solid var(--ds-gray-200);
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
 }
 
 .filter-container .ant-segmented-item-selected {
-  background: var(--ds-primary) !important;
-  color: var(--ds-text-inverse) !important;
-  border-radius: var(--ds-radius-md);
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%) !important;
+  color: white !important;
+  border-radius: 6px !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.15);
 }
 
 .loading {
@@ -55,15 +59,15 @@
 }
 
 .view-hackathon-card {
-  border-radius: var(--ds-radius-lg);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: var(--ds-shadow-sm);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   background: var(--ds-bg-primary);
-  transition: all var(--ds-transition-slow);
-  height: 260px;
-  border: 1px solid var(--ds-gray-200);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 320px;
+  border: 1px solid #efefef;
   width: 100%;
 }
 
@@ -72,47 +76,59 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .view-hackathon-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--ds-shadow-lg);
-  border-color: var(--ds-primary);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: #1890ff;
+  z-index: 5;
+}
+
+.view-hackathon-card:hover .hackathon-actions {
+  z-index: 20;
 }
 
 .hackathon-poster {
-  height: 100px;
-  min-height: 100px;
+  height: 140px;
+  min-height: 140px;
   background-size: cover;
-  background-position: center;
-  border-radius: var(--ds-radius-md);
+  background-position: center top;
+  background-repeat: no-repeat;
+  border-radius: 0;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-  padding: var(--ds-space-1-5);
-  background-color: var(--ds-primary-light);
-  margin: var(--ds-space-2);
-  width: calc(100% - 16px);
+  padding: 8px;
+  background-color: #f0f0f0;
+  margin: 0;
+  width: 100%;
   position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .hackathon-content {
-  padding: var(--ds-space-1) var(--ds-space-3) var(--ds-space-2);
+  padding: 16px 18px 14px;
   display: flex;
   flex-direction: column;
   flex: 1;
   width: 100%;
+  overflow: hidden;
+  gap: 6px;
 }
 
 .hackathon-name {
-  font-size: var(--ds-text-sm);
-  font-weight: var(--ds-font-semibold);
-  margin-bottom: var(--ds-space-1);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
   color: var(--ds-text-primary);
-  line-height: 1.3;
+  line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: block;
 }
 
 .hackathon-date,
@@ -120,12 +136,13 @@
 .hackathon-location,
 .hackathon-description,
 .hackathon-prize {
-  margin: var(--ds-space-0-5) 0;
-  font-size: var(--ds-text-xs);
-  color: var(--ds-text-secondary);
+  margin: 3px 0;
+  font-size: 12px;
+  color: #777;
   display: flex;
   align-items: center;
-  gap: var(--ds-space-1-5);
+  gap: 8px;
+  line-height: 1.5;
 }
 
 .hackathon-date .anticon,
@@ -162,39 +179,110 @@
 .hackathon-actions {
   margin-top: auto;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap;
-  gap: var(--ds-space-1);
-  padding-top: var(--ds-space-1-5);
-  border-top: none;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 0 0 0;
+  border-top: 1px solid #f0f0f0;
   width: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 .hackathon-actions button {
-  border-radius: var(--ds-radius-sm);
-  height: 24px;
-  font-size: var(--ds-text-xs);
-  padding: 0 var(--ds-space-1-5);
+  border-radius: 8px;
+  height: 38px;
+  font-size: 12px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 1 auto;
-  min-width: 0;
   white-space: nowrap;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  color: #262626;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.hackathon-actions button:first-child {
+  flex: 1.5;
+  min-width: 110px;
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 3px 12px rgba(24, 144, 255, 0.3);
+}
+
+.hackathon-actions button:nth-child(2),
+.hackathon-actions button:nth-child(3) {
+  flex: 0 1 auto;
+  min-width: 40px;
+  width: 40px;
+  height: 38px;
+  padding: 0;
+  border: 2px solid #d9d9d9;
+  background: #fff !important;
+  color: #1890ff !important;
+  border-radius: 8px;
+}
+
+.hackathon-actions button:nth-child(3) {
+  color: #ff4d4f !important;
+  border-color: #ffa8a8 !important;
 }
 
 .hackathon-actions button .anticon {
-  font-size: var(--ds-text-xs);
+  font-size: 16px;
+  margin-right: 6px;
+}
+
+.hackathon-actions button:first-child .anticon {
+  font-size: 14px;
 }
 
 .hackathon-actions button span:not(.anticon) {
-  margin-left: var(--ds-space-1);
+  margin-left: 0;
+  font-size: 13px;
+}
+
+.hackathon-actions button:first-child:hover {
+  background: linear-gradient(135deg, #0050b3 0%, #003a8b 100%) !important;
+  box-shadow: 0 6px 20px rgba(24, 144, 255, 0.35) !important;
+  transform: translateY(-3px);
+}
+
+.hackathon-actions button:nth-child(2):hover {
+  background: #e6f7ff !important;
+  border-color: #1890ff !important;
+  color: #0050b3 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 12px rgba(24, 144, 255, 0.2);
+}
+
+.hackathon-actions button:nth-child(3):hover {
+  background: #fff1f0 !important;
+  border-color: #ff4d4f !important;
+  color: #d9363e !important;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 12px rgba(255, 77, 79, 0.2);
+}
+
+.hackathon-actions button:active {
+  transform: translateY(-1px);
 }
 
 .hackathon-actions button:focus {
-  outline: 2px solid var(--ds-primary);
-  outline-offset: 2px;
+  outline: none;
 }
 
 /* Responsive Layout: Cards per row based on screen size */
@@ -260,7 +348,7 @@
 
 @media (max-width: 1024px) {
   .view-hackathon-card {
-    height: 250px;
+    min-height: 290px;
   }
 }
 
@@ -284,41 +372,36 @@
   }
 
   .hackathon-poster {
-    height: 90px;
-    min-height: 90px;
-    margin: 6px;
-    width: calc(100% - 12px);
+    height: 120px;
+    min-height: 120px;
+    margin: 0;
+    width: 100%;
   }
 
   .hackathon-content {
-    padding: 4px 10px 6px;
-  }
-
-  .hackathon-name {
-    font-size: 13px;
-  }
-
-  .hackathon-date,
-  .hackathon-entry,
-  .hackathon-location,
-  .hackathon-description,
-  .hackathon-prize {
-    font-size: 11px;
+    padding: 14px 16px 12px;
   }
 
   .view-hackathon-card {
-    height: 240px;
-    border-radius: 8px;
+    min-height: 290px;
+    border-radius: 10px;
   }
 
   .hackathon-actions {
-    gap: 3px;
+    gap: 10px;
+    padding: 12px 0 0 0;
   }
 
   .hackathon-actions button {
-    height: 22px;
-    font-size: 10px;
-    padding: 0 6px;
+    height: 36px;
+    font-size: 11px;
+    padding: 0 14px;
+  }
+
+  .hackathon-actions button:nth-child(2),
+  .hackathon-actions button:nth-child(3) {
+    width: 36px;
+    height: 36px;
   }
 }
 
@@ -332,10 +415,11 @@
   }
 
   .hackathon-poster {
-    height: 80px;
-    min-height: 80px;
-    margin: 6px;
-    border-radius: 6px;
+    height: 100px;
+    min-height: 100px;
+    margin: 0;
+    border-radius: 0;
+    width: 100%;
   }
 
   .hackathon-name {
@@ -343,32 +427,192 @@
   }
 
   .hackathon-actions {
-    justify-content: center;
-    gap: 3px;
-    padding-top: 4px;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 0 0 0;
+    flex-wrap: wrap;
   }
 
   .hackathon-actions button {
-    height: 22px;
-    font-size: 9px;
-    padding: 0 5px;
+    height: 34px;
+    font-size: 11px;
+    padding: 0 12px;
+  }
+
+  .hackathon-actions button:first-child {
+    flex: 1;
+    min-width: 90px;
+    font-size: 12px;
+  }
+
+  .hackathon-actions button:nth-child(2),
+  .hackathon-actions button:nth-child(3) {
+    width: 34px;
+    height: 34px;
+    padding: 0;
   }
 
   .hackathon-actions button span:not(.anticon) {
-    display: none;
+    display: inline;
   }
 
   .hackathon-actions button .anticon {
-    margin: 0;
+    margin-right: 3px;
   }
 
   .view-hackathon-card {
-    height: 220px;
+    height: auto;
     border-radius: 6px;
   }
 
   .filter-container .ant-segmented {
     font-size: 11px;
+  }
+}
+
+/* Extra small screens: 320px */
+@media (max-width: 320px) {
+  .viewhackathons-container {
+    padding: 6px;
+  }
+
+  .viewhackathons-container .ant-row {
+    margin-left: -4px !important;
+    margin-right: -4px !important;
+  }
+
+  .viewhackathons-container .ant-col {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .view-page-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .view-page-header .ant-typography {
+    font-size: 16px !important;
+  }
+
+  .view-page-header > button {
+    width: 100%;
+    font-size: 11px;
+    height: 32px;
+  }
+
+  .filter-container {
+    margin-bottom: 12px;
+  }
+
+  .filter-container .ant-segmented {
+    font-size: 10px;
+    padding: 2px;
+  }
+
+  .hackathon-poster {
+    height: 85px;
+    min-height: 85px;
+    margin: 0;
+    width: 100%;
+  }
+
+  .hackathon-content {
+    padding: 4px 8px 6px;
+  }
+
+  .hackathon-name {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .hackathon-date,
+  .hackathon-entry,
+  .hackathon-location,
+  .hackathon-description,
+  .hackathon-prize {
+    font-size: 9px;
+    margin: 2px 0;
+    gap: 6px;
+  }
+
+  .hackathon-date .anticon,
+  .hackathon-location .anticon,
+  .hackathon-entry .anticon {
+    font-size: 9px;
+  }
+
+  .view-hackathon-card {
+    height: auto;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+
+  .hackathon-actions {
+    gap: 3px;
+    padding-top: 4px;
+  }
+
+  .hackathon-poster {
+    height: 85px;
+    min-height: 85px;
+    margin: 0;
+    width: 100%;
+    padding: 6px;
+  }
+
+  .hackathon-content {
+    padding: 8px 10px 6px;
+    gap: 2px;
+  }
+
+  .hackathon-name {
+    font-size: 11px;
+    margin-bottom: 3px;
+  }
+
+  .hackathon-date,
+  .hackathon-entry,
+  .hackathon-location,
+  .hackathon-description,
+  .hackathon-prize {
+    font-size: 9px;
+    margin: 1px 0;
+    gap: 5px;
+  }
+
+  .hackathon-actions {
+    gap: 6px;
+    padding: 8px 0 0 0;
+  }
+
+  .hackathon-actions button {
+    height: 30px;
+    font-size: 10px;
+    padding: 0 10px;
+  }
+
+  .hackathon-actions button:first-child {
+    flex: 1;
+    min-width: 75px;
+    font-size: 11px;
+  }
+
+  .hackathon-actions button:nth-child(2),
+  .hackathon-actions button:nth-child(3) {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+  }
+
+  .hackathon-actions button .anticon {
+    font-size: 14px;
+    margin-right: 2px;
+  }
+
+  .hackathon-actions button:first-child .anticon {
+    font-size: 12px;
   }
 }
 
@@ -441,7 +685,7 @@
 }
 
 .hackathon-modal .ant-modal-body {
-  padding: 12px;
+  padding: 18px;
   max-height: 65vh;
   overflow-y: auto;
   box-shadow: none;
@@ -449,13 +693,14 @@
 }
 
 .hackathon-modal .ant-modal-footer {
-  border-top: 1px solid #f0f0f0;
-  padding: 12px 16px;
+  border-top: 1px solid #e8e8e8;
+  padding: 14px 18px;
   margin: 0;
   box-shadow: none;
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 10px;
+  background: #f9f9f9;
 }
 
 .modal-header {
@@ -480,19 +725,21 @@
 
 .modal-poster {
   width: 100%;
-  height: 160px;
+  height: 180px;
   background-size: cover;
-  background-position: center;
+  background-position: center top;
+  background-repeat: no-repeat;
   border-radius: 0;
   margin-bottom: 10px;
   box-shadow: none;
   border: none;
+  background-color: #f0f0f0;
 }
 
 .modal-details {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 6px;
   padding: 0;
   width: 100%;
   box-shadow: none;
@@ -502,11 +749,14 @@
 .detail-row {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  padding: 8px 0;
+  gap: 12px;
+  padding: 12px 12px;
   border: none;
   width: 100%;
   box-shadow: none;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border-left: 3px solid #1890ff;
 }
 
 .detail-row:last-child {
@@ -528,18 +778,20 @@
 
 .detail-row strong {
   display: block;
-  font-size: 11px;
-  color: #8c8c8c;
+  font-size: 10px;
+  color: #999;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
-  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  font-weight: 700;
 }
 
 .detail-row p {
   margin: 0;
   font-size: 14px;
-  color: #262626;
-  line-height: 1.4;
+  color: #333;
+  line-height: 1.5;
+  font-weight: 500;
 }
 
 .detail-row > div {
@@ -555,41 +807,50 @@
 }
 
 .detail-section {
-  margin-top: 8px;
-  padding: 8px 0 0;
+  margin-top: 6px;
+  padding: 14px 16px;
   border-top: none;
   width: 100%;
+  background: #f9f9f9;
+  border-radius: 8px;
 }
 
 .detail-section strong {
   display: block;
-  font-size: 11px;
-  color: #8c8c8c;
+  font-size: 10px;
+  color: #999;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
-  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
   text-align: center;
+  font-weight: 700;
 }
 
 .detail-section p {
   margin: 0;
   font-size: 14px;
-  color: #262626;
-  line-height: 1.5;
+  color: #333;
+  line-height: 1.6;
   text-align: center;
+  font-weight: 500;
+  margin-bottom: 0;
 }
 
 .modal-prizes {
-  margin-top: 4px;
+  margin-top: 2px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
+  gap: 8px;
 }
 
 .modal-prizes .ant-tag {
-  margin: 3px;
-  font-size: 12px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
 }
 
 @media (max-width: 768px) {

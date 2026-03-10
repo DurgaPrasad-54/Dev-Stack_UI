@@ -11,9 +11,7 @@ import {
   CloudUploadOutlined,
   HomeOutlined,
   CheckSquareOutlined,
-  UserSwitchOutlined,
-  // eslint-disable-next-line no-unused-vars
-  LoadingOutlined
+  UserSwitchOutlined
 } from '@ant-design/icons';
 
 // Cache duration in milliseconds (5 minutes)

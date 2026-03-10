@@ -16,14 +16,14 @@ const Schedule = () => {
   // Fetch schedules from API when hackathon changes
   useEffect(() => {
     fetchSchedules();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentHackathonId]);
 
   const fetchSchedules = async () => {
     try {
       setLoading(true);
       if (!currentHackathonId) {
-        setError('No hackathon selected');
+        setSchedules([]);
+        setHackathonName('');
         setLoading(false);
         return;
       }
@@ -92,8 +92,8 @@ const Schedule = () => {
     return (
       <div className="student-schedule-container">
         <div className="student-schedule-no-schedules">
-          <h3>No Schedule Available</h3>
-          <p>No approved schedule found for <strong>{hackathonName}</strong></p>
+          <h3>No Hackathon Found</h3>
+          <p>{hackathonName ? `No approved schedule found for ${hackathonName}` : 'Please select a hackathon to view the schedule.'}</p>
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Calendar, 
   Clock, 
@@ -22,10 +22,9 @@ const StudentEventsView = () => {
 
   useEffect(() => {
     fetchEvents();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchEvents]);
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
@@ -51,7 +50,7 @@ const StudentEventsView = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const showMessage = (type, text) => {
     setMessage({ type, text });

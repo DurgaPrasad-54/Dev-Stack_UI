@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Star, X, Send, Loader2, CheckCircle, AlertCircle, User, Mail, Github, Linkedin, Users, Search, UserPlus, Clock, ArrowRight, Shield, Crown, UserCheck, Plus } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
 import config from '../../../config';
+import 'react-toastify/dist/ReactToastify.css';
 
 const API_BASE = `${config.backendUrl}/studenthackteam`;
 const API_BASEs = `${config.backendUrl}/hackmentorfeedback`;
@@ -25,7 +27,6 @@ const MentorFeedbackModal = ({ isOpen, onClose, mentor, team, hackathonId }) => 
       fetchExistingFeedback();
       
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, mentor, hackathonId]);
 
   const fetchExistingFeedback = async () => {
@@ -136,24 +137,39 @@ const MentorFeedbackModal = ({ isOpen, onClose, mentor, team, hackathonId }) => 
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 1000,
-      padding: '20px'
+      padding: '20px',
+      '@media (max-width: 768px)': {
+        padding: '16px'
+      },
+      '@media (max-width: 480px)': {
+        padding: '12px'
+      }
     }}>
       <div style={{
         background: 'white',
+        marginTop:'90px',
         borderRadius: '12px',
         maxWidth: '600px',
         width: '100%',
         maxHeight: '90vh',
         overflowY: 'auto',
-        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)'
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+        ...(typeof window !== 'undefined' && window.innerWidth <= 768 && {
+          maxWidth: 'calc(100% - 32px)'
+        }),
+        ...(typeof window !== 'undefined' && window.innerWidth <= 480 && {
+          maxWidth: 'calc(100% - 24px)'
+        })
       }}>
         {/* Header */}
         <div style={{
-          background: 'linear-gradient(to right, #4f46e5, #7c3aed)',
-          padding: '24px',
+          background: 'transparent',
+          padding: '20px 24px',
           borderTopLeftRadius: '12px',
           borderTopRightRadius: '12px',
-          position: 'relative'
+          position: 'relative',
+          borderBottom: '1px solid #e5e7eb'
+          
         }}>
           <button
             onClick={onClose}
@@ -161,7 +177,7 @@ const MentorFeedbackModal = ({ isOpen, onClose, mentor, team, hackathonId }) => 
               position: 'absolute',
               top: '16px',
               right: '16px',
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: '#f3f4f6',
               border: 'none',
               borderRadius: '50%',
               width: '32px',
@@ -169,15 +185,18 @@ const MentorFeedbackModal = ({ isOpen, onClose, mentor, team, hackathonId }) => 
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              transition: 'background 0.2s'
             }}
+            onMouseOver={(e) => e.target.style.background = '#e5e7eb'}
+            onMouseOut={(e) => e.target.style.background = '#f3f4f6'}
           >
-            <X size={20} color="white" />
+            <X size={20} color="#6b7280" />
           </button>
-          <h2 style={{ color: 'white', margin: 0, fontSize: '24px', fontWeight: 'bold' }}>
+          <h2 style={{ color: '#111827', margin: 0, fontSize: 'clamp(18px, 5vw, 24px)', fontWeight: 'bold' }}>
             Rate Your Mentor
           </h2>
-          <p style={{ color: 'rgba(255, 255, 255, 0.8)', margin: '8px 0 0 0', fontSize: '14px' }}>
+          <p style={{ color: '#6b7280', margin: '8px 0 0 0', fontSize: 'clamp(12px, 4vw, 14px)' }}>
             Team: {team?.name || 'N/A'}
           </p>
         </div>
@@ -479,10 +498,10 @@ export default function TeamManagementPage() {
     if (showSearchResults) {
       loadAllStudents();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viewMode]);
 
   // Filter students on client side
+  // compute filtered students and include incoming join-request info
   const filteredStudents = students.filter(student => {
     const query = searchTerm.trim().toLowerCase();
     
@@ -492,6 +511,14 @@ export default function TeamManagementPage() {
     const studentRollNo = (student.rollNo || '').toLowerCase();
     
     return studentName.includes(query) || studentRollNo.includes(query);
+  }).map(student => {
+    // determine if this student has sent a pending join request to my team
+    const incoming = joinRequests.find(r => r.sender && r.sender._id === student.studentId);
+    return {
+      ...student,
+      hasIncomingJoinRequest: !!incoming,
+      incomingRequestId: incoming ? incoming._id : null
+    };
   });
 
   // Load incoming invitations
@@ -530,22 +557,24 @@ export default function TeamManagementPage() {
     const isSelected = selectedStudents.some(s => s.studentId === student.studentId);
     if (isSelected) {
       setSelectedStudents(selectedStudents.filter(s => s.studentId !== student.studentId));
+      toast.info(`${student.name} removed from selection`);
     } else {
       setSelectedStudents([...selectedStudents, student]);
+      toast.info(`✨ ${student.name} selected`);
     }
   };
 
   const createTeam = () => {
     if (!teamName.trim()) {
-      alert('Please enter a team name');
+      toast.error('Please enter a team name');
       return;
     }
     if (selectedStudents.length === 0) {
-      alert('Please select at least one student');
+      toast.error('Please select at least one student');
       return;
     }
     if (!selectedHackathonId) {
-      alert('No hackathon selected');
+      toast.error('No hackathon selected');
       return;
     }
 
@@ -562,7 +591,7 @@ export default function TeamManagementPage() {
       authHeaders()
     )
     .then(res => {
-      alert(`Team created successfully! Invitations sent to ${selectedStudents.length} student(s).`);
+      toast.success(`✨ Team created! Invitations sent to ${selectedStudents.length} student(s)`);
       setTeamName('');
       setSelectedStudents([]);
       axios.get(`${API_BASE}/myteam`, authHeaders())
@@ -574,18 +603,18 @@ export default function TeamManagementPage() {
       loadAllStudents();
     })
     .catch(err => {
-      alert(`Failed to create team: ${err.response?.data?.error || err.message}`);
+      toast.error(`Failed to create team: ${err.response?.data?.error || err.message}`);
     })
     .finally(() => setCreatingTeam(false));
   };
 
   const sendInvitesToTeam = () => {
     if (selectedStudents.length === 0) {
-      alert('Please select at least one student to invite');
+      toast.error('Please select at least one student to invite');
       return;
     }
     if (!myTeam) {
-      alert('You need to be in a team to send invitations');
+      toast.error('You need to be in a team to send invitations');
       return;
     }
 
@@ -599,7 +628,7 @@ export default function TeamManagementPage() {
       authHeaders()
     )
     .then(res => {
-      alert(res.data.message);
+      toast.success(`📧 ${res.data.message}`);
       setSelectedStudents([]);
       axios.get(`${API_BASE}/invitations/outgoing`, authHeaders())
         .then(res => setOutgoingInvitations(res.data))
@@ -607,14 +636,14 @@ export default function TeamManagementPage() {
       loadAllStudents();
     })
     .catch(err => {
-      alert(`Failed to send invitations: ${err.response?.data?.error || err.message}`);
+      toast.error(`Failed to send invitations: ${err.response?.data?.error || err.message}`);
     })
     .finally(() => setSendingInvites(false));
   };
 
   const sendJoinRequest = (teamId, teamName) => {
     if (!teamId) {
-      alert('Invalid team');
+      toast.error('Invalid team');
       return;
     }
 
@@ -624,14 +653,14 @@ export default function TeamManagementPage() {
       authHeaders()
     )
     .then(() => {
-      alert(`Join request sent to team "${teamName}"!`);
+      toast.success(`✅ Join request sent to "${teamName}"`);
       axios.get(`${API_BASE}/join-requests/sent`, authHeaders())
         .then(res => setSentJoinRequests(res.data))
         .catch(() => setSentJoinRequests([]));
       loadAllStudents();
     })
     .catch(err => {
-      alert(`Failed to send join request: ${err.response?.data?.error || err.message}`);
+      toast.error(`Failed to send join request: ${err.response?.data?.error || err.message}`);
     });
   };
 
@@ -643,15 +672,17 @@ export default function TeamManagementPage() {
     )
     .then(res => {
       setIncomingInvitations(incomingInvitations.filter(i => i._id !== id));
-      alert(res.data.message || `Invitation ${response}`);
       if (response === 'accepted') {
+        toast.success('🎉 Invitation accepted! You have joined the team');
         axios.get(`${API_BASE}/myteam`, authHeaders())
           .then(res => setMyTeam(res.data))
           .catch(() => setMyTeam(null));
+      } else {
+        toast.info('📬 Invitation declined');
       }
       loadAllStudents();
     })
-    .catch(err => alert(`Failed to respond: ${err.response?.data?.error || err.message}`));
+    .catch(err => toast.error(`Failed to respond: ${err.response?.data?.error || err.message}`));
   };
 
   const respondToJoinRequest = (id, response) => {
@@ -662,7 +693,11 @@ export default function TeamManagementPage() {
     )
     .then(res => {
       setJoinRequests(joinRequests.filter(r => r._id !== id));
-      alert(res.data.message || `Join request ${response}`);
+      if (response === 'accepted') {
+        toast.success('✅ Student added to your team!');
+      } else {
+        toast.info('📬 Join request declined');
+      }
       if (response === 'accepted') {
         axios.get(`${API_BASE}/myteam`, authHeaders())
           .then(res => setMyTeam(res.data))
@@ -670,11 +705,25 @@ export default function TeamManagementPage() {
       }
       loadAllStudents();
     })
-    .catch(err => alert(`Failed to respond: ${err.response?.data?.error || err.message}`));
+    .catch(err => toast.error(`Failed to respond: ${err.response?.data?.error || err.message}`));
   };
 
   return (
     <div className="tm-wrapper">
+      {/* Toast Notifications */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
       {/* Hero Header */}
       <div className="tm-hero">
         <div className="tm-hero-content">
@@ -874,6 +923,7 @@ export default function TeamManagementPage() {
                     <div className="tm-student-list">
                       {filteredStudents.map(s => {
                         const isSelected = selectedStudents.some(sel => sel.studentId === s.studentId);
+                        const showIncoming = myTeam && !s.inTeam && s.hasIncomingJoinRequest;
                         
                         return (
                           <div key={s._id} className={`tm-student-card ${isSelected ? 'tm-student-selected' : s.inTeam ? 'tm-student-in-team' : 'tm-student-available'}`}>
@@ -912,39 +962,61 @@ export default function TeamManagementPage() {
                                           <Send size={11} /> Invitation Sent
                                         </span>
                                       )}
+                                      {showIncoming && (
+                                        <span className="tm-badge tm-badge-blue">
+                                          <Clock size={11} /> Requested to Join
+                                        </span>
+                                      )}
                                     </>
                                   )}
                                 </div>
                               </div>
                               <div className="tm-student-action">
-                                {!myTeam && viewMode === 'inTeams' ? (
-                                  <button 
-                                    onClick={() => sendJoinRequest(s.teamId, s.teamName)}
-                                    disabled={s.hasPendingJoinRequest}
-                                    className={`tm-btn tm-btn-sm ${s.hasPendingJoinRequest ? 'tm-btn-disabled' : 'tm-btn-green'}`}
-                                  >
-                                    {s.hasPendingJoinRequest ? (
-                                      <><Clock size={13} /> Sent</>
-                                    ) : (
-                                      <><ArrowRight size={13} /> Join</>
-                                    )}
-                                  </button>
-                                ) : (
-                                  !s.inTeam && (
-                                    <button 
-                                      onClick={() => toggleStudentSelection(s)}
-                                      disabled={s.hasPendingInvitation}
-                                      className={`tm-btn tm-btn-sm ${s.hasPendingInvitation ? 'tm-btn-disabled' : isSelected ? 'tm-btn-red' : 'tm-btn-blue'}`}
-                                      title={s.hasPendingInvitation ? 'Invitation already sent to this student' : ''}
+                                {showIncoming ? (
+                                  <div className="tm-action-buttons">
+                                    <button
+                                      onClick={() => respondToJoinRequest(s.incomingRequestId, 'accepted')}
+                                      className="tm-btn tm-btn-sm tm-btn-green"
                                     >
-                                      {s.hasPendingInvitation ? (
-                                        <><Send size={13} /> Invited</>
-                                      ) : isSelected ? (
-                                        <><X size={13} /> Remove</>
+                                      <CheckCircle size={13} /> Accept
+                                    </button>
+                                    <button
+                                      onClick={() => respondToJoinRequest(s.incomingRequestId, 'rejected')}
+                                      className="tm-btn tm-btn-sm tm-btn-red-outline"
+                                    >
+                                      <X size={13} /> Reject
+                                    </button>
+                                  </div>
+                                ) : (
+                                  (!myTeam && viewMode === 'inTeams') ? (
+                                    <button 
+                                      onClick={() => sendJoinRequest(s.teamId, s.teamName)}
+                                      disabled={s.hasPendingJoinRequest}
+                                      className={`tm-btn tm-btn-sm ${s.hasPendingJoinRequest ? 'tm-btn-disabled' : 'tm-btn-green'}`}
+                                    >
+                                      {s.hasPendingJoinRequest ? (
+                                        <><Clock size={13} /> Sent</>
                                       ) : (
-                                        <><Plus size={13} /> Select</>
+                                        <><ArrowRight size={13} /> Join</>
                                       )}
                                     </button>
+                                  ) : (
+                                    !s.inTeam && (
+                                      <button 
+                                        onClick={() => toggleStudentSelection(s)}
+                                        disabled={s.hasPendingInvitation}
+                                        className={`tm-btn tm-btn-sm ${s.hasPendingInvitation ? 'tm-btn-disabled' : isSelected ? 'tm-btn-red' : 'tm-btn-blue'}`}
+                                        title={s.hasPendingInvitation ? 'Invitation already sent to this student' : ''}
+                                      >
+                                        {s.hasPendingInvitation ? (
+                                          <><Send size={13} /> Invited</>
+                                        ) : isSelected ? (
+                                          <><X size={13} /> Remove</>
+                                        ) : (
+                                          <><Plus size={13} /> Select</>
+                                        )}
+                                      </button>
+                                    )
                                   )
                                 )}
                               </div>
@@ -1208,7 +1280,7 @@ export default function TeamManagementPage() {
         .tm-wrapper {
           max-width: 1400px;
           margin: 0 auto;
-          padding: 90px 24px 40px;
+          padding: 0px 24px 40px;
           font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
           background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #f0fdf4 100%);
           min-height: 100vh;
@@ -1216,38 +1288,28 @@ export default function TeamManagementPage() {
 
         /* Hero */
         .tm-hero {
-          background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
-          border-radius: 20px;
-          padding: 32px 36px;
           margin-bottom: 28px;
-          box-shadow: 0 10px 40px -10px rgba(79, 70, 229, 0.4);
-          animation: fadeInUp 0.5s ease-out;
+          text-align: center;
         }
         .tm-hero-content {
           display: flex;
-          align-items: center;
-          gap: 20px;
-        }
-        .tm-hero-icon {
-          width: 60px;
-          height: 60px;
-          background: rgba(255,255,255,0.15);
-          backdrop-filter: blur(10px);
-          border-radius: 16px;
-          display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
-          border: 1px solid rgba(255,255,255,0.2);
+          gap: 0;
+        }
+        .tm-hero-icon {
+          display: none;
         }
         .tm-hero-title {
-          color: white;
+          color: #111827;
           font-size: 28px;
           font-weight: 800;
           margin: 0;
           letter-spacing: -0.5px;
         }
         .tm-hero-subtitle {
-          color: rgba(255,255,255,0.8);
+          color: #6b7280;
           font-size: 15px;
           margin: 4px 0 0;
           font-weight: 400;

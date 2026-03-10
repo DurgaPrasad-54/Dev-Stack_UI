@@ -12,14 +12,21 @@ import saikumar from '../assests/teampics/saikumar.jpg' ;
 import aravvind from '../assests/teampics/aravvind.jpg' ;
 import venky from '../assests/teampics/venky.jpg' ;
 import umaa from '../assests/teampics/umaa.jpg' ;
+import Dpjunior from '../assests/teampics/Dpjunior.jpg' ;
+import Dpsenior from '../assests/teampics/Dpsenior.jpg';
+import deepujunior from '../assests/teampics/deepujunior.jpg' ;
+import govindjunior from '../assests/teampics/govindjunior.jpg' ;
+import prudhvijunior from '../assests/teampics/prudhvijunior.jpg' ;
+import swarnasenior from '../assests/teampics/swarnasenior.jpg' ;
+import tejasenior from '../assests/teampics/tejasenior.jpg' ;
 
 const TeamDetails = () => {
   const navigate = useNavigate();
+  const [selectedBatch, setSelectedBatch] = useState("2024");
 
-  // eslint-disable-next-line no-unused-vars
-  const [teamDetails, setTeamDetails] = useState({
+  const batch2024Details = {
     batch: "2024",
-    teamNumber: 4,
+    teamNumber: "DevOrbit",
     teamLead: [
       { 
         name: 'Prudhvi', 
@@ -116,7 +123,110 @@ const TeamDetails = () => {
         }
       },
     ]
-  });
+  };
+
+  const batch2025Details = {
+    batch: "2025",
+    teamNumber: "Hackathon",
+    teamLead: [
+      { 
+        name: 'Aravind Swamy', 
+        role: 'Team-Lead',
+        image: aravvind,
+        social: {
+          github: 'https://github.com/Aravindswamymajjuri',
+          linkedin: 'https://linkedin.com/in/prudhvi',
+          email: 'aravindswamymajjuri143@gmail.com'
+        }
+      },
+    ],
+    seniorDevelopers: [
+      { 
+        name: 'Durga Prasad', 
+        role: 'Senior-Developer',
+        image: Dpsenior,
+        social: {
+          github: 'https://github.com/DurgaPrasad-54',
+          linkedin: 'https://in.linkedin.com/in/durga-prasad-koppireddy-778516275',
+          email: 'prasad8790237@gmail.com'
+        }
+      },
+      { 
+        name: 'Sai Teja', 
+        role: 'Senior-Developer',
+        image: tejasenior,
+        social: {
+          github: 'https://github.com/tejnaiduu',
+          linkedin: 'https://www.linkedin.com/in/saiteja-kumpatla-a724b8293/',
+          email: 'tejnaidukumpatla123@gmail.com'
+        }
+      },
+      { 
+        name: 'Swarna', 
+        role: 'Senior-Developer',
+        image: swarnasenior,
+        social: {
+          github: 'https://github.com/kandaswarna123',
+          linkedin: 'https://www.linkedin.com/in/swarna-kanda-a9459a288',
+          email: 'kandha815@gmail.com'
+        }
+      },
+      // { 
+      //   name: 'Balaji', 
+      //   role: 'Senior-Developer',
+      //   image: venky,
+      //   social: {
+      //     github: 'https://github.com',
+      //     linkedin: 'https://www.linkedin.com',
+      //     email: 'seniordev4@gmail.com'
+      //   }
+      // }
+    ],
+    juniorDevelopers: [
+      { 
+        name: 'Prudhvi', 
+        role: 'Junior-Developer',
+        image: prudhvijunior,
+        social: {
+          github: 'https://github.com',
+          linkedin: 'https://www.linkedin.com',
+          email: 'juniordev1@gmail.com'
+        }
+      },
+      {
+        name: 'Durga Prasad', 
+        role: 'Junior-Developer',
+        image: Dpjunior,
+        social: {
+          github: 'https://github.com/Durga62823',    
+          linkedin: 'https://www.linkedin.com/in/durga-prasad-peddapalli-1616a8297/',
+          email: 'psivadurgaprasad88@gmail.com'
+        }
+      },
+      { 
+        name: 'Govind', 
+        role: 'Junior-Developer',
+        image: govindjunior,
+        social: {
+          github: 'https://github.com/govindgovind0987',
+          linkedin: 'https://www.linkedin.com',
+          email: 'mamidalagovind5599@gmail.com'
+        }
+      },
+      { 
+        name: 'G.H.S.Deepthi', 
+        role: 'Junior-Developer',
+        image: deepujunior,
+        social: {
+          github: 'https://github.com/deepthigopisetti',
+          linkedin: 'https://www.linkedin.com/in/deepthi-gopisetti-a49870292/',
+          email: 'deepugopisetti@gmail.com'
+        }
+      },
+    ]
+  };
+
+  const teamDetails = selectedBatch === "2024" ? batch2024Details : batch2025Details;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -134,6 +244,23 @@ const TeamDetails = () => {
         </button>
         
         <h1 className='teamdetails-heading'>Batch-{teamDetails.batch}</h1>
+        
+        {/* Batch Selector Buttons */}
+        <div className="teamdetails-batch-selector">
+          <button 
+            className={`teamdetails-batch-button ${selectedBatch === "2024" ? "active" : ""}`}
+            onClick={() => setSelectedBatch("2024")}
+          >
+            2024 BATCH
+          </button>
+          <button 
+            className={`teamdetails-batch-button ${selectedBatch === "2025" ? "active" : ""}`}
+            onClick={() => setSelectedBatch("2025")}
+          >
+            2025 BATCH
+          </button>
+        </div>
+        
         <h2 className="teamdetails-team-title" style={{marginTop : "-20px"}}>Team {teamDetails.teamNumber}</h2>
 
         {/* Team Lead Section */}

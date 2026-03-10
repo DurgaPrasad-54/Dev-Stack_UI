@@ -58,7 +58,6 @@ const StudentCertificates = () => {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
   const getAchievementLabel = (type) => {
     switch (type) {
       case 'champion': return 'Champion';
@@ -69,7 +68,6 @@ const StudentCertificates = () => {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
   const getAchievementColor = (type) => {
     switch (type) {
       case 'champion': return '#FFD700';
@@ -151,54 +149,54 @@ const StudentCertificates = () => {
     };
 
     return (
-      <div className="certificate-template" ref={certificateRef}>
+      <div className="student-certificate-template" ref={certificateRef}>
         {/* Left decorative corner */}
-        <div className="certificate-corner-left">
-          <div className="corner-shape corner-shape-1"></div>
-          <div className="corner-shape corner-shape-2"></div>
-          <div className="corner-shape corner-shape-3"></div>
-          <div className="corner-shape corner-shape-4"></div>
+        <div className="student-certificate-corner-left">
+          <div className="student-certificate-corner-shape student-certificate-corner-shape-1"></div>
+          <div className="student-certificate-corner-shape student-certificate-corner-shape-2"></div>
+          <div className="student-certificate-corner-shape student-certificate-corner-shape-3"></div>
+          <div className="student-certificate-corner-shape student-certificate-corner-shape-4"></div>
         </div>
 
         {/* Main content */}
-        <div className="certificate-content">
-          <h1 className="certificate-title">CERTIFICATE</h1>
-          <div className="certificate-subtitle-line"></div>
-          <h2 className="certificate-subtitle">OF {getAchievementTitle(certificate.achievementType)}</h2>
+        <div className="student-certificate-content">
+          <h1 className="student-certificate-title">CERTIFICATE</h1>
+          <div className="student-certificate-subtitle-line"></div>
+          <h2 className="student-certificate-subtitle">OF {getAchievementTitle(certificate.achievementType)}</h2>
           
-          <p className="presented-to">PROUDLY PRESENTED TO</p>
+          <p className="student-certificate-presented-to">PROUDLY PRESENTED TO</p>
           
-          <h3 className="recipient-name">{certificate.recipientName}</h3>
+          <h3 className="student-certificate-recipient-name">{certificate.recipientName}</h3>
           
-          <p className="certificate-description">
+          <p className="student-certificate-description">
             {getDescription(certificate)}
           </p>
 
-          <div className="certificate-signatures">
-            <div className="signature-block">
-              <div className="signature-line"></div>
-              <p className="signature-label">COORDINATOR</p>
+          <div className="student-certificate-signatures">
+            <div className="student-certificate-signature-block">
+              <div className="student-certificate-signature-line"></div>
+              <p className="student-certificate-signature-label">COORDINATOR</p>
             </div>
-            <div className="signature-block">
-              <div className="signature-line"></div>
-              <p className="signature-label">DIRECTOR</p>
+            <div className="student-certificate-signature-block">
+              <div className="student-certificate-signature-line"></div>
+              <p className="student-certificate-signature-label">DIRECTOR</p>
             </div>
           </div>
 
-          <div className="certificate-footer">
-            <p className="certificate-number">Certificate No: {certificate.certificateNumber}</p>
-            <p className="certificate-date">Issued: {formatDate(certificate.issuedAt)}</p>
+          <div className="student-certificate-footer">
+            <p className="student-certificate-number">Certificate No: {certificate.certificateNumber}</p>
+            <p className="student-certificate-date">Issued: {formatDate(certificate.issuedAt)}</p>
           </div>
         </div>
 
         {/* Right side badge - circular only */}
-        <div className="certificate-badge">
-          <div className="badge-outer">
-            <div className="badge-inner">
-              <div className="badge-stars-top">★★★★★</div>
-              <span className="badge-text-best">BEST</span>
-              <span className="badge-text-award">AWARD</span>
-              <div className="badge-stars-bottom">★★★★★</div>
+        <div className="student-certificate-badge">
+          <div className="student-certificate-badge-outer">
+            <div className="student-certificate-badge-inner">
+              <div className="student-certificate-badge-stars-top">★★★★★</div>
+              <span className="student-certificate-badge-text-best">BEST</span>
+              <span className="student-certificate-badge-text-award">AWARD</span>
+              <div className="student-certificate-badge-stars-bottom">★★★★★</div>
             </div>
           </div>
         </div>
@@ -208,9 +206,9 @@ const StudentCertificates = () => {
 
   if (loading) {
     return (
-      <div className="student-certificates">
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
+      <div className="student-certificate-container">
+        <div className="student-certificate-loading-container">
+          <div className="student-certificate-loading-spinner"></div>
           <p>Loading your certificates...</p>
         </div>
       </div>
@@ -218,26 +216,26 @@ const StudentCertificates = () => {
   }
 
   return (
-    <div className="student-certificates">
-      <div className="certificates-header">
+    <div className="student-certificate-container">
+      <div className="student-certificate-header">
         <h1><SafetyCertificateOutlined /> My Certificates</h1>
         <p>View and download your hackathon achievements</p>
       </div>
 
       {/* Search Dropdown */}
-      <div className="search-container" ref={searchRef}>
+      <div className="student-certificate-search-container" ref={searchRef}>
         <div 
-          className={`search-dropdown ${searchDropdownOpen ? 'open' : ''}`}
+          className={`student-certificate-search-dropdown ${searchDropdownOpen ? 'open' : ''}`}
           onClick={() => setSearchDropdownOpen(!searchDropdownOpen)}
         >
-          <SearchOutlined className="search-icon" />
-          <span className="search-text">
+          <SearchOutlined className="student-certificate-search-icon" />
+          <span className="student-certificate-search-text">
             {searchQuery || 'Select Hackathon'}
           </span>
         </div>
         {searchDropdownOpen && (
-          <div className="search-dropdown-menu">
-            <div className="dropdown-search-input">
+          <div className="student-certificate-search-dropdown-menu">
+            <div className="student-certificate-dropdown-search-input">
               <input
                 type="text"
                 placeholder="Search..."
@@ -247,7 +245,7 @@ const StudentCertificates = () => {
               />
             </div>
             <div 
-              className="dropdown-item"
+              className="student-certificate-dropdown-item"
               onClick={() => { setSearchQuery(''); setSearchDropdownOpen(false); }}
             >
               All Hackathons
@@ -257,7 +255,7 @@ const StudentCertificates = () => {
               .map(name => (
               <div 
                 key={name}
-                className={`dropdown-item ${searchQuery === name ? 'selected' : ''}`}
+                className={`student-certificate-dropdown-item ${searchQuery === name ? 'selected' : ''}`}
                 onClick={() => { setSearchQuery(name); setSearchDropdownOpen(false); }}
               >
                 {name}
@@ -268,52 +266,52 @@ const StudentCertificates = () => {
       </div>
 
       {certificates.length === 0 ? (
-        <div className="no-certificates">
-          <FileProtectOutlined className="no-cert-icon" />
+        <div className="student-certificate-no-certificates">
+          <FileProtectOutlined className="student-certificate-no-cert-icon" />
           <h3>No Certificates Yet</h3>
           <p>Participate in hackathons and earn your certificates!</p>
         </div>
       ) : (
-        <div className="certificates-container">
-          <div className="certificates-grid">
+        <div className="student-certificate-grid-container">
+          <div className="student-certificate-grid">
             {certificates
               .filter(cert => cert.hackathonName?.toLowerCase().includes(searchQuery.toLowerCase()))
               .map((cert) => (
-              <div key={cert._id} className="certificate-card">
+              <div key={cert._id} className="student-certificate-card">
                 {/* Mini Certificate Preview - Looks like actual certificate */}
-                <div className="certificate-preview" onClick={() => setPreviewCertificate(cert)}>
-                  <div className="mini-certificate">
-                    <div className="mini-corner-left"></div>
-                    <div className="mini-content">
-                      <div className="mini-title">CERTIFICATE</div>
-                      <div className="mini-subtitle">OF {cert.achievementType === 'champion' ? 'CHAMPIONSHIP' : cert.achievementType === 'runner-up' ? 'RUNNER UP' : cert.achievementType === 'third-place' ? 'THIRD PLACE' : 'PARTICIPATION'}</div>
-                      <div className="mini-presented">PROUDLY PRESENTED TO</div>
-                      <div className="mini-name">{cert.recipientName}</div>
-                      <div className="mini-hackathon">{cert.hackathonName}</div>
+                <div className="student-certificate-preview" onClick={() => setPreviewCertificate(cert)}>
+                  <div className="student-certificate-mini">
+                    <div className="student-certificate-mini-corner-left"></div>
+                    <div className="student-certificate-mini-content">
+                      <div className="student-certificate-mini-title">CERTIFICATE</div>
+                      <div className="student-certificate-mini-subtitle">OF {cert.achievementType === 'champion' ? 'CHAMPIONSHIP' : cert.achievementType === 'runner-up' ? 'RUNNER UP' : cert.achievementType === 'third-place' ? 'THIRD PLACE' : 'PARTICIPATION'}</div>
+                      <div className="student-certificate-mini-presented">PROUDLY PRESENTED TO</div>
+                      <div className="student-certificate-mini-name">{cert.recipientName}</div>
+                      <div className="student-certificate-mini-hackathon">{cert.hackathonName}</div>
                     </div>
-                    <div className="mini-badge-circle">
+                    <div className="student-certificate-mini-badge-circle">
                       <span>★</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Card Info */}
-                <div className="card-info">
-                  <h3 className="hackathon-name">{cert.hackathonName}</h3>
-                  <p className="team-name">Team: {cert.teamName}</p>
+                <div className="student-certificate-card-info">
+                  <h3 className="student-certificate-hackathon-name">{cert.hackathonName}</h3>
+                  <p className="student-certificate-team-name">Team: {cert.teamName}</p>
                 </div>
 
                 {/* Action Buttons - Plain */}
-                <div className="card-actions">
+                <div className="student-certificate-card-actions">
                   <button 
-                    className="btn-plain"
+                    className="student-certificate-btn-plain"
                     onClick={() => setPreviewCertificate(cert)}
                   >
                     <EyeOutlined /> View
                   </button>
-                  <span className="action-divider">|</span>
+                  <span className="student-certificate-action-divider">|</span>
                   <button 
-                    className="btn-plain"
+                    className="student-certificate-btn-plain"
                     onClick={() => downloadCertificatePDF(cert)}
                   >
                     <DownloadOutlined /> Download
@@ -327,13 +325,15 @@ const StudentCertificates = () => {
 
       {/* Certificate Preview Modal */}
       {previewCertificate && (
-        <div className="certificate-modal-overlay" onClick={() => setPreviewCertificate(null)}>
-          <div className="certificate-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setPreviewCertificate(null)}>×</button>
-            <CertificateTemplate certificate={previewCertificate} />
-            <div className="modal-actions">
+        <div className="student-certificate-modal-overlay" onClick={() => setPreviewCertificate(null)}>
+          <div className="student-certificate-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="student-certificate-modal-close" onClick={() => setPreviewCertificate(null)}>×</button>
+            <div className="student-certificate-scale-wrapper">
+              <CertificateTemplate certificate={previewCertificate} />
+            </div>
+            <div className="student-certificate-modal-actions">
               <button 
-                className="btn btn-download-modal"
+                className="student-certificate-btn-download-modal"
                 onClick={() => downloadCertificatePDF(previewCertificate)}
               >
                 <DownloadOutlined /> Download PDF

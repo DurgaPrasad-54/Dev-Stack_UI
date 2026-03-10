@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
-// eslint-disable-next-line no-unused-vars
-import { FaAngleDown } from 'react-icons/fa';
 import '../../Student/StudentHeader/StudentHeader.css';
 import userheader from '../../../assests/headerlogo.png';
 import notification from '../../../assests/notificationicon.png';
-// eslint-disable-next-line no-unused-vars
-import chart from '../../../assests/messageicon.png';
 import profile from '../../../assests/userprofileicon.png';
 import config from '../../../config';
 import { GrGallery } from "react-icons/gr";
@@ -262,7 +258,6 @@ const CoordinatorNavbar = () => {
               <li><a href="/coordinator/hackattendance">Attendance</a></li>
               <li><a href="/coordinator/schedule">Schedule</a></li>
               <li><a href="/coordinator/roomallocation">Room Allocation</a></li>
-              <li><a href="/coordinator/resource">Resources</a></li>
               <li><a href="/coordinator/allteamsprogress">Teams Progress</a></li>
               <li><a href="/coordinator/hacksubmission">Hackathon Submission</a></li>
               <li><a href="/coordinator/assignmentor">Assign Mentors</a></li>

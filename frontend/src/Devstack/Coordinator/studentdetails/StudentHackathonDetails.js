@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   User, Search, ChevronDown, Calendar, Users, FileText, 
   Award, Star, GitBranch, Mail, Phone, ExternalLink,
@@ -37,8 +37,7 @@ export default function StudentHackathonDetails() {
   // Fetch branches on mount
   useEffect(() => {
     fetchBranches();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchBranches]);
 
   // Fetch students when branch changes
   useEffect(() => {
@@ -51,7 +50,6 @@ export default function StudentHackathonDetails() {
     setSelectedStudent(null);
     setSelectedHackathon('');
     setDetails(null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBranch]);
 
   // Filter students based on search
@@ -75,10 +73,9 @@ export default function StudentHackathonDetails() {
     } else {
       setDetails(null);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStudent, selectedHackathon]);
 
-  const fetchBranches = async () => {
+  const fetchBranches = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const params = new URLSearchParams();
@@ -95,7 +92,7 @@ export default function StudentHackathonDetails() {
     } catch (error) {
       console.error('Error fetching branches:', error);
     }
-  };
+  }, [coordinatorCollege, coordinatorYear]);
 
   const fetchStudentsByBranch = async () => {
     setStudentsLoading(true);

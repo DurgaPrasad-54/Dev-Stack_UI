@@ -7,7 +7,6 @@ import config from '../config';
 
 const ChatApp = () => {
     const [users, setUsers] = useState([]);
-    // eslint-disable-next-line no-unused-vars
     const [chats, setChats] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
     const [message, setMessage] = useState('');
@@ -18,8 +17,6 @@ const ChatApp = () => {
     const socketRef = useRef(null);
     const messagesEndRef = useRef(null);
     const token = localStorage.getItem('token');
-    // eslint-disable-next-line no-unused-vars
-    const [shouldFetchChats, setShouldFetchChats] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [updated, setUpdated] = useState(null);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
@@ -94,14 +91,12 @@ const ChatApp = () => {
                 socketRef.current = null;
             }
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
     useEffect(() => {
         if (updated) {
             fetchChats();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updated]);
 
     const fetchUsers = async () => {
@@ -117,7 +112,6 @@ const ChatApp = () => {
 
     useEffect(() => {
         fetchChats();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchChats = async () => {
@@ -154,7 +148,6 @@ const ChatApp = () => {
 
     useEffect(() => {
         fetchInitialData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
     const selectUser = async (user) => {

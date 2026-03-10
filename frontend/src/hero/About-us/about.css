@@ -43,13 +43,13 @@
     }
 
     .about-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-weight: bold;
         margin-bottom: 0.3rem;
     }
 
     .about-description {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         line-height: 1.6;
         color: #020202;
         text-align: justify;
@@ -72,7 +72,7 @@
     }
 
     .about-title {
-        font-size: 1.75rem;
+        font-size: 2rem;
         margin-bottom: 0.2rem;
     }
 

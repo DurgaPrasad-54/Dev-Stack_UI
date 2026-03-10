@@ -21,11 +21,7 @@ const AboutUs = () => {
             <h2 className="about-title">About Us</h2>
           </div>
           <p className="about-description">
-            Dev-Orbit is a student-centric initiative at Kiet College dedicated to fostering 
-            innovation and creativity. Our program provides a platform for students to explore their 
-            passions, develop essential skills, and collaborate with like-minded individuals. Through 
-            mentorship, workshops, and hands-on projects, we empower students to become future 
-            leaders and innovators. Join us in creating a vibrant community of learners and problem-solvers.
+           Dev-stack is a student-driven community at KIET College, fostering innovation through mentorship and collaborative projects. It is a combination of Dev-orbit and HACKATHON Platform . Hackathon platform extends this ecosystem as a comprehensive hackathon management platform, featuring role-based access for students, mentors, and coordinators. It provides end-to-end hackathon tracking—from team formation and progress monitoring to accessing completed, upcoming, and past events.
           </p>
         </article>
       </div>

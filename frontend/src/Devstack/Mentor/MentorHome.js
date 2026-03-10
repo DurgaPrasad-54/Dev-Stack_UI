@@ -11,9 +11,7 @@ import {
   TeamOutlined,
   FileTextOutlined,
   BarChartOutlined,
-  FormOutlined,
-  // eslint-disable-next-line no-unused-vars
-  LoadingOutlined
+  FormOutlined
 } from '@ant-design/icons';
 
 const MentorHome = () => {

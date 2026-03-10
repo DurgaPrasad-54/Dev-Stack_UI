@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, message } from 'antd';
+import { message } from 'antd';
 import io from 'socket.io-client';
 import config from '../../config';
 import './hackathonnotification.css';
 import { toast, ToastContainer } from "react-toastify";
-
-// eslint-disable-next-line no-unused-vars
-const { Title } = Typography;
 
 const HackathonNotifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -15,6 +12,35 @@ const HackathonNotifications = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        if (!token) {
+          message.error('No authentication token found');
+          setLoading(false);
+          return;
+        }
+
+        const response = await fetch(`${config.backendUrl}/hacknotifications/notification`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Fetched notifications:', data);
+          setNotifications(data);
+        } else {
+          const err = await response.json();
+          console.error('Error response:', err);
+          message.error(err.message || 'Failed to fetch notifications');
+        }
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+        message.error('Error fetching notifications');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     // Mark all as read when page loads, then fetch notifications
     const markAsReadAndFetch = async () => {
       try {
@@ -77,37 +103,7 @@ const HackathonNotifications = () => {
       console.log('Cleaning up socket connection...');
       socket.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
-
-  const fetchNotifications = async () => {
-    try {
-      if (!token) {
-        message.error('No authentication token found');
-        setLoading(false);
-        return;
-      }
-
-      const response = await fetch(`${config.backendUrl}/hacknotifications/notification`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Fetched notifications:', data);
-        setNotifications(data);
-      } else {
-        const err = await response.json();
-        console.error('Error response:', err);
-        message.error(err.message || 'Failed to fetch notifications');
-      }
-    } catch (error) {
-      console.error('Error fetching notifications:', error);
-      message.error('Error fetching notifications');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const markNotificationAsRead = async (notificationId) => {
     try {

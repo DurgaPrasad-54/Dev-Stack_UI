@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Check, X, AlertCircle, Info } from 'lucide-react';
 import config from '../../../config';
+import './attendance.css';
 
 export default function HackathonAttendanceManagement() {
   const API_BASE = config.backendUrl;
@@ -11,7 +12,6 @@ export default function HackathonAttendanceManagement() {
   const [sessions, setSessions] = useState([]);
   const [branchFilter, setBranchFilter] = useState('');
   const [yearFilter, setYearFilter] = useState('');
-  const [searchText, setSearchText] = useState('');
   const [session, setSession] = useState('');
   const [customSession, setCustomSession] = useState('');
   const [showCustomSession, setShowCustomSession] = useState(false);
@@ -23,6 +23,7 @@ export default function HackathonAttendanceManagement() {
   const [successMessage, setSuccessMessage] = useState('');
   const [attendance, setAttendance] = useState({});
   const [remarks, setRemarks] = useState({});
+  const [searchText, setSearchText] = useState('');
 
   // Get coordinator details from localStorage
   const coordinatorCollege = localStorage.getItem('coordinatordetails');
@@ -44,7 +45,6 @@ export default function HackathonAttendanceManagement() {
         setHackathons(filteredHackathons);
       })
       .catch(err => setError(String(err)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinatorCollege, coordinatorYear]);
 
   useEffect(() => {
@@ -89,7 +89,6 @@ export default function HackathonAttendanceManagement() {
       })
       .catch(err => setError(String(err)))
       .finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, coordinatorCollege, coordinatorYear]);
 
   useEffect(() => {
@@ -116,7 +115,6 @@ export default function HackathonAttendanceManagement() {
         setSessions([]);
       })
       .finally(() => setLoadingSessions(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, branchFilter]);
 
   const handleSessionChange = async (sessionName) => {
@@ -398,8 +396,8 @@ export default function HackathonAttendanceManagement() {
   const selectedHackathonData = hackathons.find(h => (h._id || h.id) === selectedHackathon);
 
   return (
-    <div style={{ padding: 24, maxWidth: 1400, margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif', background: '#f8f9fa', minHeight: '100vh',paddingTop: '90px' }}>
-      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
+    <div className="attendance-container" style={{ padding: 24, maxWidth: 1400, margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif', background: '#f8f9fa', minHeight: '100vh' }}>
+      <div className="page-header" style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: 32, fontWeight: 700, color: '#1f2937' }}>Attendance Management</h1>
           <p style={{ margin: '8px 0 0', color: '#6b7280' }}>Track student attendance for hackathons - Filtered by {coordinatorCollege || 'your college'} {coordinatorYear && `(Year ${coordinatorYear})`}</p>
@@ -604,7 +602,7 @@ export default function HackathonAttendanceManagement() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <div className="button-group" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <button 
                 onClick={() => { setSearchText(''); setYearFilter(''); }}
                 style={{ padding: '8px 16px', borderRadius: 8, border: '1px solid #d1d5db', background: 'white', cursor: 'pointer', fontSize: 14 }}
@@ -626,18 +624,18 @@ export default function HackathonAttendanceManagement() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 24 }}>
-            <div style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
-              <div style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Total Students</div>
-              <div style={{ fontSize: 32, fontWeight: 700, color: '#1f2937' }}>{stats.total}</div>
+          <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 24 }}>
+            <div className="stat-box" style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <div className="stat-label" style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Total Students</div>
+              <div className="stat-value" style={{ fontSize: 32, fontWeight: 700, color: '#1f2937' }}>{stats.total}</div>
             </div>
-            <div style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #10b981' }}>
-              <div style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Present</div>
-              <div style={{ fontSize: 32, fontWeight: 700, color: '#10b981' }}>{stats.present}</div>
+            <div className="stat-box" style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #10b981' }}>
+              <div className="stat-label" style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Present</div>
+              <div className="stat-value" style={{ fontSize: 32, fontWeight: 700, color: '#10b981' }}>{stats.present}</div>
             </div>
-            <div style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #ef4444' }}>
-              <div style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Absent</div>
-              <div style={{ fontSize: 32, fontWeight: 700, color: '#ef4444' }}>{stats.absent}</div>
+            <div className="stat-box" style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #ef4444' }}>
+              <div className="stat-label" style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Absent</div>
+              <div className="stat-value" style={{ fontSize: 32, fontWeight: 700, color: '#ef4444' }}>{stats.absent}</div>
             </div>
           </div>
 
@@ -669,10 +667,10 @@ export default function HackathonAttendanceManagement() {
             ) : loadingSessionData ? (
               <div style={{ padding: 40, textAlign: 'center', color: '#6b7280' }}>Loading session data...</div>
             ) : filteredStudents.length === 0 ? (
-              <div style={{ padding: 40, textAlign: 'center', color: '#6b7280' }}>No students found for this branch matching your college/year</div>
+              <div className="empty-state" style={{ padding: 40, textAlign: 'center', color: '#6b7280' }}>No students found for this branch matching your college/year</div>
             ) : (
-              <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <div className="table-container" style={{ maxHeight: '500px', overflowY: 'auto', overflowX: 'auto' }}>
+                <table className="attendance-table" style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
                   <thead style={{ background: '#f9fafb', position: 'sticky', top: 0, zIndex: 1 }}>
                     <tr>
                       <th style={{ padding: 16, textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase' }}>S.No</th>
@@ -697,11 +695,11 @@ export default function HackathonAttendanceManagement() {
                             <td style={{ padding: 16, color: '#6b7280' }}>{student.rollNo}</td>
                             <td style={{ padding: 16, color: '#6b7280' }}>{student.year || student.currentYear}</td>
                             <td style={{ padding: 16 }}>
-                              <div style={{ display: 'flex', justifyContent: 'center', gap: 8, flexWrap: 'wrap' }}>
+                              <div className="attendance-buttons" style={{ display: 'flex', justifyContent: 'center', gap: 8, flexWrap: 'wrap' }}>
                                 <button
                                   onClick={() => setStudentStatus(student._id, 'present')}
                                   style={{
-                                    padding: '8px 20px',
+                                    padding: '8px 16px',
                                     borderRadius: 8,
                                     border: status === 'present' ? 'none' : '1px solid #d1d5db',
                                     background: status === 'present' ? '#10b981' : 'white',
@@ -711,7 +709,8 @@ export default function HackathonAttendanceManagement() {
                                     fontWeight: 600,
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: 6
+                                    gap: 6,
+                                    whiteSpace: 'nowrap'
                                   }}
                                 >
                                   {status === 'present' && <Check size={16} />}
@@ -720,7 +719,7 @@ export default function HackathonAttendanceManagement() {
                                 <button
                                   onClick={() => setStudentStatus(student._id, 'absent')}
                                   style={{
-                                    padding: '8px 20px',
+                                    padding: '8px 16px',
                                     borderRadius: 8,
                                     border: status === 'absent' ? 'none' : '1px solid #d1d5db',
                                     background: status === 'absent' ? '#ef4444' : 'white',
@@ -730,7 +729,8 @@ export default function HackathonAttendanceManagement() {
                                     fontWeight: 600,
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: 6
+                                    gap: 6,
+                                    whiteSpace: 'nowrap'
                                   }}
                                 >
                                   {status === 'absent' && <X size={16} />}
@@ -740,10 +740,10 @@ export default function HackathonAttendanceManagement() {
                             </td>
                           </tr>
                           {isAbsent && (
-                            <tr style={{ borderBottom: '1px solid #f3f4f6', background: '#fef2f2' }}>
+                            <tr className="remarks-row" style={{ borderBottom: '1px solid #f3f4f6', background: '#fef2f2' }}>
                               <td colSpan="5" style={{ padding: '12px 16px' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                  <label style={{ fontSize: 13, fontWeight: 600, color: '#991b1b', minWidth: 80 }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                                  <label style={{ fontSize: 13, fontWeight: 600, color: '#991b1b', minWidth: 60 }}>
                                     Remarks:
                                   </label>
                                   <input
@@ -753,6 +753,7 @@ export default function HackathonAttendanceManagement() {
                                     placeholder="Enter reason for absence..."
                                     style={{
                                       flex: 1,
+                                      minWidth: 150,
                                       padding: '8px 12px',
                                       borderRadius: 6,
                                       border: '1px solid #fca5a5',
@@ -774,7 +775,7 @@ export default function HackathonAttendanceManagement() {
           </div>
 
           {filteredStudents.length > 0 && (
-            <div style={{ marginTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+            <div className="footer-actions" style={{ marginTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
               <div style={{ fontSize: 14, color: '#6b7280' }}>
                 Total: <strong>{stats.total}</strong> | Present: <strong style={{ color: '#10b981' }}>{stats.present}</strong> | Absent: <strong style={{ color: '#ef4444' }}>{stats.absent}</strong>
               </div>

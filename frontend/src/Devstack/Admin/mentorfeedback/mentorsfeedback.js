@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Filter, Star, TrendingUp, Users, Award, ChevronRight, Mail, User } from 'lucide-react';
-import './mentorsfeedback.css';
 import config from '../../../config';
+import './mentorsfeedback.css';
 
 // API Base URLs
-// eslint-disable-next-line no-unused-vars
-const API_BASE = `${config.backendUrl}/studenthackteam`;
 const API_BASEs = `${config.backendUrl}/hackmentorfeedback`;
 const API_HACKATHON = `${config.backendUrl}/hackathon`;
 
@@ -40,14 +38,12 @@ export default function MentorFeedbackDashboard() {
       fetchAllFeedbacks();
       setSelectedMentor(null);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedHackathon]);
+  }, [selectedHackathon, fetchAllFeedbacks]);
 
   // Apply filters whenever filter values or feedbacks change
   useEffect(() => {
     applyFilters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [feedbacks, searchMentor, selectedBranch]);
+  }, [feedbacks, searchMentor, selectedBranch, applyFilters]);
 
   const fetchHackathons = async () => {
     try {
@@ -66,7 +62,7 @@ export default function MentorFeedbackDashboard() {
     }
   };
 
-  const fetchAllFeedbacks = async () => {
+  const fetchAllFeedbacks = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(`${API_BASEs}/mentor/all/feedback?hackathonId=${selectedHackathon}`);
@@ -115,9 +111,9 @@ export default function MentorFeedbackDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedHackathon]);
 
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = [...mentorsList];
 
     // Filter by mentor name or email
@@ -137,7 +133,7 @@ export default function MentorFeedbackDashboard() {
     }
 
     setFilteredMentors(filtered);
-  };
+  }, [mentorsList, searchMentor, selectedBranch]);
 
   const renderStars = (rating, size = 16) => {
     const numericRating = typeof rating === 'string' ? parseFloat(rating) : rating;
@@ -185,16 +181,6 @@ export default function MentorFeedbackDashboard() {
     setSearchMentor('');
     setSelectedBranch('all');
     setSelectedMentor(null);
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  const getStatusColor = (status) => {
-    switch(status) {
-      case 'ongoing': return 'text-green-600 bg-green-100';
-      case 'upcoming': return 'text-blue-600 bg-blue-100';
-      case 'completed': return 'text-gray-600 bg-gray-100';
-      default: return 'text-gray-600 bg-gray-100';
-    }
   };
 
   const selectedHackathonData = hackathons.find(h => h._id === selectedHackathon);

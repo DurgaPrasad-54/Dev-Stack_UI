@@ -40,7 +40,6 @@ const ProfilePage = () => {
       localStorage.removeItem('token');
       navigate('/login');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   const fetchProfileData = async (token, role) => {

@@ -94,7 +94,6 @@ function AddEditExam() {
   }, []);
 
   // Better column span calculation based on screen size
-  // eslint-disable-next-line no-unused-vars
   const getColSpan = () => {
     if (windowWidth < 576) {
       return 24; // Full width on mobile
@@ -154,7 +153,6 @@ function AddEditExam() {
     if (params.id) {
       getExamData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   const deleteQuestion = async (questionId) => {

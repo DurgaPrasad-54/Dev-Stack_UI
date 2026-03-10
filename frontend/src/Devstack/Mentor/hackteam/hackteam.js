@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Users, Trophy, Github, ExternalLink, AlertCircle, Linkedin, Mail } from 'lucide-react';
+import config from '../../../config';
 import { useHackathon } from '../../Student/context/HackathonContext';
 import './hackteam.css';
-import config from '../../../config';
 
 const MentorHackathonTeams = () => {
   const [hackathons, setHackathons] = useState([]);
@@ -169,7 +169,6 @@ const MentorHackathonTeams = () => {
       }
     };
     initData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Fetch teams when hackathon changes
@@ -177,7 +176,6 @@ const MentorHackathonTeams = () => {
     if (selectedHackathon) {
       fetchMyTeams();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon]);
 
   // Real-time updates every 30 seconds
@@ -189,7 +187,6 @@ const MentorHackathonTeams = () => {
     }, 30000);
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon]);
 
   // Auto-select first approved hackathon when hackathons or mentor request map changes
@@ -205,7 +202,6 @@ const MentorHackathonTeams = () => {
         setMyTeams([]);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hackathons, mentorRequestsMap]);
 
   // Periodically refresh mentor request statuses
@@ -215,7 +211,6 @@ const MentorHackathonTeams = () => {
     }, 30000);
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filteredMyTeams = myTeams.filter(team =>

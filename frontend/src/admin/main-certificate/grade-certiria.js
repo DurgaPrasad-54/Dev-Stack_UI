@@ -93,7 +93,6 @@ const GradeCriteriaComponent = () => {
   useEffect(() => {
     fetchGradeCriteria();
     fetchGeneratedPrograms();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const showCreateModal = () => {

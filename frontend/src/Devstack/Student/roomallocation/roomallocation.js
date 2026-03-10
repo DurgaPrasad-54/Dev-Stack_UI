@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHackathon } from '../context/HackathonContext';
-import config from '../../../config';
 
-const API_BASE = `${config.backendUrl}/roomallocation`;
+const API_BASE = 'http://localhost:5000/roomallocation';
 
 const RoomAllocationTable = () => {
   const [scheduleData, setScheduleData] = useState(null);
@@ -15,10 +14,9 @@ const RoomAllocationTable = () => {
 
   useEffect(() => {
     fetchApprovedSchedule();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentHackathonId]);
+  }, [fetchApprovedSchedule]);
 
-  const fetchApprovedSchedule = async () => {
+  const fetchApprovedSchedule = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -46,7 +44,7 @@ const RoomAllocationTable = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentHackathonId]);
 
   const getStatistics = () => {
     if (!scheduleData || !scheduleData.allocations) return { totalRooms: 0, uniqueMentors: 0, uniqueCampuses: 0 };
@@ -100,7 +98,6 @@ const RoomAllocationTable = () => {
     );
   }
 
-  // eslint-disable-next-line no-unused-vars
   const stats = getStatistics();
 
   return (

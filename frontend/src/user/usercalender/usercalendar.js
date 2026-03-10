@@ -175,7 +175,6 @@ const CalendarUser = () => {
     setViewMode('month'); // Switch back to month view after selecting a month
   };
 
-  // eslint-disable-next-line no-unused-vars
   const handleDelete = async () => {
     if (selectedDate) {
       const formattedDate = selectedDate.toLocaleDateString('en-GB');

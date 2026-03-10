@@ -23,7 +23,6 @@ const CoordinatorSchedule = () => {
   // Fetch all hackathons on mount
   useEffect(() => {
     fetchHackathons();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Close dropdown when clicking outside
@@ -203,25 +202,37 @@ const CoordinatorSchedule = () => {
       <div className="coordinator-schedule-status-filters">
         <button 
           className={`coordinator-schedule-status-btn ${statusFilter === 'all' ? 'active' : ''}`}
-          onClick={() => setStatusFilter('all')}
+          onClick={() => {
+            setStatusFilter('all');
+            setSearchQuery('');
+          }}
         >
           All <span className="coordinator-schedule-status-count">{statusCounts.all}</span>
         </button>
         <button 
           className={`coordinator-schedule-status-btn upcoming ${statusFilter === 'upcoming' ? 'active' : ''}`}
-          onClick={() => setStatusFilter('upcoming')}
+          onClick={() => {
+            setStatusFilter('upcoming');
+            setSearchQuery('');
+          }}
         >
           Upcoming <span className="coordinator-schedule-status-count">{statusCounts.upcoming}</span>
         </button>
         <button 
           className={`coordinator-schedule-status-btn ongoing ${statusFilter === 'ongoing' ? 'active' : ''}`}
-          onClick={() => setStatusFilter('ongoing')}
+          onClick={() => {
+            setStatusFilter('ongoing');
+            setSearchQuery('');
+          }}
         >
           Ongoing <span className="coordinator-schedule-status-count">{statusCounts.ongoing}</span>
         </button>
         <button 
           className={`coordinator-schedule-status-btn completed ${statusFilter === 'completed' ? 'active' : ''}`}
-          onClick={() => setStatusFilter('completed')}
+          onClick={() => {
+            setStatusFilter('completed');
+            setSearchQuery('');
+          }}
         >
           Completed <span className="coordinator-schedule-status-count">{statusCounts.completed}</span>
         </button>

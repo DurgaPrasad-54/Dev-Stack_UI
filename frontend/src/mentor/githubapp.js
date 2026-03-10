@@ -81,7 +81,7 @@ const Githubapp = () => {
   };
 
   const extractGithubUsername = (url) => {
-    const match = url.match(/https:\/\/github\.com\/([^/]+)/);
+    const match = url.match(/https:\/\/github\.com\/([^\/]+)/);
     return match ? match[1] : url;
   };
 

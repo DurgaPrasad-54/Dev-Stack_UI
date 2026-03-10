@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Download, Calendar, Users, FileText, AlertCircle, Search, Filter } from 'lucide-react';
 import config from '../../../config';
+import './attendance.css';
 
 export default function AttendanceHistoryViewer() {
   const API_BASE = config.backendUrl;
@@ -36,7 +37,6 @@ export default function AttendanceHistoryViewer() {
         setHackathons(filteredHackathons);
       })
       .catch(err => setError(String(err)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinatorCollege, coordinatorYear]);
 
   useEffect(() => {
@@ -64,7 +64,6 @@ export default function AttendanceHistoryViewer() {
         console.error('Error fetching branches:', err);
         setBranches([]);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon]);
 
   useEffect(() => {
@@ -91,7 +90,6 @@ export default function AttendanceHistoryViewer() {
         console.error('Error fetching sessions:', err);
         setSessions([]);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, selectedBranch]);
 
   useEffect(() => {
@@ -138,7 +136,6 @@ export default function AttendanceHistoryViewer() {
         setAttendanceData(null);
       })
       .finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHackathon, selectedBranch, selectedSession]);
 
   const selectedHackathonData = hackathons.find(h => (h._id || h.id) === selectedHackathon);
@@ -421,8 +418,8 @@ export default function AttendanceHistoryViewer() {
   };
 
   return (
-    <div style={{ padding: 24, maxWidth: 1400, margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif', background: '#f8f9fa', minHeight: '100vh' }}>
-      <div style={{ marginBottom: 32 }}>
+    <div className="attendance-container" style={{ padding: 24, maxWidth: 1400, margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif', background: '#f8f9fa', minHeight: '100vh' }}>
+      <div className="page-header" style={{ marginBottom: 32 }}>
         <h1 style={{ margin: 0, fontSize: 32, fontWeight: 700, color: '#1f2937', display: 'flex', alignItems: 'center', gap: 12 }}>
           <FileText size={32} />
           Attendance History
@@ -432,13 +429,13 @@ export default function AttendanceHistoryViewer() {
         </p>
       </div>
 
-      <div style={{ background: 'white', padding: 24, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', marginBottom: 24 }}>
+      <div className="attendance-card" style={{ background: 'white', padding: 24, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', marginBottom: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
           <Filter size={20} style={{ color: '#6366f1' }} />
           <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>Filters</h3>
         </div>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 16 }}>
+        <div className="filter-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 16 }}>
           <div>
             <label style={{ display: 'block', marginBottom: 8, fontWeight: 600, color: '#374151' }}>Hackathon *</label>
             <select 
@@ -503,25 +500,25 @@ export default function AttendanceHistoryViewer() {
 
       {attendanceData && (
         <>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 24 }}>
-            <div style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
-              <div style={{ fontSize: 14, color: '#6b7280', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 24 }}>
+            <div className="stat-box" style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <div className="stat-label" style={{ fontSize: 14, color: '#6b7280', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Users size={16} />
                 Total Students
               </div>
-              <div style={{ fontSize: 32, fontWeight: 700, color: '#1f2937' }}>{stats.total}</div>
+              <div className="stat-value" style={{ fontSize: 32, fontWeight: 700, color: '#1f2937' }}>{stats.total}</div>
             </div>
-            <div style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #10b981' }}>
-              <div style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Present</div>
-              <div style={{ fontSize: 32, fontWeight: 700, color: '#10b981' }}>{stats.present}</div>
+            <div className="stat-box" style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #10b981' }}>
+              <div className="stat-label" style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Present</div>
+              <div className="stat-value" style={{ fontSize: 32, fontWeight: 700, color: '#10b981' }}>{stats.present}</div>
             </div>
-            <div style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #ef4444' }}>
-              <div style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Absent</div>
-              <div style={{ fontSize: 32, fontWeight: 700, color: '#ef4444' }}>{stats.absent}</div>
+            <div className="stat-box" style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #ef4444' }}>
+              <div className="stat-label" style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Absent</div>
+              <div className="stat-value" style={{ fontSize: 32, fontWeight: 700, color: '#ef4444' }}>{stats.absent}</div>
             </div>
-            <div style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #6366f1' }}>
-              <div style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Attendance %</div>
-              <div style={{ fontSize: 32, fontWeight: 700, color: '#6366f1' }}>{stats.presentPercent}%</div>
+            <div className="stat-box" style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderLeft: '4px solid #6366f1' }}>
+              <div className="stat-label" style={{ fontSize: 14, color: '#6b7280', marginBottom: 4 }}>Attendance %</div>
+              <div className="stat-value" style={{ fontSize: 32, fontWeight: 700, color: '#6366f1' }}>{stats.presentPercent}%</div>
             </div>
           </div>
 
@@ -533,18 +530,19 @@ export default function AttendanceHistoryViewer() {
                   {attendanceData.branch} - {attendanceData.session}
                 </p>
               </div>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <div style={{ position: 'relative' }}>
+              <div className="search-container" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <div className="search-input-wrapper" style={{ position: 'relative' }}>
                   <Search size={18} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }} />
                   <input
                     type="text"
                     value={searchText}
                     onChange={e => setSearchText(e.target.value)}
                     placeholder="Search students..."
-                    style={{ paddingLeft: 40, padding: '10px 16px', borderRadius: 8, border: '1px solid #d1d5db', fontSize: 14, minWidth: 250 }}
+                    style={{ paddingLeft: 40, padding: '10px 16px', borderRadius: 8, border: '1px solid #d1d5db', fontSize: 14, width: '100%', minWidth: 200 }}
                   />
                 </div>
                 <button
+                  className="download-btn"
                   onClick={downloadPDF}
                   style={{
                     padding: '10px 20px',
@@ -570,15 +568,15 @@ export default function AttendanceHistoryViewer() {
             {loading ? (
               <div style={{ padding: 40, textAlign: 'center', color: '#6b7280' }}>Loading attendance data...</div>
             ) : error ? (
-              <div style={{ padding: 40, textAlign: 'center' }}>
+              <div className="empty-state" style={{ padding: 40, textAlign: 'center' }}>
                 <AlertCircle size={48} style={{ color: '#ef4444', marginBottom: 16 }} />
                 <p style={{ color: '#991b1b', margin: 0 }}>{error}</p>
               </div>
             ) : filteredStudents.length === 0 ? (
-              <div style={{ padding: 40, textAlign: 'center', color: '#6b7280' }}>No students found</div>
+              <div className="empty-state" style={{ padding: 40, textAlign: 'center', color: '#6b7280' }}>No students found</div>
             ) : (
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <div className="table-container" style={{ overflowX: 'auto' }}>
+                <table className="attendance-table" style={{ width: '100%', borderCollapse: 'collapse', minWidth: '700px' }}>
                   <thead style={{ background: '#f9fafb' }}>
                     <tr>
                       <th style={{ padding: 16, textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase' }}>S.No</th>

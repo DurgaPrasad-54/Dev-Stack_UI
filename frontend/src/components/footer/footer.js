@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../footer/footer.css';
-import Logo from '../../assests/heroheadericon.png';
+import Logo from '../../assests/Devstack_logo.png';
 import mail from '../../assests/locationmailicon.png';
 import { RxInstagramLogo } from "react-icons/rx";
 import { FaYoutube } from "react-icons/fa6";
@@ -26,7 +26,7 @@ function Footer() {
               <li><a href='https://www.linkedin.com/company/khub-kiet/'><FaLinkedin /></a></li>
             </ul>
           </div>
-          <p className='footer-matter1'>Dev-Orbit is your go to hub established by KIET Group for turning ideas into reality. Join a community of creators, access valuable resources and gain invaluable insights, and collaborate on projects.</p>
+          <p className='footer-matter1'>Dev-Stack is your go to hub established by KIET Group for turning ideas into reality. Join a community of creators, access valuable resources and gain invaluable insights, and collaborate on projects.</p>
         </div>
 
         <div className='footer-subcontainer2'>
@@ -44,7 +44,7 @@ function Footer() {
             <p className='footer-matter3'>Kiet College,Yanam Road,Korangi,Andhra Pradesh-533461</p>
             <div className='footer-subcontainer3-icons-bar'>
               <img src={mail} alt='' className='mail-icon'/>
-              <p className='footer-matter3-para'>Dev-Orbit@kietgroup.com</p>
+              <p className='footer-matter3-para'>dev-stack@kietgroup.com</p>
             </div>
           </div>
         </div>

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Search, Filter, Star, TrendingUp, Users, Award, ChevronRight, Mail, User } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Filter, Star, TrendingUp, Users, Award, ChevronRight, Mail, User } from 'lucide-react';
 import config from '../../../config';
 import './hackmentorfeedback.css';
 
 // API Base URLs using config
-// eslint-disable-next-line no-unused-vars
 const API_BASE = `${config.backendUrl}/studenthackteam`;
 const API_BASEs = `${config.backendUrl}/hackmentorfeedback`;
 const API_HACKATHON = `${config.backendUrl}/hackathon`;
@@ -29,27 +28,8 @@ const [isHackathonOpen, setIsHackathonOpen] = useState(false);
   const [mentorsList, setMentorsList] = useState([]);
   const [filteredMentors, setFilteredMentors] = useState([]);
 
-  // Fetch hackathons on mount
-  useEffect(() => {
-    fetchHackathons();
-  }, []);
-
-  // Fetch feedbacks when hackathon is selected
-  useEffect(() => {
-    if (selectedHackathon) {
-      fetchAllFeedbacks();
-      setSelectedMentor(null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedHackathon]);
-
-  // Apply filters whenever filter values or feedbacks change
-  useEffect(() => {
-    applyFilters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [feedbacks, searchMentor, selectedBranch]);
-
- const fetchHackathons = async () => {
+  // Define functions before useEffect
+  const fetchHackathons = useCallback(async () => {
     try {
       const response = await fetch(`${API_HACKATHON}/all`);
       if (!response.ok) {
@@ -79,7 +59,25 @@ const [isHackathonOpen, setIsHackathonOpen] = useState(false);
       console.error('Error fetching hackathons:', error);
       alert('Failed to fetch hackathons. Please check if the server is running.');
     }
-  };
+  }, []);
+
+  // Fetch hackathons on mount
+  useEffect(() => {
+    fetchHackathons();
+  }, [fetchHackathons]);
+
+  // Fetch feedbacks when hackathon is selected
+  useEffect(() => {
+    if (selectedHackathon) {
+      fetchAllFeedbacks();
+      setSelectedMentor(null);
+    }
+  }, [selectedHackathon]);
+
+  // Apply filters whenever filter values or feedbacks change
+  useEffect(() => {
+    applyFilters();
+  }, [feedbacks, searchMentor, selectedBranch]);
 
   const fetchAllFeedbacks = async () => {
     setLoading(true);
@@ -372,33 +370,32 @@ const [isHackathonOpen, setIsHackathonOpen] = useState(false);
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="mentor-filters-section">
                 {/* Search Mentor */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="mentor-filter-group">
+                  <label className="mentor-filter-label">
                     Search Mentor (Name/Email)
                   </label>
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                     <input
                       type="text"
                       value={searchMentor}
                       onChange={(e) => setSearchMentor(e.target.value)}
                       placeholder="Search by name or email..."
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="mentor-filter-input pl-10"
                     />
                   </div>
                 </div>
 
                 {/* Branch Filter */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="mentor-filter-group">
+                  <label className="mentor-filter-label">
                     Filter by Branch
                   </label>
                   <select
                     value={selectedBranch}
                     onChange={(e) => setSelectedBranch(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="mentor-filter-input"
                   >
                     <option value="all">All Branches</option>
                     {branches.map((branch) => (
@@ -437,32 +434,32 @@ const [isHackathonOpen, setIsHackathonOpen] = useState(false);
                         <button
                           key={mentor.id}
                           onClick={() => setSelectedMentor(mentor)}
-                          className={`w-full text-left p-4 border-b border-gray-100 hover:bg-gray-50 transition-colors ${
-                            selectedMentor?.id === mentor.id ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
+                          className={`mentor-card-item ${
+                            selectedMentor?.id === mentor.id ? 'mentor-card-item-active' : ''
                           }`}
                         >
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1 min-w-0">
-                              <h3 className="font-semibold text-gray-900 truncate mb-1">
+                          <div className="mentor-card-header">
+                            <div className="mentor-card-content">
+                              <h3 className="mentor-card-name">
                                 {mentor.name}
                               </h3>
-                              <p className="text-xs text-gray-600 truncate mb-2">
+                              <p className="mentor-card-email">
                                 {mentor.email}
                               </p>
-                              <div className="flex items-center gap-2">
+                              <div className="mentor-card-rating">
                                 <div className="flex items-center gap-1">
                                   {renderStars(mentor.averageRating)}
                                 </div>
-                                <span className="text-sm font-medium text-gray-700">
+                                <span className="mentor-card-rating-value">
                                   {mentor.averageRating}
                                 </span>
                               </div>
-                              <p className="text-xs text-gray-500 mt-1">
+                              <p className="mentor-card-feedback-count">
                                 {mentor.feedbacks.length} feedback{mentor.feedbacks.length !== 1 ? 's' : ''}
                               </p>
                             </div>
-                            <ChevronRight className={`w-5 h-5 text-gray-400 flex-shrink-0 ${
-                              selectedMentor?.id === mentor.id ? 'text-blue-500' : ''
+                            <ChevronRight className={`mentor-card-icon ${
+                              selectedMentor?.id === mentor.id ? 'mentor-card-icon-active' : ''
                             }`} />
                           </div>
                         </button>
@@ -484,23 +481,23 @@ const [isHackathonOpen, setIsHackathonOpen] = useState(false);
                   ) : (
                     <>
                       {/* Mentor Header */}
-                      <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <h2 className="text-2xl font-bold text-gray-900 mb-1">
+                      <div className="mentor-details-header">
+                        <div className="mentor-details-header-content">
+                          <div className="mentor-details-info">
+                            <h2 className="mentor-details-name">
                               {selectedMentor.name}
                             </h2>
-                            <p className="text-gray-600 flex items-center gap-2">
+                            <p className="mentor-details-email">
                               <Mail className="w-4 h-4" />
                               {selectedMentor.email}
                             </p>
                           </div>
-                          <div className="text-right">
-                            <div className="flex items-center gap-2 justify-end mb-1">
+                          <div className="mentor-details-rating-box">
+                            <div className="mentor-details-stars">
                               {renderStars(selectedMentor.averageRating, 20)}
                             </div>
-                            <p className="text-2xl font-bold text-gray-900">{selectedMentor.averageRating}</p>
-                            <p className="text-sm text-gray-600">Average Rating</p>
+                            <p className="mentor-details-rating-number">{selectedMentor.averageRating}</p>
+                            <p className="mentor-details-rating-label">Average Rating</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-4 text-sm text-gray-700">
@@ -513,34 +510,34 @@ const [isHackathonOpen, setIsHackathonOpen] = useState(false);
                       {/* Feedbacks List */}
                       <div className="divide-y divide-gray-200 max-h-[600px] overflow-y-auto">
                         {selectedMentor.feedbacks.map((feedback) => (
-                          <div key={feedback._id} className="p-6 hover:bg-gray-50 transition-colors">
-                            <div className="flex items-start justify-between mb-3">
-                              <div className="flex-1">
-                                <h3 className="font-semibold text-gray-900 mb-1">
+                          <div key={feedback._id} className="feedback-item">
+                            <div className="feedback-item-header">
+                              <div className="feedback-student-info">
+                                <h3 className="feedback-student-name">
                                   {feedback.student?.name || 'Unknown Student'}
                                 </h3>
-                                <p className="text-sm text-gray-600">
+                                <p className="feedback-student-details">
                                   {feedback.student?.rollNo} {feedback.student?.branch && `• ${feedback.student.branch}`}
                                 </p>
                                 {feedback.student?.email && (
-                                  <p className="text-xs text-gray-500 mt-1">{feedback.student.email}</p>
+                                  <p className="feedback-student-email">{feedback.student.email}</p>
                                 )}
                               </div>
-                              <div className="flex flex-col items-end ml-4">
-                                <div className="flex items-center gap-1 mb-1">
+                              <div className="feedback-rating-box">
+                                <div className="feedback-rating-stars">
                                   {renderStars(feedback.rating)}
                                 </div>
-                                <span className="text-lg font-bold text-gray-900">{feedback.rating}/5</span>
+                                <span className="feedback-rating-score">{feedback.rating}/5</span>
                               </div>
                             </div>
 
                             {feedback.feedback && (
-                              <div className="bg-gray-50 rounded-lg p-4 mt-3">
-                                <p className="text-sm text-gray-700 leading-relaxed">{feedback.feedback}</p>
+                              <div className="feedback-comment-section">
+                                <p className="feedback-comment-text">{feedback.feedback}</p>
                               </div>
                             )}
 
-                            <p className="text-xs text-gray-500 mt-3">
+                            <p className="feedback-timestamp">
                               Updated: {new Date(feedback.updatedAt).toLocaleDateString('en-US', {
                                 year: 'numeric',
                                 month: 'short',

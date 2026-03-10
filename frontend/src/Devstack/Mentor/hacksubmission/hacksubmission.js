@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Download, Eye, Filter, Calendar, Users, FileText, Github, ExternalLink, AlertCircle, X, Lock } from 'lucide-react';
-import './hacksubmission.css';
+import { Download, Eye, Filter, Calendar, Users, FileText, Github, ExternalLink, AlertCircle, X, Lock } from 'lucide-react';
 import config from '../../../config';
+import './hacksubmission.css';
 
 const MentorSubmissionDashboard = () => {
   const [submissions, setSubmissions] = useState([]);
@@ -16,7 +16,6 @@ const MentorSubmissionDashboard = () => {
   const [hackathons, setHackathons] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   const [stats, setStats] = useState(null);
-  // eslint-disable-next-line no-unused-vars
   const [mentorId, setMentorId] = useState(localStorage.getItem("mentor"));
 
   const API_BASE = `${config.backendUrl}/hacksubmission`;
@@ -26,7 +25,6 @@ const MentorSubmissionDashboard = () => {
     fetchHackathons();
     fetchStats();
     setLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -36,7 +34,6 @@ const MentorSubmissionDashboard = () => {
       setSubmissions([]);
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.hackathon]);
 
   const fetchSubmissions = async () => {
@@ -272,7 +269,7 @@ const MentorSubmissionDashboard = () => {
             <div className="mentordash-filter-group">
               <label className="mentordash-filter-label">Search</label>
               <div className="mentordash-search-wrapper">
-                <Search size={18} className="mentordash-search-icon" />
+  
                 <input
                   type="text"
                   placeholder="Search by team, student, or problem..."

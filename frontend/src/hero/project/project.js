@@ -138,13 +138,12 @@ const Project = () => {
                                     )}
                                     {project.youtubeLink && (
                                         <li>
-                                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                            <a 
-                                                href="#"
+                                            <button 
                                                 onClick={(e) => handleYoutubeClick(project, e)}
+                                                className="link-button"
                                             >
                                                 <FaYoutube />
-                                            </a>
+                                            </button>
                                         </li>
                                     )}
                                 </ul>

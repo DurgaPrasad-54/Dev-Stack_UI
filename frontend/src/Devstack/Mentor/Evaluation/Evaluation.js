@@ -30,8 +30,6 @@ import {
   CheckCircleOutlined,
   ClockCircleOutlined,
   LineChartOutlined,
-  // eslint-disable-next-line no-unused-vars
-  WarningOutlined,
   FileTextOutlined,
   GlobalOutlined,
   FilePdfOutlined,
@@ -46,6 +44,7 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import config from "../../../config";
+import "./Evaluation.css";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -252,7 +251,6 @@ const MentorEvaluationPage = () => {
   useEffect(() => {
     fetchApprovedHackathons();
     fetchStatistics();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Handle hackathon selection change
@@ -464,13 +462,12 @@ const MentorEvaluationPage = () => {
   });
   
   // Ongoing hackathons only (for backwards compatibility)
-  // eslint-disable-next-line no-unused-vars
   const ongoingHackathons = hackathons.filter(
     (h) => h.status === "ongoing" || !h.status
   );
 
   return (
-    <div style={{ padding: 30 }}>
+    <div style={{ padding: 30 }} className="evaluation-container">
       <Title level={3}>
         <TrophyOutlined /> Team Evaluations
       </Title>
@@ -480,7 +477,7 @@ const MentorEvaluationPage = () => {
 
       {/* Statistics Cards */}
       {statistics && !statisticsLoading && (
-        <Row gutter={16} style={{ marginTop: 24, marginBottom: 24 }}>
+        <Row gutter={16} style={{ marginTop: 24, marginBottom: 24 }} className="evaluation-stats-row">
           <Col xs={24} sm={12} md={6}>
             <Card>
               <Statistic
@@ -628,18 +625,20 @@ const MentorEvaluationPage = () => {
       ) : selectedHackathon ? (
         teams.length > 0 ? (
           <Card>
-            <Table
-              columns={columns}
-              dataSource={teams}
-              rowKey="_id"
-              pagination={{ 
-                pageSize: 10,
-                showTotal: (total) => `Total ${total} teams`,
-                showSizeChanger: true,
-                pageSizeOptions: ['10', '20', '50']
-              }}
-              scroll={{ x: 1200 }}
-            />
+            <div className="evaluation-table-wrapper">
+              <Table
+                columns={columns}
+                dataSource={teams}
+                rowKey="_id"
+                pagination={{
+                  pageSize: 10,
+                  showTotal: (total) => `Total ${total} teams`,
+                  showSizeChanger: true,
+                  pageSizeOptions: ['10', '20', '50']
+                }}
+                scroll={{ x: 1200 }}
+              />
+            </div>
           </Card>
         ) : (
           <Empty
@@ -671,6 +670,7 @@ const MentorEvaluationPage = () => {
         }}
         footer={null}
         width={700}
+        wrapperClassName="submission-detail-modal"
       >
         {detailedSubmission && currentTeam && (
           <>
@@ -907,6 +907,7 @@ const MentorEvaluationPage = () => {
           setCurrentTeam(null);
         }}
         width={650}
+        wrapperClassName="evaluation-modal"
       >
         {currentTeam && currentSubmission && (
           <>

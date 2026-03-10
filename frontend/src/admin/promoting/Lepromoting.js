@@ -160,7 +160,6 @@ const AdminDashboard = () => {
     fetchDashboardStats();
     fetchPendingStudents();
     fetchApprovalActivity();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Dashboard stats component

@@ -19,15 +19,13 @@ import {
   SearchOutlined
 } from '@ant-design/icons';
 import axios from 'axios';
-// eslint-disable-next-line no-unused-vars
-import { Document, Page, pdfjs } from 'react-pdf';
+import { pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import config from '../../config';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.js`;
 
-// eslint-disable-next-line no-unused-vars
 const { Header, Content } = Layout;
 const { Option } = Select;
 
@@ -39,11 +37,9 @@ const App = () => {
   const [pdfPreviewVisible, setPdfPreviewVisible] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [selectedPdfUrl, setSelectedPdfUrl] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [numPages, setNumPages] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [pageNumber, setPageNumber] = useState(1);
   const [searchText, setSearchText] = useState('');
+  const [pageNumber, setPageNumber] = useState(1);
+  const [numPages, setNumPages] = useState(null);
   const [form] = Form.useForm();
 
   const fetchFolders = async () => {
@@ -120,7 +116,6 @@ const App = () => {
     setPdfPreviewVisible(true);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
@@ -130,12 +125,10 @@ const App = () => {
     setPageNumber(prevPageNumber => prevPageNumber + offset);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const previousPage = () => {
     changePage(-1);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const nextPage = () => {
     changePage(1);
   };

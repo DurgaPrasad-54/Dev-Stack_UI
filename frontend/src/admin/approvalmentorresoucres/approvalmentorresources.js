@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Clock, CheckCircle, XCircle, Eye, Filter, Search, FileText, Folder, Video, Link, AlertCircle, RefreshCw, X, ExternalLink } from 'lucide-react';
 
 // Import the custom CSS - you'll need to include this in your project
@@ -7,7 +7,6 @@ import config from '../../config'; // Adjust the path as necessary
 
 const AdminApprovalDashboard = () => {
   const [requests, setRequests] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [allRequests, setAllRequests] = useState([]); // Store all requests for stats calculation
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState({ type: 'all', status: 'pending' });
@@ -39,7 +38,7 @@ const AdminApprovalDashboard = () => {
   };
 
   // Fetch requests from API
-  const fetchRequests = async () => {
+  const fetchRequests = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -92,7 +91,7 @@ const AdminApprovalDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter.type, filter.status]);
 
   // Calculate statistics based on ALL data (not filtered)
   const calculateStats = (allRequestsData) => {
@@ -447,8 +446,7 @@ const AdminApprovalDashboard = () => {
 
   useEffect(() => {
     fetchRequests();
-    // eslint-disable-next-line
-  }, [filter.type, filter.status]);
+  }, [fetchRequests]);
 
   return (
     <div className="mentorresources-dashboard">
